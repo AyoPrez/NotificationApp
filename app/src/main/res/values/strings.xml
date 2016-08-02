@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CastroApp</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Drawer menu-->
+    <string name="events">Events</string>
+    <string name="players">Wrestlers</string>
+    <string name="games">Wrestling</string>
+    <string name="arena">Arena</string>
+    <string name="about_us">About us</string>
+    <string name="pictures">Pictures</string>
+    <string name="videos">Videos</string>
+    <string name="sponsors">Sponsors</string>
+</resources>
