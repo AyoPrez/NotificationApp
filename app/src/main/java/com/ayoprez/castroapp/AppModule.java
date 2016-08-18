@@ -1,7 +1,9 @@
 package com.ayoprez.castroapp;
 
-import com.ayoprez.castroapp.presenter.GamesPresenter;
-import com.ayoprez.castroapp.presenter.GamesPresenterImpl;
+import com.ayoprez.castroapp.presenter.adapters.videos.VideoGalleryAdapterPresenter;
+import com.ayoprez.castroapp.presenter.adapters.videos.VideoGalleryAdapterPresenterImpl;
+import com.ayoprez.castroapp.presenter.games.GamesCalendarPresenter;
+import com.ayoprez.castroapp.presenter.games.GamesCalendarPresenterImpl;
 import com.ayoprez.castroapp.presenter.adapters.images.GalleryAdapterPresenter;
 import com.ayoprez.castroapp.presenter.adapters.images.GalleryAdapterPresenterImpl;
 import com.ayoprez.castroapp.presenter.adapters.events.EventAdapterPresenter;
@@ -16,17 +18,23 @@ import com.ayoprez.castroapp.presenter.arena.ArenaPresenter;
 import com.ayoprez.castroapp.presenter.arena.ArenaPresenterImpl;
 import com.ayoprez.castroapp.presenter.events.EventPresenter;
 import com.ayoprez.castroapp.presenter.events.EventPresenterImpl;
+import com.ayoprez.castroapp.presenter.games.GamesTablePresenter;
+import com.ayoprez.castroapp.presenter.games.GamesTablePresenterImpl;
 import com.ayoprez.castroapp.presenter.images.GalleryPresenter;
 import com.ayoprez.castroapp.presenter.images.GalleryPresenterImpl;
 import com.ayoprez.castroapp.presenter.players.PlayersPresenter;
 import com.ayoprez.castroapp.presenter.players.PlayersPresenterImpl;
 import com.ayoprez.castroapp.presenter.sponsors.SponsorsPresenter;
 import com.ayoprez.castroapp.presenter.sponsors.SponsorsPresenterImpl;
+import com.ayoprez.castroapp.presenter.videos.VideosGalleryPresenter;
+import com.ayoprez.castroapp.presenter.videos.VideosGalleryPresenterImpl;
 import com.ayoprez.castroapp.repository.AboutUsRepositoryImpl;
 import com.ayoprez.castroapp.repository.AboutUsRepository;
 import com.ayoprez.castroapp.repository.ArenaRepositoryImpl;
 import com.ayoprez.castroapp.repository.ArenaRepository;
 import com.ayoprez.castroapp.repository.EventsRepository;
+import com.ayoprez.castroapp.repository.GamesRepository;
+import com.ayoprez.castroapp.repository.GamesRepositoryImpl;
 import com.ayoprez.castroapp.repository.ImagesGalleryRepository;
 import com.ayoprez.castroapp.repository.ImagesGalleryRepositoryImpl;
 import com.ayoprez.castroapp.repository.EventsRepositoryImpl;
@@ -34,7 +42,8 @@ import com.ayoprez.castroapp.repository.PlayersRepositoryImpl;
 import com.ayoprez.castroapp.repository.PlayersRepository;
 import com.ayoprez.castroapp.repository.SponsorRepository;
 import com.ayoprez.castroapp.repository.SponsorRepositoryImpl;
-import com.ayoprez.castroapp.ui.adapters.SponsorsListAdapter;
+import com.ayoprez.castroapp.repository.VideosGalleryRepository;
+import com.ayoprez.castroapp.repository.VideosGalleryRepositoryImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -73,6 +82,16 @@ public class AppModule {
     @Provides
     public SponsorRepository provideSponsorRepository(){
         return new SponsorRepositoryImpl();
+    }
+
+    @Provides
+    public GamesRepository provideGamesRepository(){
+        return new GamesRepositoryImpl();
+    }
+
+    @Provides
+    public VideosGalleryRepository provideVideosGalleryRepository(){
+        return new VideosGalleryRepositoryImpl();
     }
 
     @Provides
@@ -126,7 +145,22 @@ public class AppModule {
     }
 
     @Provides
-    public GamesPresenter provideGamesPresenter(){
-        return new GamesPresenterImpl();
+    public GamesCalendarPresenter provideGamesCalendarPresenter(GamesRepository repository){
+        return new GamesCalendarPresenterImpl(repository);
+    }
+
+    @Provides
+    public GamesTablePresenter provideGamesTablePresenter(GamesRepository repository){
+        return new GamesTablePresenterImpl(repository);
+    }
+
+    @Provides
+    public VideosGalleryPresenter provideVideosGalleryPresenter(VideosGalleryRepository videosGalleryRepository){
+        return new VideosGalleryPresenterImpl(videosGalleryRepository);
+    }
+
+    @Provides
+    public VideoGalleryAdapterPresenter provideVideoGalleryAdapterPresenter(VideosGalleryRepository videosGalleryRepository){
+        return new VideoGalleryAdapterPresenterImpl(videosGalleryRepository);
     }
 }

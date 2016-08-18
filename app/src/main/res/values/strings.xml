@@ -15,4 +15,9 @@
     <string name="pictures">Pictures</string>
     <string name="videos">Videos</string>
     <string name="sponsors">Sponsors</string>
+
+    <!--SeasonInfo fragment-->
+    <string name="results">Results</string>
+    <string name="table">Table</string>
+
 </resources>

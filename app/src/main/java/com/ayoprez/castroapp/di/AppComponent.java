@@ -5,13 +5,17 @@ import com.ayoprez.castroapp.ui.adapters.EventsListAdapter;
 import com.ayoprez.castroapp.ui.adapters.ImagesGalleryListAdapter;
 import com.ayoprez.castroapp.ui.adapters.PlayersListAdapter;
 import com.ayoprez.castroapp.ui.adapters.SponsorsListAdapter;
+import com.ayoprez.castroapp.ui.adapters.VideosGalleryListAdapter;
 import com.ayoprez.castroapp.ui.fragments.SponsorsFragment;
 import com.ayoprez.castroapp.ui.fragments.aboutus.AboutUsFragment;
 import com.ayoprez.castroapp.ui.fragments.arena.ArenaFragment;
 import com.ayoprez.castroapp.ui.fragments.events.EventFragment;
+import com.ayoprez.castroapp.ui.fragments.games.GamesCalendarFragment;
 import com.ayoprez.castroapp.ui.fragments.games.GamesFragment;
+import com.ayoprez.castroapp.ui.fragments.games.GamesTableFragment;
 import com.ayoprez.castroapp.ui.fragments.images.ImagesGalleryFragment;
 import com.ayoprez.castroapp.ui.fragments.players.PlayersFragment;
+import com.ayoprez.castroapp.ui.fragments.videos.VideosGalleryFragment;
 
 import javax.inject.Singleton;
 
@@ -33,5 +37,8 @@ public interface AppComponent {
     void inject(ImagesGalleryListAdapter imagesGalleryListAdapter);
     void inject(SponsorsFragment sponsorsFragment);
     void inject(SponsorsListAdapter sponsorsListAdapter);
-    void inject(GamesFragment gamesFragment);
+    void inject(GamesCalendarFragment gamesCalendarFragment);
+    void inject(GamesTableFragment gamesTableFragment);
+    void inject(VideosGalleryFragment videosGalleryFragment);
+    void inject(VideosGalleryListAdapter videosGalleryListAdapter);
 }

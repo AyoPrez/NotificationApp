@@ -5,7 +5,10 @@ import com.ayoprez.castroapp.common.CommonListView;
 /**
  * Created by ayo on 24.07.16.
  */
-public interface GamesView {
+public interface GamesCalendarView {
+
+    void showErrorMessage();
+    void displayCalendar(String url);
 
 
 }

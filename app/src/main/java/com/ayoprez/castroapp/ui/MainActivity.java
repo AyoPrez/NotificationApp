@@ -17,8 +17,10 @@ import com.ayoprez.castroapp.ui.fragments.SponsorsFragment;
 import com.ayoprez.castroapp.ui.fragments.aboutus.AboutUsFragment;
 import com.ayoprez.castroapp.ui.fragments.arena.ArenaFragment;
 import com.ayoprez.castroapp.ui.fragments.events.EventFragment;
+import com.ayoprez.castroapp.ui.fragments.games.GamesFragment;
 import com.ayoprez.castroapp.ui.fragments.images.ImagesGalleryFragment;
 import com.ayoprez.castroapp.ui.fragments.players.PlayersFragment;
+import com.ayoprez.castroapp.ui.fragments.videos.VideosGalleryFragment;
 
 import javax.inject.Inject;
 
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity
                 changeFragment(new EventFragment());
                 break;
             case R.id.nav_games:
+                changeFragment(new GamesFragment());
                 break;
             case R.id.nav_players:
                 changeFragment(new PlayersFragment());
@@ -108,13 +111,13 @@ public class MainActivity extends AppCompatActivity
                 changeFragment(new ImagesGalleryFragment());
                 break;
             case R.id.nav_videos:
+                changeFragment(new VideosGalleryFragment());
                 break;
             case R.id.nav_sponsors:
                 changeFragment(new SponsorsFragment());
                 break;
 
             /**TODO Para el próximo domingo.
-             * TODO     -Hacer el fragment de los videos.
              * TODO     -Implementar Retrofit
              * TODO     -Probar que la base de datos funciona
              * TODO     -Hacer más tests
