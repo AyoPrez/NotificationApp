@@ -26,9 +26,9 @@ public class AboutUsPresenterImpl implements AboutUsPresenter {
         if(aboutUs == null){
             view.showErrorMessage();
         }else{
-            view.displayName(aboutUs.getName());
-            view.displayDescription(aboutUs.getDescription());
-            view.displayImage(aboutUs.getImage());
+            view.displayName(aboutUs.getTitle());
+            view.displayDescription(aboutUs.getMeta().getDescription());
+            view.displayImage(aboutUs.getMeta().getShare_image());
         }
     }
 
@@ -43,7 +43,7 @@ public class AboutUsPresenterImpl implements AboutUsPresenter {
 
     @Override
     public void openShare() {
-        String shareText = aboutUs.getShareText();
+        String shareText = aboutUs.getMeta().getShare_text();
         if(shareText == null || shareText.trim().equals("")){
             view.showErrorMessage();
         }else{
@@ -53,7 +53,7 @@ public class AboutUsPresenterImpl implements AboutUsPresenter {
 
     @Override
     public void openCall() {
-        String number = aboutUs.getTelephoneNumber();
+        String number = aboutUs.getMeta().getNumber();
         if(number == null || number.trim().equals("")){
             view.showErrorMessage();
         }else{
@@ -63,7 +63,7 @@ public class AboutUsPresenterImpl implements AboutUsPresenter {
 
     @Override
     public void openMail() {
-        String mail = aboutUs.getMail();
+        String mail = aboutUs.getMeta().getEmail();
         if(mail == null || mail.trim().equals("")){
             view.showErrorMessage();
         }else{

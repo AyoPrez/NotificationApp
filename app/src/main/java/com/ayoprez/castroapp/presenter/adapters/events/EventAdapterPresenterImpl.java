@@ -41,10 +41,10 @@ public class EventAdapterPresenterImpl implements EventAdapterPresenter{
     }
 
     private void applyDisplayEvents(EventItem eventItem){
-        if(!eventItem.getImage().isEmpty() && !eventItem.getTitle().isEmpty() && !eventItem.getSubtitle().isEmpty()){
-            view.displayEventImage(eventItem.getImage());
+        if(!eventItem.getMeta().getImage().isEmpty() && !eventItem.getTitle().isEmpty() && !eventItem.getMeta().getSubtitle().isEmpty()){
+            view.displayEventImage(eventItem.getMeta().getImage());
             view.displayEventTitle(eventItem.getTitle());
-            view.displayEventSubtitle(eventItem.getSubtitle());
+            view.displayEventSubtitle(eventItem.getMeta().getSubtitle());
         }else{
             view.showError();
         }

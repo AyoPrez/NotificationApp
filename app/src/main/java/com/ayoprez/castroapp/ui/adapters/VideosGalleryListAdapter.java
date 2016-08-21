@@ -19,26 +19,22 @@ import javax.inject.Inject;
 public class VideosGalleryListAdapter extends RecyclerView.Adapter<VideosGalleryItemViewHolder>{
     private static final String TAG = VideosGalleryListAdapter.class.getSimpleName();
 
-    protected Context context;
-
     @Inject
     VideoGalleryAdapterPresenter presenter;
 
+    public VideosGalleryListAdapter(Context context){
+        ((CastroApplication) context.getApplicationContext()).getComponent().inject(this);
+    }
+
     @Override
     public VideosGalleryItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_image, parent, false);
         return new VideosGalleryItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(VideosGalleryItemViewHolder holder, int position) {
-        initAdapterComponents();
         presenter.setView(holder);
-    }
-
-    private void initAdapterComponents() {
-        ((CastroApplication) context.getApplicationContext()).getComponent().inject(this);
     }
 
     @Override

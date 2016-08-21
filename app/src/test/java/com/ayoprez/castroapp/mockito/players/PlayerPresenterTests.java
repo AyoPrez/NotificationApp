@@ -35,7 +35,7 @@ public class PlayerPresenterTests {
         repository = mock(PlayersRepository.class);
 
         item.setId(1);
-        item.setName("PlayerName");
+        item.setTitle("PlayerName");
 
         mockView = mock(PlayersView.class);
 

@@ -11,9 +11,9 @@ import com.ayoprez.castroapp.ui.fragments.arena.ArenaView;
 public class ArenaPresenterImpl implements ArenaPresenter {
     private static final String TAG = ArenaPresenterImpl.class.getSimpleName();
 
-    private ArenaView view;
-    private ArenaRepository arenaRepository;
-    private Arena arena;
+    protected ArenaView view;
+    protected ArenaRepository arenaRepository;
+    protected Arena arena;
 
     public ArenaPresenterImpl(ArenaRepository repository) {
         this.arenaRepository = repository;
@@ -27,10 +27,10 @@ public class ArenaPresenterImpl implements ArenaPresenter {
         if (arena == null) {
             view.showErrorMessage();
         } else {
-            view.displayName(arena.getName());
-            view.displayAddress(arena.getAddress());
-            view.displayDescription(arena.getDescription());
-            view.displayImage(arena.getImage());
+            view.displayName(arena.getTitle());
+            view.displayAddress(arena.getMeta().getCoordinates().getAddress());
+            view.displayDescription(arena.getMeta().getDescription());
+            view.displayImage(arena.getMeta().getPhoto());
         }
     }
 

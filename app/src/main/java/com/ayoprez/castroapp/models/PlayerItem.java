@@ -10,15 +10,8 @@ public class PlayerItem extends RealmObject{
 
     @PrimaryKey
     protected int id;
-    protected String name;
-    protected String image;
-
-    public PlayerItem setObject(PlayerItem playerItem){
-        this.id = playerItem.id;
-        this.name = playerItem.getName();
-        this.image = playerItem.getImage();
-        return this;
-    }
+    protected String title; //Name
+    protected PlayerItemMeta meta;
 
     public int getId() {
         return id;
@@ -28,19 +21,19 @@ public class PlayerItem extends RealmObject{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title= title;
     }
 
-    public String getImage() {
-        return image;
+    public PlayerItemMeta getMeta() {
+        return meta;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setMeta(PlayerItemMeta meta) {
+        this.meta = meta;
     }
 }

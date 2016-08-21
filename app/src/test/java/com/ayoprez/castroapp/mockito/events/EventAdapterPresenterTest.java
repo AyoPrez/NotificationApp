@@ -53,9 +53,9 @@ public class EventAdapterPresenterTest {
     public EventItem initEventItem(int id, String image, String title, String subtitle){
         EventItem eventItem = new EventItem();
         eventItem.setId(id);
-        eventItem.setImage(image);
+        eventItem.getMeta().setImage(image);
         eventItem.setTitle(title);
-        eventItem.setSubtitle(subtitle);
+        eventItem.getMeta().setSubtitle(subtitle);
         return eventItem;
     }
 

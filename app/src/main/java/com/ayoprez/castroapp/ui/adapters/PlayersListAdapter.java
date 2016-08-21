@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.ayoprez.castroapp.CastroApplication;
 import com.ayoprez.castroapp.R;
 import com.ayoprez.castroapp.presenter.adapters.players.PlayerAdapterPresenter;
+import com.ayoprez.castroapp.repository.PlayersRepository;
 import com.ayoprez.castroapp.ui.viewholders.players.PlayersViewHolder;
 
 import javax.inject.Inject;
@@ -24,9 +25,12 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersViewHolder> 
     @Inject
     PlayerAdapterPresenter playersPresenter;
 
+    public PlayersListAdapter(Context context){
+        this.context = context;
+    }
+
     @Override
     public PlayersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_player, parent, false);
         return new PlayersViewHolder(view);
     }
@@ -37,12 +41,13 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersViewHolder> 
 
     @Override
     public void onBindViewHolder(PlayersViewHolder holder, int position) {
-        initAdapterComponents();
         playersPresenter.setView(holder);
     }
 
     @Override
     public int getItemCount() {
+        initAdapterComponents();
+
         return playersPresenter.getPlayersCountSize();
     }
 }

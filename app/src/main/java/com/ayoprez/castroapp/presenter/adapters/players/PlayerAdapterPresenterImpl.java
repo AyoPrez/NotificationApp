@@ -5,6 +5,8 @@ import com.ayoprez.castroapp.models.PlayerItem;
 import com.ayoprez.castroapp.repository.PlayersRepository;
 import com.ayoprez.castroapp.ui.viewholders.players.PlayerListItemView;
 
+import java.util.List;
+
 /**
  * Created by ayo on 10.07.16.
  */
@@ -42,9 +44,9 @@ public class PlayerAdapterPresenterImpl implements PlayerAdapterPresenter {
     }
 
     private void applyDisplayPlayers(PlayerItem playerItem){
-        if(!playerItem.getImage().isEmpty() && !playerItem.getName().isEmpty()){
-            view.displayItemImage(playerItem.getImage());
-            view.displayItemTitle(playerItem.getName());
+        if(playerItem != null && playerItem.getMeta() != null && !playerItem.getMeta().getPhoto().isEmpty() && !playerItem.getTitle().isEmpty()){
+            view.displayItemImage(playerItem.getMeta().getPhoto());
+            view.displayItemTitle(playerItem.getTitle());
         }else{
             view.showError();
         }

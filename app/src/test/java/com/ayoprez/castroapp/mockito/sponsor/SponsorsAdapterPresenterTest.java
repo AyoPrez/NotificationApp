@@ -53,8 +53,8 @@ public class SponsorsAdapterPresenterTest {
     public SponsorItem initImageItem(int id, String image, String url){
         SponsorItem sponsorItem = new SponsorItem();
         sponsorItem.setId(id);
-        sponsorItem.setImage(image);
-        sponsorItem.setUrl(url);
+        sponsorItem.getMeta().setPhoto(image);
+        sponsorItem.getMeta().setUrl(url);
         return sponsorItem;
     }
 
@@ -90,7 +90,7 @@ public class SponsorsAdapterPresenterTest {
     public void shouldShowErrorMessageWhenImageDataAreEmpty(){
         when(mockView.getItemPosition()).thenReturn(1);
 
-        item.setImage("");
+        item.getMeta().setPhoto("");
 
         when(mockRepository.getSponsor(anyInt())).thenReturn(item);
 

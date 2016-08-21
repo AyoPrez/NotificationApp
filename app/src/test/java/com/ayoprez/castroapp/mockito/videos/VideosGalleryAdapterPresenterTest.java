@@ -54,8 +54,8 @@ public class VideosGalleryAdapterPresenterTest  {
     public VideoItem initImageItem(int id, String video, String preview){
         VideoItem imageItem = new VideoItem();
         imageItem.setId(id);
-        imageItem.setVideoUrl(video);
-        imageItem.setPreviewImageUrl(preview);
+        imageItem.getMeta().setVideo(video);
+        imageItem.getMeta().setPreview(preview);
         return imageItem;
     }
 
@@ -91,8 +91,8 @@ public class VideosGalleryAdapterPresenterTest  {
     public void shouldShowErrorMessageWhenImageDataAreEmpty(){
         when(mockView.getItemPosition()).thenReturn(1);
 
-        item.setVideoUrl("");
-        item.setPreviewImageUrl("");
+        item.getMeta().setVideo("");
+        item.getMeta().setPreview("");
 
         when(mockRepository.getVideo(anyInt())).thenReturn(item);
 

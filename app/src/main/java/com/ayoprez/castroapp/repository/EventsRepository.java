@@ -13,5 +13,6 @@ public interface EventsRepository {
     ArrayList<EventItem> getAllEvents();
 
     void saveEvents(ArrayList<EventItem> events);
+    void deleteAllEvents();
     void closeRealm();
 }

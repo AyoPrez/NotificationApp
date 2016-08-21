@@ -63,7 +63,7 @@ public class VideosGalleryFragment extends Fragment implements VideosGalleryView
 
     @Override
     public void initRecyclerView() {
-        adapter = new VideosGalleryListAdapter();
+        adapter = new VideosGalleryListAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

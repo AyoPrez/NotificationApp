@@ -61,7 +61,7 @@ public class SponsorsFragment extends Fragment implements SponsorsView {
 
     @Override
     public void initRecyclerView() {
-        adapter = new ImagesGalleryListAdapter();
+        adapter = new ImagesGalleryListAdapter(getActivity());
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(adapter);
     }

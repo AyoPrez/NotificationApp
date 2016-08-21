@@ -14,5 +14,6 @@ public interface ImagesGalleryRepository {
     ArrayList<String> getAllImages();
 
     void saveImages(ArrayList<ImageItem> images);
+    void deleteAllImages();
     void closeRealm();
 }

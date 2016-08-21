@@ -34,7 +34,7 @@ public class GamesCalendarPresenterTest {
         calendar = new CalendarItem();
 
         calendar.setId(1);
-        calendar.setImage("http://images.de/image");
+        calendar.getMeta().setCalendar("http://images.de/image");
 
         when(mockRepository.getCalendar()).thenReturn(calendar);
 
@@ -71,7 +71,7 @@ public class GamesCalendarPresenterTest {
 
         CalendarItem calendarItem = new CalendarItem();
         calendarItem.setId(1);
-        calendarItem.setImage(null);
+        calendarItem.getMeta().setCalendar(null);
 
         when(mockRepository.getCalendar()).thenReturn(calendarItem);
 
@@ -88,7 +88,7 @@ public class GamesCalendarPresenterTest {
 
         CalendarItem calendarItem = new CalendarItem();
         calendarItem.setId(1);
-        calendarItem.setImage("");
+        calendarItem.getMeta().setCalendar("");
 
         when(mockRepository.getCalendar()).thenReturn(calendarItem);
 

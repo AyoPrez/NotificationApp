@@ -10,5 +10,6 @@ public interface ArenaRepository {
     Arena getArena();
 
     void saveArena(Arena arena);
+    void deleteArena();
     void closeRealm();
 }

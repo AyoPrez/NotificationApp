@@ -30,10 +30,10 @@ public class GamesCalendarPresenterImpl implements GamesCalendarPresenter {
 
         calendar = repository.getCalendar();
 
-        if(calendar == null || calendar.getImage() == null || calendar.getImage().equals("")){
+        if(calendar == null || calendar.getMeta().getCalendar() == null || calendar.getMeta().getCalendar().equals("")){
             view.showErrorMessage();
         }else {
-            view.displayCalendar(calendar.getImage());
+            view.displayCalendar(calendar.getMeta().getCalendar());
         }
     }
 }

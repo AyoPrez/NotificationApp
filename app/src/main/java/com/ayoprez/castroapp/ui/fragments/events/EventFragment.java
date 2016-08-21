@@ -69,7 +69,7 @@ public class EventFragment extends Fragment implements EventView {
 
     @Override
     public void initRecyclerView() {
-        adapter = new EventsListAdapter();
+        adapter = new EventsListAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

@@ -1,6 +1,8 @@
 package com.ayoprez.castroapp.di;
 
 import com.ayoprez.castroapp.AppModule;
+import com.ayoprez.castroapp.presenter.SplashPresenterImpl;
+import com.ayoprez.castroapp.ui.SplashActivity;
 import com.ayoprez.castroapp.ui.adapters.EventsListAdapter;
 import com.ayoprez.castroapp.ui.adapters.ImagesGalleryListAdapter;
 import com.ayoprez.castroapp.ui.adapters.PlayersListAdapter;
@@ -41,4 +43,8 @@ public interface AppComponent {
     void inject(GamesTableFragment gamesTableFragment);
     void inject(VideosGalleryFragment videosGalleryFragment);
     void inject(VideosGalleryListAdapter videosGalleryListAdapter);
+    void inject(SplashActivity splashActivity);
+
+//    Restful service
+    void inject(SplashPresenterImpl splashPresenter);
 }

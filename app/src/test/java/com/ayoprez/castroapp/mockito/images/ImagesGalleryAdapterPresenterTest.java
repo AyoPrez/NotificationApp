@@ -38,11 +38,11 @@ public class ImagesGalleryAdapterPresenterTest {
         item = initImageItem(1, "www.img.com/1");
 
         itemsList = new ArrayList<>();
-        itemsList.add(initImageItem(1, "www.img.com/1").getImage());
-        itemsList.add(initImageItem(2, "www.img.com/2").getImage());
-        itemsList.add(initImageItem(3, "www.img.com/3").getImage());
+        itemsList.add(initImageItem(1, "www.img.com/1").getMeta().getPhoto());
+        itemsList.add(initImageItem(2, "www.img.com/2").getMeta().getPhoto());
+        itemsList.add(initImageItem(3, "www.img.com/3").getMeta().getPhoto());
 
-        when(mockRepository.getImage(anyInt())).thenReturn(item.getImage());
+        when(mockRepository.getImage(anyInt())).thenReturn(item.getMeta().getPhoto());
 
         when(mockRepository.getAllImages()).thenReturn(itemsList);
 
@@ -53,7 +53,7 @@ public class ImagesGalleryAdapterPresenterTest {
     public ImageItem initImageItem(int id, String image){
         ImageItem imageItem = new ImageItem();
         imageItem.setId(id);
-        imageItem.setImage(image);
+        imageItem.getMeta().setPhoto(image);
         return imageItem;
     }
 
@@ -89,9 +89,9 @@ public class ImagesGalleryAdapterPresenterTest {
     public void shouldShowErrorMessageWhenImageDataAreEmpty(){
         when(mockView.getItemPosition()).thenReturn(1);
 
-        item.setImage("");
+        item.getMeta().setPhoto("");
 
-        when(mockRepository.getImage(anyInt())).thenReturn(item.getImage());
+        when(mockRepository.getImage(anyInt())).thenReturn(item.getMeta().getPhoto());
 
         presenter.setView(mockView);
 

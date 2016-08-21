@@ -53,8 +53,8 @@ public class PlayerAdapterPresenterTest {
     public PlayerItem initPlayerItem(int id, String image, String title){
         PlayerItem eventItem = new PlayerItem();
         eventItem.setId(id);
-        eventItem.setImage(image);
-        eventItem.setName(title);
+        eventItem.getMeta().setPhoto(image);
+        eventItem.setTitle(title);
         return eventItem;
     }
 
@@ -92,7 +92,7 @@ public class PlayerAdapterPresenterTest {
     public void shouldShowErrorMessageWhenPlayerDataAreEmpty(){
         when(mockView.getItemPosition()).thenReturn(1);
 
-        item.setName("");
+        item.setTitle("");
 
         when(mockRepository.getPlayer(anyInt())).thenReturn(item);
 

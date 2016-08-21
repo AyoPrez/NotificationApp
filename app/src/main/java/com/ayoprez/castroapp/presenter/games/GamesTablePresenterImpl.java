@@ -30,10 +30,10 @@ public class GamesTablePresenterImpl implements GamesTablePresenter {
 
         table = repository.getTable();
 
-        if(table == null || table.getImage() == null || table.getImage().equals("")){
+        if(table == null || table.getMeta().getTabla() == null || table.getMeta().getTabla().equals("")){
             view.showErrorMessage();
         }else {
-            view.displayTable(table.getImage());
+            view.displayTable(table.getMeta().getTabla());
         }
 
     }

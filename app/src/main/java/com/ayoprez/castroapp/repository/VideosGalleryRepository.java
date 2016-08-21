@@ -14,5 +14,6 @@ public interface VideosGalleryRepository {
     ArrayList<VideoItem> getAllVideos();
 
     void saveVideos(ArrayList<VideoItem> videos);
+    void deleteAllVideos();
     void closeRealm();
 }

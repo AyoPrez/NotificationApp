@@ -11,19 +11,8 @@ public class Arena extends RealmObject{
 
     @PrimaryKey
     private int id;
-    private String name;
-    private String address;
-    private String description;
-    private String image;
-
-    public Arena setObject(Arena arena){
-        this.id = arena.getId();
-        this.name = arena.getName();
-        this.address = arena.getAddress();
-        this.description = arena.getDescription();
-        this.image = arena.getImage();
-        return this;
-    }
+    private String title;
+    private ArenaMeta meta;
 
     public int getId() {
         return id;
@@ -33,35 +22,19 @@ public class Arena extends RealmObject{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getAddress() {
-        return address;
+    public ArenaMeta getMeta() {
+        return meta;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setMeta(ArenaMeta meta) {
+        this.meta = meta;
     }
 }

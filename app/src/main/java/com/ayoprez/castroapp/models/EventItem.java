@@ -12,16 +12,7 @@ public class EventItem extends RealmObject{
     @PrimaryKey
     private int id;
     private String title;
-    private String subtitle;
-    private String image;
-
-    public EventItem setObject(EventItem eventItem){
-        this.id = eventItem.getId();
-        this.title = eventItem.getTitle();
-        this.subtitle = eventItem.getSubtitle();
-        this.image = eventItem.getImage();
-        return this;
-    }
+    private EventItemMeta meta;
 
     public int getId() {
         return id;
@@ -39,19 +30,11 @@ public class EventItem extends RealmObject{
         this.title = title;
     }
 
-    public String getSubtitle() {
-        return subtitle;
+    public EventItemMeta getMeta() {
+        return meta;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setMeta(EventItemMeta meta) {
+        this.meta = meta;
     }
 }

@@ -1,10 +1,12 @@
 package com.ayoprez.castroapp.repository;
 
 import com.ayoprez.castroapp.models.SponsorItem;
+import com.ayoprez.castroapp.models.SponsorItemMeta;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by ayo on 17.07.16.
@@ -12,6 +14,7 @@ import io.realm.Realm;
 public class SponsorRepositoryImpl implements SponsorRepository {
 
     protected Realm sponsorRealm;
+    protected int lastId;
 
     public SponsorRepositoryImpl(){
         sponsorRealm = Realm.getDefaultInstance();
@@ -29,15 +32,45 @@ public class SponsorRepositoryImpl implements SponsorRepository {
 
     @Override
     public void saveSponsor(final ArrayList<SponsorItem> sponsors) {
+        SponsorItem sponsorItem;
+        SponsorItemMeta sponsorItemMeta;
+
+        Realm sponsorRealm = Realm.getDefaultInstance();
+
+        for(SponsorItem sponsor : sponsors) {
+            sponsorRealm.beginTransaction();
+
+            sponsorItem = new SponsorItem();
+            sponsorItem.setId(sponsor.getId()+getLastId());
+            sponsorItem.setTitle(sponsor.getTitle());
+
+            sponsorItemMeta = new SponsorItemMeta();
+            sponsorItemMeta.setPhoto(sponsor.getMeta().getPhoto());
+            sponsorItemMeta.setUrl(sponsor.getMeta().getUrl());
+            sponsorItem.setMeta(sponsorItemMeta);
+
+            SponsorItemMeta itemMeta = sponsorRealm.copyToRealm(sponsorItemMeta);
+            SponsorItem itemTable = sponsorRealm.copyToRealm(sponsorItem);
+
+            sponsorRealm.commitTransaction();
+        }
+    }
+
+    @Override
+    public void deleteAllSponsors() {
         sponsorRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                SponsorItem sponsorTable = sponsorRealm.createObject(SponsorItem.class);
-                for (SponsorItem sponsor : sponsors){
-                    sponsorTable.setObject(sponsor);
-                }
+                RealmResults<SponsorItem> result = realm.where(SponsorItem.class).findAll();
+                RealmResults<SponsorItemMeta> metaResult = realm.where(SponsorItemMeta.class).findAll();
+                result.deleteAllFromRealm();
+                metaResult.deleteAllFromRealm();
             }
         });
+    }
+
+    private int getLastId() {
+        return lastId++;
     }
 
     @Override

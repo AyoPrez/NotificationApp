@@ -1,16 +1,20 @@
 package com.ayoprez.castroapp.repository;
 
 import com.ayoprez.castroapp.models.VideoItem;
+import com.ayoprez.castroapp.models.VideoItemMeta;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by ayo on 18.08.16.
  */
 public class VideosGalleryRepositoryImpl implements VideosGalleryRepository {
-    Realm videoRealm;
+
+    protected Realm videoRealm;
+    protected int lastId;
 
     public VideosGalleryRepositoryImpl(){
         videoRealm = Realm.getDefaultInstance();
@@ -27,17 +31,46 @@ public class VideosGalleryRepositoryImpl implements VideosGalleryRepository {
     }
 
     @Override
-    public void saveVideos(final ArrayList<VideoItem> images) {
+    public void saveVideos(final ArrayList<VideoItem> videos) {
+        VideoItem videoItem;
+        VideoItemMeta videoItemMeta;
+
+        Realm videoRealm = Realm.getDefaultInstance();
+
+        for(VideoItem video : videos) {
+            videoRealm.beginTransaction();
+
+            videoItem = new VideoItem();
+            videoItem.setId(video.getId()+getLastId());
+            videoItem.setTitle(video.getTitle());
+
+            videoItemMeta = new VideoItemMeta();
+            videoItemMeta.setPreview(video.getMeta().getPreview());
+            videoItemMeta.setVideo(video.getMeta().getVideo());
+            videoItem.setMeta(videoItemMeta);
+
+            VideoItemMeta itemMeta = videoRealm.copyToRealm(videoItemMeta);
+            VideoItem itemTable = videoRealm.copyToRealm(videoItem);
+
+            videoRealm.commitTransaction();
+        }
+    }
+
+    @Override
+    public void deleteAllVideos() {
         videoRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                VideoItem imageItemTable = videoRealm.createObject(VideoItem.class);
-
-                for(VideoItem image : images){
-                    imageItemTable.setObject(image);
-                }
+                RealmResults<VideoItem> result = realm.where(VideoItem.class).findAll();
+                RealmResults<VideoItemMeta> metaResult = realm.where(VideoItemMeta.class).findAll();
+                result.deleteAllFromRealm();
+                metaResult.deleteAllFromRealm();
             }
         });
+    }
+
+    private int getLastId(){
+        return lastId++;
     }
 
     @Override

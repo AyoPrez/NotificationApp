@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class ArenaFragment extends Fragment implements ArenaView {
     @BindView(R.id.tv_name_arena)
     TextView tvArenaName;
     @BindView(R.id.button_map_arena)
-    Button btnArenaMap;
+    ImageButton btnArenaMap;
 
     public ArenaFragment(){}
 

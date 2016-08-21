@@ -41,12 +41,12 @@ public class VideoGalleryAdapterPresenterImpl implements VideoGalleryAdapterPres
         if(item == null){
             view.showError();
         }else{
-            applyDisplayVideoPreview(item.getPreviewImageUrl());
+            applyDisplayVideoPreview(item.getMeta().getPreview());
         }
     }
 
     private void applyDisplayVideoPreview(String image){
-        if(image.isEmpty()){
+        if(image == null || image.isEmpty()){
             view.showError();
         }else {
             view.displayItemPreview(image);

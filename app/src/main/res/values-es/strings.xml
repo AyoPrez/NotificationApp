@@ -16,5 +16,6 @@
     <string name="pictures">Imágenes</string>
     <string name="videos">Vídeos</string>
     <string name="sponsors">Patrocinadores</string>
+    <string name="imagesContentDescription">share_image</string>
 
 </resources>

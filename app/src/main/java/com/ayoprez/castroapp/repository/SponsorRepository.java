@@ -12,5 +12,6 @@ public interface SponsorRepository {
     ArrayList<SponsorItem> getAllSponsors();
 
     void saveSponsor(ArrayList<SponsorItem> sponsors);
+    void deleteAllSponsors();
     void closeRealm();
 }

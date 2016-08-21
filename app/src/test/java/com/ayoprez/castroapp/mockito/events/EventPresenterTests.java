@@ -36,7 +36,7 @@ public class EventPresenterTests {
 
         item.setId(1);
         item.setTitle("EventName");
-        item.setSubtitle("EventSubtitle");
+        item.getMeta().setSubtitle("EventSubtitle");
 
         mockView = mock(EventView.class);
 

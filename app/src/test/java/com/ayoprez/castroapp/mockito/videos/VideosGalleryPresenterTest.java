@@ -37,7 +37,7 @@ public class VideosGalleryPresenterTest {
         repository = mock(VideosGalleryRepository.class);
 
         item.setId(1);
-        item.setVideoUrl("PlayerName");
+        item.getMeta().setVideo("PlayerName");
 
         mockView = mock(VideosGalleryView.class);
 

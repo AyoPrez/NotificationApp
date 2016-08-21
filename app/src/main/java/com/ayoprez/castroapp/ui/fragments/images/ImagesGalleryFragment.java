@@ -62,7 +62,7 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
 
     @Override
     public void initRecyclerView() {
-        adapter = new ImagesGalleryListAdapter();
+        adapter = new ImagesGalleryListAdapter(getActivity());
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         recyclerView.setAdapter(adapter);
     }

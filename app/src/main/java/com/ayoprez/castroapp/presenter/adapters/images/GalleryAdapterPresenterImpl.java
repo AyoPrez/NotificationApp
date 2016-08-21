@@ -41,7 +41,7 @@ public class GalleryAdapterPresenterImpl implements GalleryAdapterPresenter {
     }
 
     private void applyDisplayImages(String image){
-        if(image.isEmpty()){
+        if(image == null || image.isEmpty()){
             view.showError();
         }else {
             view.displayItemImage(image);

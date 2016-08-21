@@ -35,8 +35,8 @@ public class SponsorsPresenterTest {
         repository = mock(SponsorRepository.class);
 
         item.setId(1);
-        item.setImage("http://www.images.com/image1");
-        item.setUrl("http://www.web.sponsor.com/");
+        item.getMeta().setPhoto("http://www.images.com/image1");
+        item.getMeta().setUrl("http://www.web.sponsor.com/");
 
         mockView = mock(SponsorsView.class);
 

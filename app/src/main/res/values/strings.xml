@@ -19,5 +19,6 @@
     <!--SeasonInfo fragment-->
     <string name="results">Results</string>
     <string name="table">Table</string>
+    <string name="imagesContentDescription">share_image</string>
 
 </resources>

@@ -11,9 +11,9 @@ import com.ayoprez.castroapp.ui.viewholders.sponsor.SponsorItemView;
 public class SponsorsListAdapterPresenterImpl implements SponsorListAdapterPresenter {
     private static final String TAG = SponsorsListAdapterPresenterImpl.class.getSimpleName();
 
-    private SponsorRepository repository;
-    private SponsorItemView view;
-    private SponsorItem item;
+    protected SponsorRepository repository;
+    protected SponsorItemView view;
+    protected SponsorItem item;
 
     public SponsorsListAdapterPresenterImpl(SponsorRepository repository){
         this.repository = repository;
@@ -42,10 +42,10 @@ public class SponsorsListAdapterPresenterImpl implements SponsorListAdapterPrese
     }
 
     private void applyDisplayImages(SponsorItem item){
-        if(item.getImage().equals("")){
+        if(item == null || item.getMeta() == null || item.getMeta().getPhoto() == null || item.getMeta().getPhoto().equals("")){
             view.showError();
         }else {
-            view.displayItemImage(item.getImage());
+            view.displayItemImage(item.getMeta().getPhoto());
         }
     }
 

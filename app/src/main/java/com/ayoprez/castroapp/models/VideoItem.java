@@ -10,15 +10,8 @@ public class VideoItem extends RealmObject {
 
     @PrimaryKey
     private int id;
-    private String videoUrl;
-    private String previewImageUrl;
-
-    public VideoItem setObject(VideoItem imageItem){
-        this.id = imageItem.getId();
-        this.videoUrl = imageItem.getVideoUrl();
-        this.previewImageUrl = imageItem.getPreviewImageUrl();
-        return this;
-    }
+    private String title;
+    private VideoItemMeta meta;
 
     public int getId() {
         return id;
@@ -28,19 +21,19 @@ public class VideoItem extends RealmObject {
         this.id = id;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
+    public String getTitle() {
+        return title;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPreviewImageUrl() {
-        return previewImageUrl;
+    public VideoItemMeta getMeta() {
+        return meta;
     }
 
-    public void setPreviewImageUrl(String previewImageUrl) {
-        this.previewImageUrl = previewImageUrl;
+    public void setMeta(VideoItemMeta meta) {
+        this.meta = meta;
     }
 }

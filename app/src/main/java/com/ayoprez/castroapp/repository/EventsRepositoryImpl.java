@@ -1,17 +1,20 @@
 package com.ayoprez.castroapp.repository;
 
 import com.ayoprez.castroapp.models.EventItem;
+import com.ayoprez.castroapp.models.EventItemMeta;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by ayo on 26.06.16.
  */
 public class EventsRepositoryImpl implements EventsRepository{
 
-    Realm eventRealm;
+    private Realm eventRealm;
+    private int lastId;
 
     public EventsRepositoryImpl(){
         eventRealm = Realm.getDefaultInstance();
@@ -29,16 +32,49 @@ public class EventsRepositoryImpl implements EventsRepository{
 
     @Override
     public void saveEvents(final ArrayList<EventItem> events) {
+        EventItem eventItem;
+        EventItemMeta eventItemMeta;
+
+        Realm eventRealm = Realm.getDefaultInstance();
+
+        for(EventItem player : events) {
+            eventRealm.beginTransaction();
+
+            eventItem = new EventItem();
+            eventItem.setId(player.getId()+getLastId());
+            eventItem.setTitle(player.getTitle());
+
+            eventItemMeta = new EventItemMeta();
+            eventItemMeta.setImage(player.getMeta().getImage());
+            eventItemMeta.setDescription(player.getMeta().getDescription());
+            eventItemMeta.setDate(player.getMeta().getDate());
+            eventItemMeta.setPrice(player.getMeta().getPrice());
+            eventItemMeta.setSubtitle(player.getMeta().getSubtitle());
+            eventItemMeta.setTime(player.getMeta().getTime());
+            eventItem.setMeta(eventItemMeta);
+
+            EventItemMeta itemMeta = eventRealm.copyToRealm(eventItemMeta);
+            EventItem itemTable = eventRealm.copyToRealm(eventItem);
+
+            eventRealm.commitTransaction();
+        }
+    }
+
+    @Override
+    public void deleteAllEvents() {
         eventRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                EventItem eventItemTable = eventRealm.createObject(EventItem.class);
-
-                for(EventItem event : events){
-                    eventItemTable.setObject(event);
-                }
+                RealmResults<EventItem> result = realm.where(EventItem.class).findAll();
+                RealmResults<EventItemMeta> metaResult = realm.where(EventItemMeta.class).findAll();
+                result.deleteAllFromRealm();
+                metaResult.deleteAllFromRealm();
             }
         });
+    }
+
+    private int getLastId(){
+        return lastId++;
     }
 
     @Override

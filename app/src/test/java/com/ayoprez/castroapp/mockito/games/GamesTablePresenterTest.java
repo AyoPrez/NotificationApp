@@ -32,7 +32,7 @@ public class GamesTablePresenterTest {
         table = new TableItem();
 
         table.setId(1);
-        table.setImage("http://images.de/image");
+        table.getMeta().setTabla("http://images.de/image");
 
         when(mockRepository.getTable()).thenReturn(table);
 
@@ -69,7 +69,7 @@ public class GamesTablePresenterTest {
 
         TableItem tableItem = new TableItem();
         tableItem.setId(1);
-        tableItem.setImage(null);
+        tableItem.getMeta().setTabla(null);
 
         when(mockRepository.getTable()).thenReturn(tableItem);
 
@@ -86,7 +86,7 @@ public class GamesTablePresenterTest {
 
         TableItem tableItem = new TableItem();
         tableItem.setId(1);
-        tableItem.setImage("");
+        tableItem.getMeta().setTabla("");
 
         when(mockRepository.getTable()).thenReturn(tableItem);
 

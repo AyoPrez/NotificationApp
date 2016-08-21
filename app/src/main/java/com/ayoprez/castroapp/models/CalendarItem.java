@@ -10,13 +10,8 @@ public class CalendarItem extends RealmObject{
 
     @PrimaryKey
     private int id;
-    private String image;
-
-    public CalendarItem setObject(CalendarItem calendarItem){
-        this.id = calendarItem.getId();
-        this.image = calendarItem.getImage();
-        return this;
-    }
+    private String title;
+    private CalendarItemMeta meta;
 
     public int getId() {
         return id;
@@ -26,11 +21,19 @@ public class CalendarItem extends RealmObject{
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public CalendarItemMeta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(CalendarItemMeta meta) {
+        this.meta = meta;
     }
 }

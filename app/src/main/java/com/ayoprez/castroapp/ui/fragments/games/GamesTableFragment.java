@@ -34,9 +34,7 @@ public class GamesTableFragment extends Fragment implements GamesTableView{
 
     private static GamesTableFragment instance;
 
-    public GamesTableFragment(){
-        startComponent();
-    }
+    public GamesTableFragment() { }
 
     public static GamesTableFragment getInstance() {
         if(instance == null) {
@@ -47,11 +45,16 @@ public class GamesTableFragment extends Fragment implements GamesTableView{
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((CastroApplication)getActivity().getApplication()).getComponent().inject(this);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         presenter.setView(this);
     }
-
 
     @Nullable
     @Override
@@ -61,10 +64,6 @@ public class GamesTableFragment extends Fragment implements GamesTableView{
         ButterKnife.bind(this, view);
 
         return view;
-    }
-
-    private void startComponent(){
-        ((CastroApplication)getActivity().getApplication()).getComponent().inject(this);
     }
 
     @Override

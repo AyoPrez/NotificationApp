@@ -63,7 +63,7 @@ public class PlayersFragment extends Fragment implements PlayersView{
 
     @Override
     public void initRecyclerView() {
-        adapter = new PlayersListAdapter();
+        adapter = new PlayersListAdapter(getActivity());
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(adapter);
     }

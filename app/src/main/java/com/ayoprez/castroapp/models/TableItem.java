@@ -10,13 +10,8 @@ public class TableItem extends RealmObject {
 
     @PrimaryKey
     private int id;
-    private String image;
-
-    public TableItem setObject(TableItem tableItem){
-        this.id = tableItem.getId();
-        this.image = tableItem.getImage();
-        return this;
-    }
+    private String title;
+    private TableItemMeta meta;
 
     public int getId() {
         return id;
@@ -26,11 +21,19 @@ public class TableItem extends RealmObject {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public TableItemMeta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(TableItemMeta meta) {
+        this.meta = meta;
     }
 }

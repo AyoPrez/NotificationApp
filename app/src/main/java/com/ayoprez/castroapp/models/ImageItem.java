@@ -10,13 +10,8 @@ public class ImageItem extends RealmObject{
 
     @PrimaryKey
     private int id;
-    private String image;
-
-    public ImageItem setObject(ImageItem imageItem){
-        this.id = imageItem.getId();
-        this.image = imageItem.getImage();
-        return this;
-    }
+    private String title;
+    private ImageItemMeta meta;
 
     public int getId() {
         return id;
@@ -26,11 +21,19 @@ public class ImageItem extends RealmObject{
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ImageItemMeta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(ImageItemMeta meta) {
+        this.meta = meta;
     }
 }

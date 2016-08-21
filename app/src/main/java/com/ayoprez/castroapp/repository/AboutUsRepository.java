@@ -9,5 +9,6 @@ public interface AboutUsRepository {
     AboutUs getAboutUs();
 
     void saveAboutUs(AboutUs aboutUs);
+    void deleteAboutUs();
     void closeRealm();
 }

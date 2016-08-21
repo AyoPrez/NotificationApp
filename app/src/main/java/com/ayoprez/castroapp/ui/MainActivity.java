@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        changeFragment(new EventFragment());
     }
 
 
@@ -118,7 +120,6 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             /**TODO Para el próximo domingo.
-             * TODO     -Implementar Retrofit
              * TODO     -Probar que la base de datos funciona
              * TODO     -Hacer más tests
               */
@@ -142,6 +143,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void hideProgress() {
+
+    }
+
+    @Override
+    public void showErrorMessage() {
 
     }
 }

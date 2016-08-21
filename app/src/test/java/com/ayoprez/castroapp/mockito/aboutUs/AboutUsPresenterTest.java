@@ -33,12 +33,12 @@ public class AboutUsPresenterTest {
         mockRepository = mock(AboutUsRepository.class);
         aboutUs = new AboutUs();
 
-        aboutUs.setName("Castro Morales");
-        aboutUs.setDescription("Sumergete en la descripción");
-        aboutUs.setImage("www.url.es/mierda");
-        aboutUs.setTelephoneNumber("123456789");
-        aboutUs.setShareText("Shared text");
-        aboutUs.setMail("mail@mail.com");
+        aboutUs.setTitle("Castro Morales");
+        aboutUs.getMeta().setDescription("Sumergete en la descripción");
+        aboutUs.getMeta().setShare_image("www.url.es/mierda");
+        aboutUs.getMeta().setNumber("123456789");
+        aboutUs.getMeta().setShare_text("Shared text");
+        aboutUs.getMeta().setEmail("mail@mail.com");
         when(mockRepository.getAboutUs()).thenReturn(aboutUs);
 
         mockView = mock(AboutUsView.class);
@@ -59,9 +59,9 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).clickCallButton();
         verify(mockView, never()).clickShareButton();
         verify(mockView, never()).clickMailButton();
-        verify(mockView, never()).openPhone(aboutUs.getTelephoneNumber());
-        verify(mockView, never()).openMail(aboutUs.getMail());
-        verify(mockView, never()).openShare(aboutUs.getShareText());
+        verify(mockView, never()).openPhone(aboutUs.getMeta().getNumber());
+        verify(mockView, never()).openMail(aboutUs.getMeta().getEmail());
+        verify(mockView, never()).openShare(aboutUs.getMeta().getShare_text());
     }
 
     @Test
@@ -81,9 +81,9 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).clickCallButton();
         verify(mockView, never()).clickShareButton();
         verify(mockView, never()).clickMailButton();
-        verify(mockView, never()).openPhone(aboutUs.getTelephoneNumber());
-        verify(mockView, never()).openMail(aboutUs.getMail());
-        verify(mockView, never()).openShare(aboutUs.getShareText());
+        verify(mockView, never()).openPhone(aboutUs.getMeta().getNumber());
+        verify(mockView, never()).openMail(aboutUs.getMeta().getEmail());
+        verify(mockView, never()).openShare(aboutUs.getMeta().getShare_text());
     }
 
     @Test

@@ -1,5 +1,10 @@
 package com.ayoprez.castroapp;
 
+import android.support.annotation.AnyThread;
+
+import com.ayoprez.castroapp.common.Constants;
+import com.ayoprez.castroapp.presenter.SplashPresenter;
+import com.ayoprez.castroapp.presenter.SplashPresenterImpl;
 import com.ayoprez.castroapp.presenter.adapters.videos.VideoGalleryAdapterPresenter;
 import com.ayoprez.castroapp.presenter.adapters.videos.VideoGalleryAdapterPresenterImpl;
 import com.ayoprez.castroapp.presenter.games.GamesCalendarPresenter;
@@ -44,9 +49,32 @@ import com.ayoprez.castroapp.repository.SponsorRepository;
 import com.ayoprez.castroapp.repository.SponsorRepositoryImpl;
 import com.ayoprez.castroapp.repository.VideosGalleryRepository;
 import com.ayoprez.castroapp.repository.VideosGalleryRepositoryImpl;
+import com.ayoprez.castroapp.restful.AboutUsRestfulService;
+import com.ayoprez.castroapp.restful.AboutUsRestfulServiceImpl;
+import com.ayoprez.castroapp.restful.ArenaRestfulService;
+import com.ayoprez.castroapp.restful.ArenaRestfulServiceImpl;
+import com.ayoprez.castroapp.restful.EventsRestfulService;
+import com.ayoprez.castroapp.restful.EventsRestfulServiceImpl;
+import com.ayoprez.castroapp.restful.GamesRestfulService;
+import com.ayoprez.castroapp.restful.GamesRestfulServiceImpl;
+import com.ayoprez.castroapp.restful.ImageRestfulService;
+import com.ayoprez.castroapp.restful.ImageRestfulServiceImpl;
+import com.ayoprez.castroapp.restful.PlayerRestfulService;
+import com.ayoprez.castroapp.restful.PlayerRestfulServiceImpl;
+import com.ayoprez.castroapp.restful.RestfulService;
+import com.ayoprez.castroapp.restful.SponsorsRestfulService;
+import com.ayoprez.castroapp.restful.SponsorsRestfulServiceImpl;
+import com.ayoprez.castroapp.restful.VideoRestfulService;
+import com.ayoprez.castroapp.restful.VideoRestfulServiceImpl;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by ayo on 19.06.16.
@@ -162,5 +190,71 @@ public class AppModule {
     @Provides
     public VideoGalleryAdapterPresenter provideVideoGalleryAdapterPresenter(VideosGalleryRepository videosGalleryRepository){
         return new VideoGalleryAdapterPresenterImpl(videosGalleryRepository);
+    }
+
+    @Provides
+    public SplashPresenter provideSplashPresenter() {
+        return new SplashPresenterImpl();
+    }
+
+    @Provides
+    public OkHttpClient provideLoggingCapableHttpClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+
+        logging.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+
+        return new OkHttpClient.Builder().addInterceptor(logging).build();
+    }
+
+    @Provides
+    public Retrofit provideRetrofit(String baseURL) {
+        return new Retrofit.Builder().baseUrl(baseURL).addConverterFactory(GsonConverterFactory.create()).client(provideLoggingCapableHttpClient()).build();
+    }
+
+    @Provides
+    public RestfulService provideRestfulService(){
+        return provideRetrofit(Constants.BASE_URL).create(RestfulService.class);
+    }
+
+//    Restful Services
+
+    @Provides
+    public EventsRestfulService provideEventsRestfulService(EventsRepository repository, RestfulService service){
+        return new EventsRestfulServiceImpl(repository, service);
+    }
+
+    @Provides
+    public PlayerRestfulService providePlayerRestfulService(PlayersRepository repository, RestfulService service){
+        return new PlayerRestfulServiceImpl(repository, service);
+    }
+
+    @Provides
+    public ArenaRestfulService provideArenaRestfulService(ArenaRepository repository, RestfulService service){
+        return new ArenaRestfulServiceImpl(repository, service);
+    }
+
+    @Provides
+    public AboutUsRestfulService provideAboutUsRestfulService(AboutUsRepository repository, RestfulService service){
+        return new AboutUsRestfulServiceImpl(repository, service);
+    }
+
+    @Provides
+    public GamesRestfulService provideGamesRestfulService(GamesRepository repository, RestfulService service){
+        return new GamesRestfulServiceImpl(repository, service);
+    }
+
+    @Provides
+    public ImageRestfulService provideImageRestfulService(ImagesGalleryRepository repository, RestfulService service){
+        return new ImageRestfulServiceImpl(repository, service);
+    }
+
+    @Provides
+    public SponsorsRestfulService provideSponsorRestfulService(SponsorRepository repository, RestfulService service){
+        return new SponsorsRestfulServiceImpl(repository, service);
+    }
+
+    @Provides
+    public VideoRestfulService provideVideoRestfulService(VideosGalleryRepository repository, RestfulService service){
+        return new VideoRestfulServiceImpl(repository, service);
     }
 }

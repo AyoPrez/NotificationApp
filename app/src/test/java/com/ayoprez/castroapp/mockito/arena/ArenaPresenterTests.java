@@ -33,10 +33,10 @@ public class ArenaPresenterTests {
         mockRepository = mock(ArenaRepository.class);
         arena = new Arena();
 
-        arena.setName("Huesas Arena");
-        arena.setAddress("C/ Hueso");
-        arena.setDescription("Sumergete en la descripción");
-        arena.setImage("www.url.es/mierda");
+        arena.setTitle("Huesas Arena");
+        arena.getMeta().getCoordinates().setAddress("C/ Hueso");
+        arena.getMeta().setDescription("Sumergete en la descripción");
+        arena.getMeta().setPhoto("www.url.es/mierda");
         when(mockRepository.getArena()).thenReturn(arena);
 
         mockView = mock(ArenaView.class);

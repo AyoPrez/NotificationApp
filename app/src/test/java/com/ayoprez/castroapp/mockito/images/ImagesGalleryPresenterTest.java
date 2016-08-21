@@ -35,7 +35,7 @@ public class ImagesGalleryPresenterTest {
         repository = mock(ImagesGalleryRepository.class);
 
         item.setId(1);
-        item.setImage("PlayerName");
+        item.getMeta().setPhoto("PlayerName");
 
         mockView = mock(ImagesGalleryView.class);
 
@@ -61,7 +61,7 @@ public class ImagesGalleryPresenterTest {
     @Test
     public void shouldShowRecyclerViewWhenThereAreImagesInRepository(){
         ArrayList<String> items = new ArrayList<>();
-        items.add(item.getImage());
+        items.add(item.getMeta().getPhoto());
         when(repository.getAllImages()).thenReturn(items);
 
         presenter.setView(mockView);

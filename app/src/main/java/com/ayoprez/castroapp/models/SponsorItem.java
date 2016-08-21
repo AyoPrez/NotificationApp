@@ -10,15 +10,8 @@ public class SponsorItem extends RealmObject {
 
     @PrimaryKey
     private int id;
-    private String image;
-    private String url;
-
-    public SponsorItem setObject(SponsorItem item){
-        this.id = item.getId();
-        this.image = item.getImage();
-        this.url = item.getUrl();
-        return this;
-    }
+    private String title;
+    private SponsorItemMeta meta;
 
     public int getId() {
         return id;
@@ -28,19 +21,19 @@ public class SponsorItem extends RealmObject {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getUrl() {
-        return url;
+    public SponsorItemMeta getMeta() {
+        return meta;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setMeta(SponsorItemMeta meta) {
+        this.meta = meta;
     }
 }

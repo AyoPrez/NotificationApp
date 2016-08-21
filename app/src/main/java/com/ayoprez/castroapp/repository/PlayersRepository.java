@@ -12,5 +12,6 @@ public interface PlayersRepository {
     ArrayList<PlayerItem> getAllPlayers();
 
     void savePlayers(ArrayList<PlayerItem> players);
+    void deleteAllPlayers();
     void closeRealm();
 }

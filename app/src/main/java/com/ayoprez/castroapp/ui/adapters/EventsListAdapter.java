@@ -18,26 +18,22 @@ import javax.inject.Inject;
  */
 public class EventsListAdapter extends RecyclerView.Adapter<EventsViewHolder> {
 
-    private Context context;
-
     @Inject
     EventAdapterPresenter presenter;
 
+    public EventsListAdapter(Context context){
+        ((CastroApplication) context.getApplicationContext()).getComponent().inject(this);
+    }
+
     @Override
     public EventsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_event, parent, false);
         return new EventsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final EventsViewHolder holder, int position) {
-        initAdapterComponents();
         presenter.setView(holder);
-    }
-
-    private void initAdapterComponents() {
-        ((CastroApplication) context.getApplicationContext()).getComponent().inject(this);
     }
 
     @Override

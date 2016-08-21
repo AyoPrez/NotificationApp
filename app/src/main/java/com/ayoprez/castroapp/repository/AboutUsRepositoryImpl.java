@@ -1,7 +1,7 @@
 package com.ayoprez.castroapp.repository;
 
 import com.ayoprez.castroapp.models.AboutUs;
-import com.ayoprez.castroapp.repository.AboutUsRepository;
+import com.ayoprez.castroapp.models.AboutUsMeta;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -24,11 +24,38 @@ public class AboutUsRepositoryImpl implements AboutUsRepository {
 
     @Override
     public void saveAboutUs(final AboutUs aboutUs) {
+        AboutUs aboutUsItem = new AboutUs();
+        AboutUsMeta aboutUsItemMeta = new AboutUsMeta();
+
+        Realm aboutUsRealm = Realm.getDefaultInstance();
+
+        aboutUsRealm.beginTransaction();
+
+        aboutUsItem.setId(aboutUs.getId());
+        aboutUsItem.setTitle(aboutUs.getTitle());
+
+        aboutUsItemMeta.setDescription(aboutUs.getMeta().getDescription());
+        aboutUsItemMeta.setShare_image(aboutUs.getMeta().getShare_image());
+        aboutUsItemMeta.setShare_text(aboutUs.getMeta().getShare_text());
+        aboutUsItemMeta.setEmail(aboutUs.getMeta().getEmail());
+        aboutUsItemMeta.setNumber(aboutUs.getMeta().getNumber());
+        aboutUsItem.setMeta(aboutUsItemMeta);
+
+        AboutUsMeta itemMeta = aboutUsRealm.copyToRealm(aboutUsItemMeta);
+        AboutUs itemUs = aboutUsRealm.copyToRealm(aboutUsItem);
+
+        aboutUsRealm.commitTransaction();
+    }
+
+    @Override
+    public void deleteAboutUs() {
         aboutUsRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                AboutUs aboutUsTable = aboutUsRealm.createObject(AboutUs.class);
-                aboutUsTable.setObject(aboutUs);
+                RealmResults<AboutUs> result = realm.where(AboutUs.class).findAll();
+                RealmResults<AboutUsMeta> metaResult = realm.where(AboutUsMeta.class).findAll();
+                result.deleteAllFromRealm();
+                metaResult.deleteAllFromRealm();
             }
         });
     }

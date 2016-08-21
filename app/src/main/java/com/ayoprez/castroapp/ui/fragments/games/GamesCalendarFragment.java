@@ -42,8 +42,10 @@ public class GamesCalendarFragment extends Fragment implements GamesCalendarView
         return instance;
     }
 
-    public GamesCalendarFragment(){
-        startComponent();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((CastroApplication)getActivity().getApplication()).getComponent().inject(this);
     }
 
     @Override
@@ -70,9 +72,5 @@ public class GamesCalendarFragment extends Fragment implements GamesCalendarView
     @Override
     public void displayCalendar(String url) {
         Picasso.with(context).load(url).fit().into(iVCalendar);
-    }
-
-    private void startComponent(){
-        ((CastroApplication)getActivity().getApplication()).getComponent().inject(this);
     }
 }

@@ -16,5 +16,7 @@ public interface GamesRepository {
 
     void saveCalendar(CalendarItem calendar);
     void saveTable(TableItem table);
+    void deleteCalendar();
+    void deleteTable();
     void closeRealm();
 }
