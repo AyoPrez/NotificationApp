@@ -20,6 +20,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="-250dp"
         android:visibility="visible"
-        app:indicatorName="LineScale"
+        app:indicatorName="LineScaleIndicator"
         app:indicatorColor="@color/splashLoadColor" />
 </LinearLayout>

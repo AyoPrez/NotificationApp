@@ -1,0 +1,12 @@
+package com.ayoprez.castro.ui;
+
+import com.ayoprez.castro.common.CommonActivityView;
+
+/**
+ * Created by ayo on 19.06.16.
+ */
+public interface MainView<T> extends CommonActivityView{
+    void showProgress();
+
+    void hideProgress();
+}

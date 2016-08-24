@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ayoprez.castroapp">
+    package="com.ayoprez.castro">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".CastroApplication"
+        android:name="com.ayoprez.castro.CastroApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,13 +13,13 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.ayoprez.castro.ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".ui.SplashActivity"
+            android:name="com.ayoprez.castro.ui.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,6 +29,9 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4fefaf4e21f6e6d61917898a34d1a95c16b98090" />
     </application>
 
 </manifest>

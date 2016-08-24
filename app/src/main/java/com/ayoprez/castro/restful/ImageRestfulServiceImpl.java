@@ -1,0 +1,50 @@
+package com.ayoprez.castro.restful;
+
+import android.util.Log;
+
+import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.CommonActivityView;
+import com.ayoprez.castro.common.ErrorManager;
+import com.ayoprez.castro.models.ImageItem;
+import com.ayoprez.castro.repository.ImagesGalleryRepository;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import retrofit2.Response;
+
+/**
+ * Created by ayo on 19.08.16.
+ */
+public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfulService {
+    private static final String TAG = ImageRestfulServiceImpl.class.getSimpleName();
+
+    private ImagesGalleryRepository repository;
+    private RestfulService service;
+
+    public ImageRestfulServiceImpl(ImagesGalleryRepository repository, RestfulService service){
+        this.repository = repository;
+        this.service = service;
+
+        if(repository.getAllImages().size() > 0){
+            repository.deleteAllImages();
+        }
+    }
+
+    @Override
+    public void getRestfulImages(final CommonActivityView view) {
+        try {
+            Response<ArrayList<ImageItem>> response = service.getImagesFromServer().execute();
+
+            if (response.isSuccessful()) {
+                repository.saveImages(response.body());
+            }else{
+                showError(view, ERROR_RESTFUL_IMAGES);
+            }
+
+        } catch (IOException e) {
+            Log.e(TAG, "Error: ", e);
+            showError(view, ERROR_RESTFUL_IMAGES);
+        }
+    }
+}

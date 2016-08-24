@@ -21,4 +21,16 @@
     <string name="table">Table</string>
     <string name="imagesContentDescription">share_image</string>
 
+    <string name="base_error_empty">The list with %1$s is empty</string>
+    <string name="base_error_no_data">Apologize, the data to open this are missing</string>
+    <string name="base_error_restful">There was an error obtaining the data of the %1$s </string>
+    <string name="the_videos">videos</string>
+    <string name="the_events">events</string>
+    <string name="the_images">images</string>
+    <string name="the_players">wrestlers</string>
+    <string name="the_games">wrestlings</string>
+    <string name="the_sponsors">sponsors</string>
+    <string name="the_arena">arena</string>
+    <string name="the_aboutus">club</string>
+
 </resources>
