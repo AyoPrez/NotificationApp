@@ -14,6 +14,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -62,7 +64,7 @@ public class SponsorsPresenterTest {
 
         presenter.setView(mockView);
 
-        verify(mockView, times(1)).showEmptyListMessage(anyString());
+        verify(mockView, times(1)).showEmptyListMessage(anyByte());
         verify(mockView, never()).initRecyclerView();
     }
 
@@ -74,7 +76,7 @@ public class SponsorsPresenterTest {
 
         presenter.setView(mockView);
 
-        verify(mockView, never()).showEmptyListMessage(anyString());
+        verify(mockView, never()).showEmptyListMessage(anyByte());
         verify(mockView, times(1)).initRecyclerView();
     }
 }

@@ -36,7 +36,7 @@ public class GalleryItemViewHolder extends RecyclerView.ViewHolder implements Ga
     }
 
     @Override
-    public void showErrorMessage(String message, int position) {
+    public void showErrorMessage(byte message, int position) {
 
     }
 }

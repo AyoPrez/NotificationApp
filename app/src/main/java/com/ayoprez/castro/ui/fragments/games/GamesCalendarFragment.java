@@ -71,7 +71,7 @@ public class GamesCalendarFragment extends Fragment implements GamesCalendarView
     }
 
     @Override
-    public void showErrorMessage(String errorMessage) {
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+    public void showErrorMessage(byte errorMessage) {
+        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 }

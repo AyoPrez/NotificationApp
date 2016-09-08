@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.models.PlayerItem;
 import com.ayoprez.castro.presenter.players.PlayersPresenter;
 import com.ayoprez.castro.ui.adapters.PlayersListAdapter;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -56,14 +59,14 @@ public class PlayersFragment extends Fragment implements PlayersView{
     }
 
     @Override
-    public void showEmptyListMessage(String errorMessage) {
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+    public void initRecyclerView(ArrayList<PlayerItem> content) {
+        adapter = new PlayersListAdapter(getActivity(), content);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void initRecyclerView() {
-        adapter = new PlayersListAdapter(getActivity());
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        recyclerView.setAdapter(adapter);
+    public void showErrorMessage(byte errorMessage) {
+        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 }

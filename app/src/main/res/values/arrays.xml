@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="errorsArray">
+        <item>@string/base_error_restful_images</item>
+        <item>@string/base_error_restful_videos</item>
+        <item>@string/base_error_restful_events</item>
+        <item>@string/base_error_restful_players</item>
+        <item>@string/base_error_restful_games</item>
+        <item>@string/base_error_restful_sponsors</item>
+        <item>@string/base_error_restful_aboutus</item>
+        <item>@string/base_error_restful_arena</item>
+
+        <item>@string/base_error_empty_players</item>
+        <item>@string/base_error_empty_videos</item>
+        <item>@string/base_error_empty_images</item>
+        <item>@string/base_error_empty_events</item>
+        <item>@string/base_error_empty_sponsors</item>
+        <item>@string/base_error_empty_aboutus</item>
+        <item>@string/base_error_empty_arena</item>
+        <item>@string/base_error_empty_games</item>
+        <item>@string/base_error_empty_games</item>
+
+        <item>@string/base_error_no_data_aboutus</item>
+        <item>@string/base_error_no_data_arena</item>
+        <item>@string/base_error_no_data_games</item>
+        <item>@string/base_error_no_data_games</item>
+        <item>@string/base_error_no_data_events</item>
+        <item>@string/base_error_no_data_images</item>
+        <item>@string/base_error_no_data_videos</item>
+        <item>@string/base_error_no_data_sponsors</item>
+        <item>@string/base_error_no_data_players</item>
+
+    </string-array>
+
+</resources>

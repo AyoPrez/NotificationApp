@@ -14,6 +14,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Matchers.anyByte;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -72,7 +73,7 @@ public class ImagesGalleryAdapterPresenterTest {
 
         verify(mockView, times(1)).getItemPosition();
         verify(mockView, times(1)).displayItemImage("www.img.com/1");
-        verify(mockView, never()).showErrorMessage(anyString(), anyInt());
+        verify(mockView, never()).showErrorMessage(anyByte(), anyInt());
     }
 
     @Test
@@ -86,7 +87,7 @@ public class ImagesGalleryAdapterPresenterTest {
 
         verify(mockView, times(1)).getItemPosition();
         verify(mockView, never()).displayItemImage("www.img.com/1");
-        verify(mockView, times(1)).showErrorMessage(anyString(), anyInt());
+        verify(mockView, times(1)).showErrorMessage(anyByte(), anyInt());
     }
 
     @Test
@@ -103,7 +104,7 @@ public class ImagesGalleryAdapterPresenterTest {
 
         verify(mockView, times(2)).getItemPosition();
         verify(mockView, never()).displayItemImage("www.img.com/1");
-        verify(mockView, times(1)).showErrorMessage(anyString(), anyInt());
+        verify(mockView, times(1)).showErrorMessage(anyByte(), anyInt());
     }
 
     @Test

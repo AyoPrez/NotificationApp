@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.models.PlayerItem;
 import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenter;
 import com.ayoprez.castro.ui.viewholders.players.PlayersViewHolder;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -20,12 +23,14 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersViewHolder> 
     private static final String TAG = PlayersListAdapter.class.getSimpleName();
 
     protected Context context;
+    protected ArrayList<PlayerItem> playerItems;
 
     @Inject
     PlayerAdapterPresenter playersPresenter;
 
-    public PlayersListAdapter(Context context){
+    public PlayersListAdapter(Context context, ArrayList<PlayerItem> items){
         this.context = context;
+        this.playerItems = items;
     }
 
     @Override
@@ -41,12 +46,13 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersViewHolder> 
     @Override
     public void onBindViewHolder(PlayersViewHolder holder, int position) {
         playersPresenter.setView(holder);
+        playersPresenter.loadPlayersData(playerItems, position);
     }
 
     @Override
     public int getItemCount() {
         initAdapterComponents();
 
-        return playersPresenter.getPlayersCountSize();
+        return playerItems.size();
     }
 }

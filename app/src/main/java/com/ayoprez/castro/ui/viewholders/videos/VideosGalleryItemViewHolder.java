@@ -35,7 +35,7 @@ public class VideosGalleryItemViewHolder extends RecyclerView.ViewHolder impleme
     }
 
     @Override
-    public void showErrorMessage(String message, int position) {
+    public void showErrorMessage(byte message, int position) {
 
     }
 }

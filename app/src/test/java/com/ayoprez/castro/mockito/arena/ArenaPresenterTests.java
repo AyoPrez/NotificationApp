@@ -13,6 +13,8 @@ import com.ayoprez.castro.ui.fragments.arena.ArenaView;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;
@@ -69,7 +71,7 @@ public class ArenaPresenterTests {
         verify(mockView, times(1)).displayDescription("Sumergete en la descripción");
         verify(mockView, times(1)).displayImage("www.url.es/mierda");
         verify(mockView, never()).displayMap("C/ Hueso");
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
     }
 
     @Test
@@ -81,7 +83,7 @@ public class ArenaPresenterTests {
 
         verify(mockRepository, times(1)).getArena();
 
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
         verify(mockView, never()).displayName("Huesas Arena");
         verify(mockView, never()).displayAddress("C/ Hueso");
         verify(mockView, never()).displayDescription("Sumergete en la descripción");
@@ -101,7 +103,7 @@ public class ArenaPresenterTests {
         verify(mockView, times(1)).displayDescription("Sumergete en la descripción");
         verify(mockView, times(1)).displayImage("www.url.es/mierda");
         verify(mockView, times(1)).displayMap("C/ Hueso");
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
     }
 
     @Test
@@ -117,7 +119,7 @@ public class ArenaPresenterTests {
         verify(mockView, times(1)).displayDescription("Sumergete en la descripción");
         verify(mockView, times(1)).displayImage("www.url.es/mierda");
         verify(mockView, never()).displayMap("C/ Hueso");
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test(expected = ViewNotFoundException.class)

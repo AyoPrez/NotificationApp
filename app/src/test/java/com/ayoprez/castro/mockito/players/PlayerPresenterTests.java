@@ -12,7 +12,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyCollection;
+import static org.mockito.Matchers.anyCollectionOf;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -60,9 +65,11 @@ public class PlayerPresenterTests {
         when(repository.getAllPlayers()).thenReturn(items);
 
         presenter.setView(mockView);
+        presenter.setTag("Senior");
+        presenter.initView();
 
-        verify(mockView, times(1)).showEmptyListMessage(anyString());
-        verify(mockView, never()).initRecyclerView();
+        verify(mockView, times(1)).showErrorMessage(anyByte());
+        verify(mockView, never()).initRecyclerView(new ArrayList<>(Collections.singletonList(new PlayerItem())));
     }
 
     @Test
@@ -72,8 +79,10 @@ public class PlayerPresenterTests {
         when(repository.getAllPlayers()).thenReturn(items);
 
         presenter.setView(mockView);
+        presenter.setTag("Senior");
+        presenter.initView();
 
-        verify(mockView, never()).showEmptyListMessage(anyString());
-        verify(mockView, times(1)).initRecyclerView();
+        verify(mockView, never()).showErrorMessage(anyByte());
+        verify(mockView, times(1)).initRecyclerView(new ArrayList<>(anyCollectionOf(PlayerItem.class)));
     }
 }

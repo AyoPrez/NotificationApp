@@ -28,11 +28,6 @@ public class PlayersViewHolder extends RecyclerView.ViewHolder implements Player
     }
 
     @Override
-    public int getItemPosition() {
-        return getAdapterPosition();
-    }
-
-    @Override
     public void displayItemTitle(String title) {
         playerName.setText(title);
     }
@@ -43,7 +38,7 @@ public class PlayersViewHolder extends RecyclerView.ViewHolder implements Player
     }
 
     @Override
-    public void showErrorMessage(String message, int position) {
+    public void showErrorMessage(byte message, int position) {
 
     }
 }

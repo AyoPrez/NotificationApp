@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -60,7 +62,7 @@ public class EventPresenterTests {
         presenter.setView(mockView);
         presenter.openDetailedView(null);
 
-        verify(mockView, times(1)).showEmptyListMessage(anyString());
+        verify(mockView, times(1)).showEmptyListMessage(anyByte());
         verify(mockView, times(1)).initRecyclerView();
         verify(mockView, never()).changeFragment(any(Fragment.class));
     }
@@ -73,7 +75,7 @@ public class EventPresenterTests {
         presenter.setView(mockView);
         presenter.openDetailedView(item);
 
-        verify(mockView, times(1)).showEmptyListMessage(anyString());
+        verify(mockView, times(1)).showEmptyListMessage(anyByte());
         verify(mockView, times(1)).initRecyclerView();
         verify(mockView, never()).changeFragment(any(Fragment.class));
     }
@@ -86,7 +88,7 @@ public class EventPresenterTests {
         presenter.setView(mockView);
         presenter.openDetailedView(item);
 
-        verify(mockView, times(1)).showEmptyListMessage(anyString());
+        verify(mockView, times(1)).showEmptyListMessage(anyByte());
         verify(mockView, times(1)).initRecyclerView();
         verify(mockView, never()).changeFragment(any(Fragment.class));
     }

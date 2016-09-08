@@ -21,16 +21,47 @@
     <string name="table">Tabla</string>
 
     <!-- Errors -->
-    <string name="base_error_empty">La lista con %1$s está vacía</string>
-    <string name="base_error_no_data">Lo siento, faltan datos para poder abrir eso</string>
-    <string name="base_error_restful">Hubo un error al obtener los datos de %1$s </string>
-    <string name="the_videos">los vídeos</string>
-    <string name="the_images">las imágenes</string>
-    <string name="the_events">los eventos</string>
-    <string name="the_players">los luchadores</string>
-    <string name="the_games">las luchadas</string>
-    <string name="the_sponsors">los patrocinadores</string>
-    <string name="the_arena">el terrero</string>
-    <string name="the_aboutus">el club</string>
+    <string name="base_error_empty_videos">La lista con los vídeos está vacía</string>
+    <string name="base_error_empty_images">La lista con las imágenes está vacía</string>
+    <string name="base_error_empty_events">La lista con los eventos está vacía</string>
+    <string name="base_error_empty_players">La lista con los luchadores está vacía</string>
+    <string name="base_error_empty_games">La lista con las luchadas está vacía</string>
+    <string name="base_error_empty_sponsors">La lista con los patrocinadores está vacía</string>
+    <string name="base_error_empty_arena">La lista con el terrero está vacía</string>
+    <string name="base_error_empty_aboutus">La lista con el club está vacía</string>
+    <string name="base_error_no_data_videos">Lo siento, faltan datos para poder abrir el video</string>
+    <string name="base_error_no_data_images">Lo siento, faltan datos para poder abrir la imagen</string>
+    <string name="base_error_no_data_events">Lo siento, faltan datos para poder abrir la información sobre el evento</string>
+    <string name="base_error_no_data_players">Lo siento, faltan datos para poder abrir la información sobre el luchador</string>
+    <string name="base_error_no_data_games">Lo siento, faltan datos para poder abrir la información sobre la luchada</string>
+    <string name="base_error_no_data_sponsors">Lo siento, faltan datos para poder abrir la información sobre el patrocinador</string>
+    <string name="base_error_no_data_arena">Lo siento, faltan datos para poder abrir la información sobre el terrero</string>
+    <string name="base_error_no_data_aboutus">Lo siento, faltan datos para poder abrir la información sobre el club</string>
+    <string name="base_error_restful_videos">Hubo un error al obtener los datos de los vídeos </string>
+    <string name="base_error_restful_images">Hubo un error al obtener los datos de las imágenes </string>
+    <string name="base_error_restful_events">Hubo un error al obtener los datos de los eventos </string>
+    <string name="base_error_restful_players">Hubo un error al obtener los datos de los luchadores </string>
+    <string name="base_error_restful_games">Hubo un error al obtener los datos de las luchadas </string>
+    <string name="base_error_restful_sponsors">Hubo un error al obtener los datos de los patrocinadores </string>
+    <string name="base_error_restful_arena">Hubo un error al obtener los datos del terrero </string>
+    <string name="base_error_restful_aboutus">Hubo un error al obtener los datos del club </string>
+
+
+    <!--<string name="base_error_empty">La lista con %1$s está vacía</string>-->
+    <!--<string name="base_error_no_data">Lo siento, faltan datos para poder abrir eso</string>-->
+    <!--<string name="base_error_restful">Hubo un error al obtener los datos de %1$s </string>-->
+    <!--<string name="the_videos">los vídeos</string>-->
+    <!--<string name="the_images">las imágenes</string>-->
+    <!--<string name="the_events">los eventos</string>-->
+    <!--<string name="the_players">los luchadores</string>-->
+    <!--<string name="the_games">las luchadas</string>-->
+    <!--<string name="the_sponsors">los patrocinadores</string>-->
+    <!--<string name="the_arena">el terrero</string>-->
+    <!--<string name="the_aboutus">el club</string>-->
+
+    <!-- Players -->
+    <string name="senior">Senior</string>
+    <string name="cadet">Cadete</string>
+    <string name="junior">Juvenil</string>
 
 </resources>

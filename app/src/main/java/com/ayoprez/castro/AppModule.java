@@ -150,8 +150,8 @@ public class AppModule {
     }
 
     @Provides
-    public PlayerAdapterPresenter providePlayerAdapterPresenter(PlayersRepository playersRepository){
-        return new PlayerAdapterPresenterImpl(playersRepository);
+    public PlayerAdapterPresenter providePlayerAdapterPresenter(){
+        return new PlayerAdapterPresenterImpl();
     }
 
     @Provides

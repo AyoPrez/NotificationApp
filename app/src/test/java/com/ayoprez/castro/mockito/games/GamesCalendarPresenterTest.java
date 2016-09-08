@@ -12,6 +12,8 @@ import com.ayoprez.castro.ui.fragments.games.GamesCalendarView;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -55,7 +57,7 @@ public class GamesCalendarPresenterTest {
         verify(mockRepository, times(1)).getCalendar();
 
         verify(mockView, times(1)).displayCalendar("http://images.de/image");
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
     }
 
     @Test
@@ -67,7 +69,7 @@ public class GamesCalendarPresenterTest {
 
         verify(mockRepository, times(1)).getCalendar();
 
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
         verify(mockView, never()).displayCalendar("http://images.de/image");
     }
 
@@ -86,7 +88,7 @@ public class GamesCalendarPresenterTest {
 
         verify(mockRepository, times(1)).getCalendar();
 
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
         verify(mockView, never()).displayCalendar("http://images.de/image");
     }
 
@@ -105,7 +107,7 @@ public class GamesCalendarPresenterTest {
 
         verify(mockRepository, times(1)).getCalendar();
 
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
         verify(mockView, never()).displayCalendar("http://images.de/image");
     }
 
@@ -115,7 +117,7 @@ public class GamesCalendarPresenterTest {
 
         presenter.setView(mockView);
 
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test(expected = ViewNotFoundException.class)

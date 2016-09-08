@@ -8,4 +8,6 @@ import com.ayoprez.castro.ui.fragments.players.PlayersView;
 public interface PlayersPresenter {
 
     void setView(PlayersView view);
+    void setTag(String category);
+    void initView();
 }

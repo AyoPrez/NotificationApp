@@ -11,6 +11,8 @@ import com.ayoprez.castro.ui.fragments.aboutus.AboutUsView;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -62,7 +64,7 @@ public class AboutUsPresenterTest {
         verify(mockView, times(1)).displayName("Castro Morales");
         verify(mockView, times(1)).displayDescription("Sumergete en la descripción");
         verify(mockView, times(1)).displayImage("www.url.es/mierda");
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
         verify(mockView, never()).clickCallButton();
         verify(mockView, never()).clickShareButton();
         verify(mockView, never()).clickMailButton();
@@ -80,7 +82,7 @@ public class AboutUsPresenterTest {
 
         verify(mockRepository, times(1)).getAboutUs();
 
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
         verify(mockView, never()).displayName("Castro Morales");
         verify(mockView, never()).displayDescription("Sumergete en la descripción");
         verify(mockView, never()).displayImage("www.url.es/mierda");
@@ -105,7 +107,7 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, times(1)).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
     }
 
     @Test
@@ -124,7 +126,7 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test
@@ -143,7 +145,7 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test
@@ -159,7 +161,7 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, times(1)).openMail(anyString());
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
     }
 
     @Test
@@ -178,7 +180,7 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test
@@ -197,7 +199,7 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test
@@ -213,7 +215,7 @@ public class AboutUsPresenterTest {
         verify(mockView, times(1)).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
     }
 
     @Test
@@ -232,7 +234,7 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test
@@ -251,13 +253,17 @@ public class AboutUsPresenterTest {
         verify(mockView, never()).openShare(anyString());
         verify(mockView, never()).openPhone(anyString());
         verify(mockView, never()).openMail(anyString());
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
     }
 
     @Test(expected = ViewNotFoundException.class)
     public void shouldThrowViewNotFoundExceptionWhenViewIsNull() {
         presenter.setView(null);
         presenter.loadAboutUsData();
+    }
+
+    public void shouldGiveErrorMessage(){
+
     }
 
 }

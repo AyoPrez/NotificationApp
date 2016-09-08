@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     }
 
     @Override
-    public void showErrorMessage(String errorMessage) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+    public void showErrorMessage(byte errorMessage) {
+        Toast.makeText(this, getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 }

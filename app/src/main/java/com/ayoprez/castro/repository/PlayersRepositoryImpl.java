@@ -31,6 +31,36 @@ public class PlayersRepositoryImpl implements PlayersRepository {
     }
 
     @Override
+    public ArrayList<PlayerItem> getSeniorPlayers() {
+        return new ArrayList<>(playerRealm
+                .where(PlayerItem.class)
+                .equalTo("category", "Senior")
+                .or()
+                .equalTo("category", "senior")
+                .findAll());
+    }
+
+    @Override
+    public ArrayList<PlayerItem> getCadetPlayers() {
+        return new ArrayList<>(playerRealm
+                .where(PlayerItem.class)
+                .equalTo("category", "Cadete")
+                .or()
+                .equalTo("category", "cadete")
+                .findAll());
+    }
+
+    @Override
+    public ArrayList<PlayerItem> getJuniorPlayers() {
+        return new ArrayList<>(playerRealm
+                .where(PlayerItem.class)
+                .equalTo("category", "Juvenil")
+                .or()
+                .equalTo("category", "juvenil")
+                .findAll());
+    }
+
+    @Override
     public void savePlayers(final ArrayList<PlayerItem> players) {
         PlayerItem playerItem;
         PlayerItemMeta itemMeta;

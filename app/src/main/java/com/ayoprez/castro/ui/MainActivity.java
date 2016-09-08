@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void showErrorMessage(String errorMessage) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+    public void showErrorMessage(byte errorMessage) {
+        Toast.makeText(this, getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 }

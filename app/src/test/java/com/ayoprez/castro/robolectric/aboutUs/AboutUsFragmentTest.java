@@ -72,7 +72,6 @@ public class AboutUsFragmentTest {
         assertEquals(nameAboutUs.getTypeface().getStyle(), Typeface.BOLD);
     }
 
-
     //TODO test this
     /*
     *  <TextView

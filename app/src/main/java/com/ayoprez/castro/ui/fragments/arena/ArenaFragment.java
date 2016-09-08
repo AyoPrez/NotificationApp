@@ -99,7 +99,7 @@ public class ArenaFragment extends Fragment implements ArenaView {
     }
 
     @Override
-    public void showErrorMessage(String errorMessage) {
-        Toast.makeText(getActivity(), "Change this for anothing else", Toast.LENGTH_LONG).show();
+    public void showErrorMessage(byte errorMessage) {
+        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 }

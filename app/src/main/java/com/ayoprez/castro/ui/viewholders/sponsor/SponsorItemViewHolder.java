@@ -35,7 +35,7 @@ public class SponsorItemViewHolder extends RecyclerView.ViewHolder implements Sp
     }
 
     @Override
-    public void showErrorMessage(String message, int position) {
+    public void showErrorMessage(byte message, int position) {
 
     }
 }

@@ -21,6 +21,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -67,7 +69,7 @@ public class EventsRestfulServiceTest {
 
         verify(mockCall, times(1)).execute();
 
-        verify(mockView, never()).showErrorMessage(anyString());
+        verify(mockView, never()).showErrorMessage(anyByte());
         verify(mockRepository, times(1)).saveEvents(res.body());
     }
 
@@ -80,7 +82,7 @@ public class EventsRestfulServiceTest {
 
         verify(mockCall, times(1)).execute();
 
-        verify(mockView, times(1)).showErrorMessage(anyString());
+        verify(mockView, times(1)).showErrorMessage(anyByte());
         verify(mockRepository, never()).saveEvents(res.body());
     }
 

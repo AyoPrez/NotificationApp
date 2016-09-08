@@ -63,7 +63,7 @@ public class EventsViewHolder extends RecyclerView.ViewHolder implements EventLi
     }
 
     @Override
-    public void showErrorMessage(String message, int position) {
+    public void showErrorMessage(byte message, int position) {
 
     }
 }

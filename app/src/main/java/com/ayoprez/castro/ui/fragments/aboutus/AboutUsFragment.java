@@ -143,7 +143,7 @@ public class AboutUsFragment extends Fragment implements AboutUsView{
     }
 
     @Override
-    public void showErrorMessage(String errorMessage) {
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+    public void showErrorMessage(byte errorMessage) {
+        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 }

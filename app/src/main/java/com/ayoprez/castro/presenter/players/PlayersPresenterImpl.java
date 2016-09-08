@@ -12,6 +12,7 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
 
     protected PlayersView playersView;
     protected PlayersRepository repository;
+    private String tag;
 
     public PlayersPresenterImpl(PlayersRepository playersRepository){
         this.repository = playersRepository;
@@ -19,19 +20,45 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
 
     @Override
     public void setView(PlayersView view) {
+        if(view == null){
+            throw new ViewNotFoundException();
+        }
         this.playersView = view;
-        initView();
     }
 
-    private void initView(){
+    @Override
+    public void setTag(String category) {
+        if(category == null || category.equals("")){
+            throw new NullPointerException();
+        }
+        this.tag = category;
+    }
+
+    @Override
+    public void initView(){
         if(playersView == null){
             throw new ViewNotFoundException();
+        }
+        if(tag == null || tag.equals("")){
+            throw new NullPointerException();
         }
 
         if(repository.getAllPlayers().size() <= 0){
             showError(playersView, ERROR_EMPTY_PLAYERS);
         }else {
-            playersView.initRecyclerView();
+            switch (tag) {
+                case "Senior":
+                    playersView.initRecyclerView(repository.getSeniorPlayers());
+                    break;
+
+                case "Cadet":
+                    playersView.initRecyclerView(repository.getCadetPlayers());
+                    break;
+
+                case "Junio":
+                    playersView.initRecyclerView(repository.getJuniorPlayers());
+                    break;
+            }
         }
     }
 }

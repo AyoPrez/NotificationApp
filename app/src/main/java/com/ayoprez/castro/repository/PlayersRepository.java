@@ -11,6 +11,10 @@ public interface PlayersRepository {
     PlayerItem getPlayer(int id);
     ArrayList<PlayerItem> getAllPlayers();
 
+    ArrayList<PlayerItem> getSeniorPlayers();
+    ArrayList<PlayerItem> getCadetPlayers();
+    ArrayList<PlayerItem> getJuniorPlayers();
+
     void savePlayers(ArrayList<PlayerItem> players);
     void deleteAllPlayers();
     void closeRealm();

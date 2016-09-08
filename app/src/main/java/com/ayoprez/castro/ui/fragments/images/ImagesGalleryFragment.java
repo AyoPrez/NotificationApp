@@ -56,8 +56,8 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
     }
 
     @Override
-    public void showEmptyListMessage(String errorMessage) {
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+    public void showEmptyListMessage(byte errorMessage) {
+        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 
     @Override

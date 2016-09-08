@@ -30,6 +30,7 @@ public class VideosGalleryPresenterImpl extends ErrorManager implements VideosGa
             throw new ViewNotFoundException();
         }
 
+
         if(repository.getAllVideos().size() <= 0){
             showError(view, ERROR_EMPTY_VIDEOS);
         }else {

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
@@ -64,8 +65,8 @@ public class EventFragment extends Fragment implements EventView {
     }
 
     @Override
-    public void showEmptyListMessage(String errorMessage) {
-        //TODO
+    public void showEmptyListMessage(byte errorMessage) {
+        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
     }
 
     @Override
