@@ -16,7 +16,7 @@ public class PlayersRepositoryImpl implements PlayersRepository {
     private Realm playerRealm;
     private int lastId;
 
-    public PlayersRepositoryImpl(){
+    public PlayersRepositoryImpl() {
         playerRealm = Realm.getDefaultInstance();
     }
 
@@ -32,32 +32,29 @@ public class PlayersRepositoryImpl implements PlayersRepository {
 
     @Override
     public ArrayList<PlayerItem> getSeniorPlayers() {
-        return new ArrayList<>(playerRealm
-                .where(PlayerItem.class)
-                .equalTo("category", "Senior")
-                .or()
-                .equalTo("category", "senior")
-                .findAll());
+        return getCategoryPlayers("Senior");
+    }
+
+    protected ArrayList<PlayerItem> getCategoryPlayers(String category){
+        ArrayList<PlayerItem> playerItems = new ArrayList<>();
+
+        for(PlayerItem item : getAllPlayers()){
+            if(item.getMeta().getCategory().equals(category) || item.getMeta().getCategory().equals(category.toLowerCase())){
+                playerItems.add(item);
+            }
+        }
+
+        return playerItems;
     }
 
     @Override
     public ArrayList<PlayerItem> getCadetPlayers() {
-        return new ArrayList<>(playerRealm
-                .where(PlayerItem.class)
-                .equalTo("category", "Cadete")
-                .or()
-                .equalTo("category", "cadete")
-                .findAll());
+        return getCategoryPlayers("Cadete");
     }
 
     @Override
     public ArrayList<PlayerItem> getJuniorPlayers() {
-        return new ArrayList<>(playerRealm
-                .where(PlayerItem.class)
-                .equalTo("category", "Juvenil")
-                .or()
-                .equalTo("category", "juvenil")
-                .findAll());
+        return getCategoryPlayers("Juvenil");
     }
 
     @Override

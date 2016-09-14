@@ -5,8 +5,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
-import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +19,8 @@ import butterknife.ButterKnife;
  */
 public class PlayersViewHolder extends RecyclerView.ViewHolder implements PlayerListItemView {
 
+    @Inject
+    ImageLib imageLib;
 
     @BindView(R.id.playerImage)
     public ImageView playerImage;
@@ -25,6 +30,7 @@ public class PlayersViewHolder extends RecyclerView.ViewHolder implements Player
     public PlayersViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        ((CastroApplication)itemView.getContext().getApplicationContext()).getComponent().inject(this);
     }
 
     @Override
@@ -34,7 +40,7 @@ public class PlayersViewHolder extends RecyclerView.ViewHolder implements Player
 
     @Override
     public void displayItemImage(String image) {
-        Picasso.with(playerImage.getContext()).load(image).into(playerImage);
+        imageLib.setImageIntoView(image, playerImage);
     }
 
     @Override

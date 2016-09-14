@@ -15,10 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyCollection;
 import static org.mockito.Matchers.anyCollectionOf;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -65,7 +62,7 @@ public class PlayerPresenterTests {
         when(repository.getAllPlayers()).thenReturn(items);
 
         presenter.setView(mockView);
-        presenter.setTag("Senior");
+        presenter.setCategoryTag("Senior");
         presenter.initView();
 
         verify(mockView, times(1)).showErrorMessage(anyByte());
@@ -79,7 +76,7 @@ public class PlayerPresenterTests {
         when(repository.getAllPlayers()).thenReturn(items);
 
         presenter.setView(mockView);
-        presenter.setTag("Senior");
+        presenter.setCategoryTag("Senior");
         presenter.initView();
 
         verify(mockView, never()).showErrorMessage(anyByte());

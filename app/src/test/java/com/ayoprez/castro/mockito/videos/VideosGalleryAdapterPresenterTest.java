@@ -4,7 +4,7 @@ import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.models.VideoItem;
 import com.ayoprez.castro.models.VideoItemMeta;
 import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenterImpl;
+import com.ayoprez.castro.presenter.videos.VideosGalleryPresenterImpl;
 import com.ayoprez.castro.ui.viewholders.videos.VideoItemView;
 import com.ayoprez.castro.repository.VideosGalleryRepository;
 
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.anyByte;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -51,7 +50,7 @@ public class VideosGalleryAdapterPresenterTest  {
         when(mockRepository.getAllVideos()).thenReturn(itemsList);
 
         mockView = mock(VideoItemView.class);
-        presenter = new VideoGalleryAdapterPresenterImpl(mockRepository);
+        presenter = new VideosGalleryPresenterImpl(mockRepository);
     }
 
     public VideoItem initVideoItem(int id, String title, String video, String preview){

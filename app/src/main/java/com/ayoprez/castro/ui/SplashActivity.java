@@ -2,6 +2,7 @@ package com.ayoprez.castro.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -49,10 +50,13 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void changeActivity() {
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(this, getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        if(Looper.getMainLooper().getThread() == Thread.currentThread()) {
+            Toast.makeText(this, getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        }
     }
 }

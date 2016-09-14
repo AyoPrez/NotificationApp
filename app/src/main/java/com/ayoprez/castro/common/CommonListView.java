@@ -5,5 +5,5 @@ package com.ayoprez.castro.common;
  */
 public interface CommonListView {
     void showEmptyListMessage(byte errorMessage);
-    void initRecyclerView();
+    void initRecyclerView() throws Exception;
 }

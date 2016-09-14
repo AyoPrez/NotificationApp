@@ -4,7 +4,7 @@ import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.models.PlayerItem;
 import com.ayoprez.castro.models.PlayerItemMeta;
 import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenterImpl;
+import com.ayoprez.castro.presenter.players.PlayersPresenterImpl;
 import com.ayoprez.castro.repository.PlayersRepository;
 import com.ayoprez.castro.ui.viewholders.players.PlayerListItemView;
 
@@ -12,19 +12,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyCollectionOf;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by ayo on 10.07.16.
@@ -35,6 +31,7 @@ public class PlayerAdapterPresenterTest {
     PlayerAdapterPresenter presenter;
     PlayerItem item;
     ArrayList<PlayerItem> itemsList;
+    PlayersRepository mockRepository;
 
     @Before
     public void setUp(){
@@ -46,8 +43,9 @@ public class PlayerAdapterPresenterTest {
         itemsList.add(initPlayerItem(2, "www.img.com/2", "Name2", "Junior"));
         itemsList.add(initPlayerItem(3, "www.img.com/3", "Name3", "Amateur"));
 
+        mockRepository = mock(PlayersRepository.class);
         mockView = mock(PlayerListItemView.class);
-        presenter = new PlayerAdapterPresenterImpl();
+        presenter = new PlayersPresenterImpl(mockRepository);
     }
 
     public PlayerItem initPlayerItem(int id, String image, String title, String category){

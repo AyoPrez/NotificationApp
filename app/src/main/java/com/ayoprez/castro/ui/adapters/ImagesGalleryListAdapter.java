@@ -17,7 +17,6 @@ import javax.inject.Inject;
  * Created by ayo on 17.07.16.
  */
 public class ImagesGalleryListAdapter extends RecyclerView.Adapter<GalleryItemViewHolder> {
-    private static final String TAG = ImagesGalleryListAdapter.class.getSimpleName();
 
     @Inject
     GalleryAdapterPresenter presenter;
@@ -33,8 +32,14 @@ public class ImagesGalleryListAdapter extends RecyclerView.Adapter<GalleryItemVi
     }
 
     @Override
-    public void onBindViewHolder(GalleryItemViewHolder holder, int position) {
+    public void onBindViewHolder(final GalleryItemViewHolder holder, int position) {
         presenter.setView(holder);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.openImage(holder.getItemPosition());
+            }
+        });
     }
 
     @Override

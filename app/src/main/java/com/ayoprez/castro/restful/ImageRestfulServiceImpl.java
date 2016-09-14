@@ -2,7 +2,6 @@ package com.ayoprez.castro.restful;
 
 import android.util.Log;
 
-import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.ImageItem;
@@ -26,7 +25,7 @@ public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfu
         this.repository = repository;
         this.service = service;
 
-        if(repository.getAllImages().size() > 0){
+        if(repository.getAllStringImages().size() > 0){
             repository.deleteAllImages();
         }
     }

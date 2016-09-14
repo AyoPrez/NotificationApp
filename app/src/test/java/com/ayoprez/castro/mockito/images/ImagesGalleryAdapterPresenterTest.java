@@ -4,7 +4,7 @@ import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.models.ImageItem;
 import com.ayoprez.castro.models.ImageItemMeta;
 import com.ayoprez.castro.presenter.adapters.images.GalleryAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.images.GalleryAdapterPresenterImpl;
+import com.ayoprez.castro.presenter.images.GalleryPresenterImpl;
 import com.ayoprez.castro.repository.ImagesGalleryRepository;
 import com.ayoprez.castro.ui.viewholders.images.GalleryItemView;
 
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.anyByte;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -47,10 +46,10 @@ public class ImagesGalleryAdapterPresenterTest {
 
         when(mockRepository.getImage(anyInt())).thenReturn(item.getMeta().getPhoto());
 
-        when(mockRepository.getAllImages()).thenReturn(itemsList);
+        when(mockRepository.getAllStringImages()).thenReturn(itemsList);
 
         mockView = mock(GalleryItemView.class);
-        presenter = new GalleryAdapterPresenterImpl(mockRepository);
+        presenter = new GalleryPresenterImpl(mockRepository);
     }
 
     public ImageItem initImageItem(int id, String image){
@@ -69,7 +68,7 @@ public class ImagesGalleryAdapterPresenterTest {
         presenter.setView(mockView);
 
         verify(mockRepository, times(1)).getImage(anyInt());
-        verify(mockRepository, never()).getAllImages();
+        verify(mockRepository, never()).getAllStringImages();
 
         verify(mockView, times(1)).getItemPosition();
         verify(mockView, times(1)).displayItemImage("www.img.com/1");

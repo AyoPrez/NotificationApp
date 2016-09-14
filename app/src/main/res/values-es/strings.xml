@@ -45,6 +45,7 @@
     <string name="base_error_restful_sponsors">Hubo un error al obtener los datos de los patrocinadores </string>
     <string name="base_error_restful_arena">Hubo un error al obtener los datos del terrero </string>
     <string name="base_error_restful_aboutus">Hubo un error al obtener los datos del club </string>
+    <string name="error">Hubo un error</string>
 
 
     <!--<string name="base_error_empty">La lista con %1$s está vacía</string>-->

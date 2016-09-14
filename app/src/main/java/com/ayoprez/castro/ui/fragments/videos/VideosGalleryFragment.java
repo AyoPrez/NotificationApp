@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 public class VideosGalleryFragment extends Fragment implements VideosGalleryView {
     private static final String TAG = VideosGalleryFragment.class.getSimpleName();
 
-    @BindView(R.id.eventList)
+    @BindView(R.id.recyclerViewList)
     protected RecyclerView recyclerView;
 
     VideosGalleryListAdapter adapter;
@@ -66,5 +66,14 @@ public class VideosGalleryFragment extends Fragment implements VideosGalleryView
         adapter = new VideosGalleryListAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void changeFragment(Fragment fragment) {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack("videos")
+                .commit();
     }
 }

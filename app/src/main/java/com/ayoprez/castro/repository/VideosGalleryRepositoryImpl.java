@@ -31,6 +31,16 @@ public class VideosGalleryRepositoryImpl implements VideosGalleryRepository {
     }
 
     @Override
+    public int getIdByPosition(int position) {
+        return getAllVideos().get(position).getId();
+    }
+
+    @Override
+    public VideoItem getItemByPosition(int position) {
+        return getAllVideos().get(position);
+    }
+
+    @Override
     public void saveVideos(final ArrayList<VideoItem> videos) {
         VideoItem videoItem;
         VideoItemMeta videoItemMeta;

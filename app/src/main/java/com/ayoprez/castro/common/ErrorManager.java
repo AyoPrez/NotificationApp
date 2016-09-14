@@ -42,6 +42,7 @@ public class ErrorManager {
     public static final byte ERROR_NO_DATA_VIDEO = 23;
     public static final byte ERROR_NO_DATA_SPONSOR = 24;
     public static final byte ERROR_NO_DATA_PLAYER = 25;
+    public static final byte ERROR = 26;
 
     protected void showError(CommonActivityView commonActivityView, byte message){
         commonActivityView.showErrorMessage(message);

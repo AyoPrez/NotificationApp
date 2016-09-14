@@ -26,14 +26,14 @@ import butterknife.ButterKnife;
 /**
  * Created by ayo on 10.07.16.
  */
-public class PlayersFragment extends Fragment implements PlayersView{
+public class PlayersFragment extends Fragment implements PlayersView {
 
     @Inject
     PlayersPresenter playersPresenter;
 
     protected PlayersListAdapter adapter;
 
-    @BindView(R.id.eventList)
+    @BindView(R.id.recyclerViewList)
     protected RecyclerView recyclerView;
 
     public PlayersFragment(){}
@@ -41,7 +41,7 @@ public class PlayersFragment extends Fragment implements PlayersView{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((CastroApplication)getActivity().getApplication()).getComponent().inject(this);
+        initComponent();
     }
 
     @Nullable
@@ -63,6 +63,10 @@ public class PlayersFragment extends Fragment implements PlayersView{
         adapter = new PlayersListAdapter(getActivity(), content);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(adapter);
+    }
+
+    protected void initComponent(){
+        ((CastroApplication)getActivity().getApplication()).getComponent().inject(this);
     }
 
     @Override

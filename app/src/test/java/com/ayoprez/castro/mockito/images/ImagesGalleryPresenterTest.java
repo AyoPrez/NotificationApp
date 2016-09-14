@@ -14,8 +14,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -57,23 +55,31 @@ public class ImagesGalleryPresenterTest {
     @Test
     public void shouldShowEmptyListMessageWhenNoImagesInRepository(){
         ArrayList<String> items = new ArrayList<>();
-        when(repository.getAllImages()).thenReturn(items);
+        when(repository.getAllStringImages()).thenReturn(items);
 
         presenter.setView(mockView);
 
         verify(mockView, times(1)).showEmptyListMessage(anyByte());
-        verify(mockView, never()).initRecyclerView();
+        try {
+            verify(mockView, never()).initRecyclerView();
+        }catch(Exception e){
+            verify(mockView, times(1)).showEmptyListMessage(anyByte());
+        }
     }
 
     @Test
     public void shouldShowRecyclerViewWhenThereAreImagesInRepository(){
         ArrayList<String> items = new ArrayList<>();
         items.add(item.getMeta().getPhoto());
-        when(repository.getAllImages()).thenReturn(items);
+        when(repository.getAllStringImages()).thenReturn(items);
 
         presenter.setView(mockView);
 
         verify(mockView, never()).showEmptyListMessage(anyByte());
-        verify(mockView, times(1)).initRecyclerView();
+        try {
+            verify(mockView, times(1)).initRecyclerView();
+        }catch(Exception e){
+                verify(mockView, times(1)).showEmptyListMessage(anyByte());
+            }
     }
 }

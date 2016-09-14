@@ -22,7 +22,7 @@ public class SponsorsListAdapter extends RecyclerView.Adapter<SponsorItemViewHol
     @Inject
     SponsorListAdapterPresenter presenter;
 
-    public SponsorsListAdapter(Context context){
+    public SponsorsListAdapter(Context context) throws Exception{
         ((CastroApplication) context.getApplicationContext()).getComponent().inject(this);
     }
 
@@ -33,8 +33,15 @@ public class SponsorsListAdapter extends RecyclerView.Adapter<SponsorItemViewHol
     }
 
     @Override
-    public void onBindViewHolder(SponsorItemViewHolder holder, int position) {
-        presenter.setView(holder);
+    public void onBindViewHolder(final SponsorItemViewHolder holder, int position) {
+        presenter.setItemView(holder);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.loadUrl(holder.getItemPosition());
+            }
+        });
     }
 
     @Override

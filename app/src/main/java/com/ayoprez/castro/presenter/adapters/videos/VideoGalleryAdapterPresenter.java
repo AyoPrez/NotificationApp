@@ -9,6 +9,7 @@ public interface VideoGalleryAdapterPresenter {
 
     void setView(VideoItemView view);
     void loadVideos();
+    void openVideo(int position);
 
     int getVideosCountSize();
 }

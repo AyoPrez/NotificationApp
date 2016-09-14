@@ -33,8 +33,14 @@ public class VideosGalleryListAdapter extends RecyclerView.Adapter<VideosGallery
     }
 
     @Override
-    public void onBindViewHolder(VideosGalleryItemViewHolder holder, int position) {
+    public void onBindViewHolder(final VideosGalleryItemViewHolder holder, int position) {
         presenter.setView(holder);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.openVideo(holder.getItemPosition());
+            }
+        });
     }
 
     @Override

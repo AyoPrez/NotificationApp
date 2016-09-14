@@ -4,7 +4,7 @@ import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.models.EventItemMeta;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenterImpl;
+import com.ayoprez.castro.presenter.events.EventPresenterImpl;
 import com.ayoprez.castro.repository.EventsRepository;
 import com.ayoprez.castro.ui.viewholders.events.EventListItemView;
 
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.anyByte;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -50,7 +49,7 @@ public class EventAdapterPresenterTest {
         when(mockRepository.getAllEvents()).thenReturn(itemsList);
 
         mockView = mock(EventListItemView.class);
-        presenter = new EventAdapterPresenterImpl(mockRepository);
+        presenter = new EventPresenterImpl(mockRepository);
     }
 
     public EventItem initEventItem(int id, String image, String title, String subtitle, String description, String date, String time){
@@ -72,7 +71,7 @@ public class EventAdapterPresenterTest {
     public void shouldBeAbleToLoadTheEventFromRepositoryWhenValidEventIsPresent(){
         when(mockView.getEventPosition()).thenReturn(1);
 
-        presenter.setView(mockView);
+        presenter.setListItemView(mockView);
 
         verify(mockRepository, times(1)).getEvent(anyInt());
         verify(mockRepository, never()).getAllEvents();
@@ -89,7 +88,7 @@ public class EventAdapterPresenterTest {
         when(mockView.getEventPosition()).thenReturn(1);
 
         when(mockRepository.getEvent(anyInt())).thenReturn(null);
-        presenter.setView(mockView);
+        presenter.setListItemView(mockView);
 
         verify(mockRepository, times(1)).getEvent(anyInt());
 
@@ -108,7 +107,7 @@ public class EventAdapterPresenterTest {
 
         when(mockRepository.getEvent(anyInt())).thenReturn(item);
 
-        presenter.setView(mockView);
+        presenter.setListItemView(mockView);
 
         verify(mockRepository, times(1)).getEvent(anyInt());
 
@@ -121,14 +120,14 @@ public class EventAdapterPresenterTest {
 
     @Test
     public void shouldGetTotalNumberOfEvents(){
-        presenter.setView(mockView);
+        presenter.setListItemView(mockView);
 
         assertEquals(presenter.getEventsCountSize(), 3);
     }
 
     @Test(expected = ViewNotFoundException.class)
     public void shouldThrowViewNotFoundExceptionWhenViewIsNull(){
-        presenter.setView(null);
+        presenter.setListItemView((EventListItemView) null);
 
         presenter.loadEventData();
     }

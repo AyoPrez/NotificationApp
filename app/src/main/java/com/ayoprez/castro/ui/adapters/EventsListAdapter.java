@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
+import com.ayoprez.castro.presenter.events.EventPresenter;
 import com.ayoprez.castro.ui.viewholders.events.EventsViewHolder;
 
 import javax.inject.Inject;
@@ -33,7 +34,13 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsViewHolder> {
 
     @Override
     public void onBindViewHolder(final EventsViewHolder holder, int position) {
-        presenter.setView(holder);
+        presenter.setListItemView(holder);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.openDetailedView(holder.getEventPosition());
+            }
+        });
     }
 
     @Override

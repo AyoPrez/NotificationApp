@@ -11,4 +11,5 @@ public interface GalleryAdapterPresenter {
     void loadImages();
 
     int getImagesCountSize();
+    void openImage(int position);
 }

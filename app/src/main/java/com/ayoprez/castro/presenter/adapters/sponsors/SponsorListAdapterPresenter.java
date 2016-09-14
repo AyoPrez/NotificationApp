@@ -7,8 +7,10 @@ import com.ayoprez.castro.ui.viewholders.sponsor.SponsorItemView;
  */
 public interface SponsorListAdapterPresenter {
 
-    void setView(SponsorItemView view);
+    void setItemView(SponsorItemView view);
     void loadSponsors();
 
     int getSponsorsCountSize();
+
+    void loadUrl(int position);
 }

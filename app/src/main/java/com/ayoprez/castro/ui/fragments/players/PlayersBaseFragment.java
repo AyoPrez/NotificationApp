@@ -46,9 +46,9 @@ public class PlayersBaseFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(PlayersSeniorFragment.getInstance(), getString(R.string.senior));
-        adapter.addFragment(PlayersCadetFragment.getInstance(), getString(R.string.cadet));
-        adapter.addFragment(PlayersJuniorFragment.getInstance(), getString(R.string.junior));
+        adapter.addFragment(new PlayersSeniorFragment(), getString(R.string.senior));
+        adapter.addFragment(new PlayersCadetFragment(), getString(R.string.cadet));
+        adapter.addFragment(new PlayersJuniorFragment(), getString(R.string.junior));
         viewPager.setAdapter(adapter);
     }
 }

@@ -1,24 +1,18 @@
 package com.ayoprez.castro;
 
-import android.content.Context;
-
 import com.ayoprez.castro.common.Constants;
+import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.presenter.SplashPresenter;
 import com.ayoprez.castro.presenter.SplashPresenterImpl;
 import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenterImpl;
 import com.ayoprez.castro.presenter.games.GamesCalendarPresenter;
 import com.ayoprez.castro.presenter.games.GamesCalendarPresenterImpl;
 import com.ayoprez.castro.presenter.adapters.images.GalleryAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.images.GalleryAdapterPresenterImpl;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenterImpl;
 import com.ayoprez.castro.presenter.aboutUs.AboutUsPresenter;
 import com.ayoprez.castro.presenter.aboutUs.AboutUsPresenterImpl;
 import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenterImpl;
 import com.ayoprez.castro.presenter.adapters.sponsors.SponsorListAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.sponsors.SponsorsListAdapterPresenterImpl;
 import com.ayoprez.castro.presenter.arena.ArenaPresenter;
 import com.ayoprez.castro.presenter.arena.ArenaPresenterImpl;
 import com.ayoprez.castro.presenter.events.EventPresenter;
@@ -66,13 +60,9 @@ import com.ayoprez.castro.restful.SponsorsRestfulService;
 import com.ayoprez.castro.restful.SponsorsRestfulServiceImpl;
 import com.ayoprez.castro.restful.VideoRestfulService;
 import com.ayoprez.castro.restful.VideoRestfulServiceImpl;
-import com.crashlytics.android.Crashlytics;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import io.fabric.sdk.android.Fabric;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -125,8 +115,8 @@ public class AppModule {
     }
 
     @Provides
-    public EventPresenter provideEventPresenter(){
-        return new EventPresenterImpl();
+    public EventPresenter provideEventPresenter(EventsRepository eventsRepository){
+        return new EventPresenterImpl(eventsRepository);
     }
 
     @Provides
@@ -141,7 +131,7 @@ public class AppModule {
 
     @Provides
     public EventAdapterPresenter provideEventAdapterPresenter(EventsRepository eventsRepository){
-        return new EventAdapterPresenterImpl(eventsRepository);
+        return new EventPresenterImpl(eventsRepository);
     }
 
     @Provides
@@ -150,8 +140,8 @@ public class AppModule {
     }
 
     @Provides
-    public PlayerAdapterPresenter providePlayerAdapterPresenter(){
-        return new PlayerAdapterPresenterImpl();
+    public PlayerAdapterPresenter providePlayerAdapterPresenter(PlayersRepository repository){
+        return new PlayersPresenterImpl(repository);
     }
 
     @Provides
@@ -161,7 +151,7 @@ public class AppModule {
 
     @Provides
     public GalleryAdapterPresenter provideGalleryAdapterPresenter(ImagesGalleryRepository repository){
-        return new GalleryAdapterPresenterImpl(repository);
+        return new GalleryPresenterImpl(repository);
     }
 
     @Provides
@@ -171,7 +161,7 @@ public class AppModule {
 
     @Provides
     public SponsorListAdapterPresenter provideSponsorListAdapterPresenter(SponsorRepository repository){
-        return new SponsorsListAdapterPresenterImpl(repository);
+        return new SponsorsPresenterImpl(repository);
     }
 
     @Provides
@@ -191,7 +181,7 @@ public class AppModule {
 
     @Provides
     public VideoGalleryAdapterPresenter provideVideoGalleryAdapterPresenter(VideosGalleryRepository videosGalleryRepository){
-        return new VideoGalleryAdapterPresenterImpl(videosGalleryRepository);
+        return new VideosGalleryPresenterImpl(videosGalleryRepository);
     }
 
     @Provides
@@ -260,4 +250,8 @@ public class AppModule {
         return new VideoRestfulServiceImpl(repository, service);
     }
 
+    @Provides
+    public ImageLib providePicassoLibrary(){
+        return new ImageLib();
+    }
 }

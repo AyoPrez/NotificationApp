@@ -31,6 +31,16 @@ public class EventsRepositoryImpl implements EventsRepository{
     }
 
     @Override
+    public int getEventIdByPosition(int position) {
+        return getAllEvents().get(position).getId();
+    }
+
+    @Override
+    public EventItem getEventByPosition(int position) {
+        return getAllEvents().get(position);
+    }
+
+    @Override
     public void saveEvents(final ArrayList<EventItem> events) {
         EventItem eventItem;
         EventItemMeta eventItemMeta;

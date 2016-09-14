@@ -2,17 +2,24 @@ package com.ayoprez.castro.presenter.players;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
+import com.ayoprez.castro.models.PlayerItem;
+import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenter;
 import com.ayoprez.castro.repository.PlayersRepository;
 import com.ayoprez.castro.ui.fragments.players.PlayersView;
+import com.ayoprez.castro.ui.viewholders.players.PlayerListItemView;
+
+import java.util.ArrayList;
 
 /**
  * Created by ayo on 10.07.16.
  */
-public class PlayersPresenterImpl extends ErrorManager implements PlayersPresenter{
+public class PlayersPresenterImpl extends ErrorManager implements PlayersPresenter, PlayerAdapterPresenter{
 
-    protected PlayersView playersView;
+    protected static PlayersView playersView;
     protected PlayersRepository repository;
-    private String tag;
+    private String categoryTag;
+    protected PlayerListItemView itemView;
+    protected PlayerItem item;
 
     public PlayersPresenterImpl(PlayersRepository playersRepository){
         this.repository = playersRepository;
@@ -23,15 +30,17 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
         if(view == null){
             throw new ViewNotFoundException();
         }
-        this.playersView = view;
+
+        if(playersView == null) {
+            playersView = view;
+        }
     }
 
-    @Override
-    public void setTag(String category) {
+    public void setCategoryTag(String category) {
         if(category == null || category.equals("")){
             throw new NullPointerException();
         }
-        this.tag = category;
+        this.categoryTag = category;
     }
 
     @Override
@@ -39,14 +48,14 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
         if(playersView == null){
             throw new ViewNotFoundException();
         }
-        if(tag == null || tag.equals("")){
+        if(categoryTag == null || categoryTag.equals("")){
             throw new NullPointerException();
         }
 
         if(repository.getAllPlayers().size() <= 0){
             showError(playersView, ERROR_EMPTY_PLAYERS);
         }else {
-            switch (tag) {
+            switch (categoryTag) {
                 case "Senior":
                     playersView.initRecyclerView(repository.getSeniorPlayers());
                     break;
@@ -61,4 +70,38 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
             }
         }
     }
+
+    @Override
+    public void setView(PlayerListItemView view) {
+        this.itemView = view;
+    }
+
+    @Override
+    public void loadPlayersData(ArrayList<PlayerItem> playerItems, int position) {
+        if(itemView == null){
+            throw new ViewNotFoundException();
+        }
+
+        if(playerItems == null || playerItems.size() == 0){
+            showError(itemView, ERROR_EMPTY_PLAYERS, position);
+        }else {
+            item = playerItems.get(position);
+
+            if (item == null) {
+                showError(itemView, ERROR_EMPTY_PLAYERS, position);
+            } else {
+                applyDisplayPlayers(item, position);
+            }
+        }
+    }
+
+    private void applyDisplayPlayers(PlayerItem playerItem, int position){
+        if(playerItem != null && playerItem.getMeta() != null && !playerItem.getMeta().getPhoto().isEmpty() && !playerItem.getTitle().isEmpty()){
+            itemView.displayItemImage(playerItem.getMeta().getPhoto());
+            itemView.displayItemTitle(playerItem.getTitle());
+        }else{
+            showError(itemView, ERROR_NO_DATA_PLAYER, position);
+        }
+    }
+
 }

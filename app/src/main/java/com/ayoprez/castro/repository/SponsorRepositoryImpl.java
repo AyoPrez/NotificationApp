@@ -31,6 +31,16 @@ public class SponsorRepositoryImpl implements SponsorRepository {
     }
 
     @Override
+    public int getSponsorIdByPosition(int position) {
+        return getAllSponsors().get(position).getId();
+    }
+
+    @Override
+    public SponsorItem getSponsorItemByPosition(int position) {
+        return getAllSponsors().get(position);
+    }
+
+    @Override
     public void saveSponsor(final ArrayList<SponsorItem> sponsors) {
         SponsorItem sponsorItem;
         SponsorItemMeta sponsorItemMeta;
@@ -41,7 +51,7 @@ public class SponsorRepositoryImpl implements SponsorRepository {
             sponsorRealm.beginTransaction();
 
             sponsorItem = new SponsorItem();
-            sponsorItem.setId(sponsor.getId()+getLastId());
+            sponsorItem.setId(sponsor.getId() + getLastId());
             sponsorItem.setTitle(sponsor.getTitle());
 
             sponsorItemMeta = new SponsorItemMeta();

@@ -2,7 +2,10 @@ package com.ayoprez.castro.ui.fragments.images;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,7 +33,7 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
 
     protected ImagesGalleryListAdapter adapter;
 
-    @BindView(R.id.eventList)
+    @BindView(R.id.recyclerViewList)
     protected RecyclerView recyclerView;
 
     public ImagesGalleryFragment(){ }
@@ -57,7 +60,7 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        Snackbar.make(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -65,5 +68,15 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
         adapter = new ImagesGalleryListAdapter(getActivity());
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void changeFragment(Fragment fragment) {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack("image")
+                .commit();
+
     }
 }

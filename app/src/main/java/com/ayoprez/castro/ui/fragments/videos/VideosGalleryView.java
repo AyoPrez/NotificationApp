@@ -1,5 +1,7 @@
 package com.ayoprez.castro.ui.fragments.videos;
 
+import android.support.v4.app.Fragment;
+
 import com.ayoprez.castro.common.CommonListView;
 
 /**
@@ -7,4 +9,5 @@ import com.ayoprez.castro.common.CommonListView;
  */
 public interface VideosGalleryView extends CommonListView{
 
+    void changeFragment(Fragment fragment);
 }

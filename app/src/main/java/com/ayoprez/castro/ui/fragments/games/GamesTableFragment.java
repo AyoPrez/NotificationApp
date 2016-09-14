@@ -1,6 +1,5 @@
 package com.ayoprez.castro.ui.fragments.games;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.games.GamesTablePresenter;
-import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -25,13 +24,15 @@ import butterknife.ButterKnife;
  */
 public class GamesTableFragment extends Fragment implements GamesTableView{
     private static final String TAG = GamesTableFragment.class.getSimpleName();
-    private Context context;
-
-    @BindView(R.id.table_image)
-    ImageView ivTable;
 
     @Inject
     GamesTablePresenter presenter;
+
+    @Inject
+    ImageLib imageLib;
+
+    @BindView(R.id.table_image)
+    ImageView ivTable;
 
     private static GamesTableFragment instance;
 
@@ -61,7 +62,6 @@ public class GamesTableFragment extends Fragment implements GamesTableView{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_season_table, container, false);
-        this.context = inflater.getContext();
         ButterKnife.bind(this, view);
 
         return view;
@@ -69,7 +69,7 @@ public class GamesTableFragment extends Fragment implements GamesTableView{
 
     @Override
     public void displayTable(String url) {
-        Picasso.with(context).load(url).fit().into(ivTable);
+        imageLib.setImageIntoView(url, ivTable);
     }
 
     @Override

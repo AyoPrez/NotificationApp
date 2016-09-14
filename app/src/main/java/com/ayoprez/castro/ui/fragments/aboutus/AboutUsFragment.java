@@ -14,9 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.aboutUs.AboutUsPresenter;
-import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -27,6 +27,9 @@ import butterknife.ButterKnife;
  * Created by ayo on 03.07.16.
  */
 public class AboutUsFragment extends Fragment implements AboutUsView{
+
+    @Inject
+    ImageLib imageLib;
 
     @Inject
     AboutUsPresenter aboutUsPresenter;
@@ -83,7 +86,7 @@ public class AboutUsFragment extends Fragment implements AboutUsView{
 
     @Override
     public void displayImage(String image) {
-        Picasso.with(getActivity()).load(image).fit().into(ivAboutUsImage);
+        imageLib.setImageIntoView(image, ivAboutUsImage);
     }
 
     @Override

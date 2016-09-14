@@ -3,10 +3,15 @@ package com.ayoprez.castro.mockito.events;
 import android.support.v4.app.Fragment;
 
 import com.ayoprez.castro.ViewNotFoundException;
+import com.ayoprez.castro.common.CommonListItemView;
+import com.ayoprez.castro.common.CommonListView;
 import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.models.EventItemMeta;
+import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenterImpl;
+import com.ayoprez.castro.repository.EventsRepository;
+import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.fragments.events.EventView;
 
 import org.junit.Before;
@@ -14,8 +19,6 @@ import org.junit.Test;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -26,10 +29,12 @@ import static org.mockito.Mockito.verify;
  */
 public class EventPresenterTests {
 
-    EventView mockView;
+    EventListView mockView;
     EventPresenter presenter;
+    EventAdapterPresenter eventAdapterPresenter;
     EventItem item;
     EventItemMeta itemMeta;
+    EventsRepository mockRepository;
 
     @Before
     public void setup(){
@@ -45,25 +50,31 @@ public class EventPresenterTests {
         itemMeta.setSubtitle("EventSubtitle");
         item.setMeta(itemMeta);
 
-        mockView = mock(EventView.class);
+        mockView = mock(EventListView.class);
+        mockRepository = mock(EventsRepository.class);
 
-        presenter = new EventPresenterImpl();
+        presenter = new EventPresenterImpl(mockRepository);
+        eventAdapterPresenter = new EventPresenterImpl(mockRepository);
     }
 
     @Test(expected = ViewNotFoundException.class)
     public void shouldThrowViewNotFoundExceptionWhenViewIsNull(){
         presenter.setView(null);
 
-        presenter.openDetailedView(item);
+        eventAdapterPresenter.openDetailedView(item.getId());
     }
 
     @Test
     public void shouldShowErrorMessageWhenItemIsNull(){
         presenter.setView(mockView);
-        presenter.openDetailedView(null);
+        eventAdapterPresenter.openDetailedView(-1);
 
         verify(mockView, times(1)).showEmptyListMessage(anyByte());
-        verify(mockView, times(1)).initRecyclerView();
+        try {
+            verify(mockView, times(1)).initRecyclerView();
+        }catch(Exception e){
+            verify(mockView, times(1)).showEmptyListMessage(anyByte());
+        }
         verify(mockView, never()).changeFragment(any(Fragment.class));
     }
 
@@ -73,10 +84,14 @@ public class EventPresenterTests {
         item.setTitle(null);
 
         presenter.setView(mockView);
-        presenter.openDetailedView(item);
+        eventAdapterPresenter.openDetailedView(item.getId());
 
         verify(mockView, times(1)).showEmptyListMessage(anyByte());
-        verify(mockView, times(1)).initRecyclerView();
+        try {
+            verify(mockView, times(1)).initRecyclerView();
+        }catch(Exception e){
+            verify(mockView, times(1)).showEmptyListMessage(anyByte());
+        }
         verify(mockView, never()).changeFragment(any(Fragment.class));
     }
 
@@ -86,10 +101,14 @@ public class EventPresenterTests {
         item.setTitle("");
 
         presenter.setView(mockView);
-        presenter.openDetailedView(item);
+        eventAdapterPresenter.openDetailedView(item.getId());
 
         verify(mockView, times(1)).showEmptyListMessage(anyByte());
-        verify(mockView, times(1)).initRecyclerView();
+        try {
+            verify(mockView, times(1)).initRecyclerView();
+        }catch(Exception e){
+            verify(mockView, times(1)).showEmptyListMessage(anyByte());
+        }
         verify(mockView, never()).changeFragment(any(Fragment.class));
     }
 }

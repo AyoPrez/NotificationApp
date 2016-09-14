@@ -46,6 +46,7 @@
     <string name="base_error_restful_sponsors">There was an error obtaining the data of the sponsors </string>
     <string name="base_error_restful_arena">There was an error obtaining the data of the arena </string>
     <string name="base_error_restful_aboutus">There was an error obtaining the data of the club </string>
+    <string name="error">There was an error</string>
 
 
     <!-- Players -->

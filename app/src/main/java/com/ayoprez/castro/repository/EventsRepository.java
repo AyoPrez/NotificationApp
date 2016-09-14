@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public interface EventsRepository {
     EventItem getEvent(int id);
     ArrayList<EventItem> getAllEvents();
+    int getEventIdByPosition(int position);
+    EventItem getEventByPosition(int position);
 
     void saveEvents(ArrayList<EventItem> events);
     void deleteAllEvents();

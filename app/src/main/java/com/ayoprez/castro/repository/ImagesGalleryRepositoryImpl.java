@@ -27,7 +27,7 @@ public class ImagesGalleryRepositoryImpl implements ImagesGalleryRepository {
     }
 
     @Override
-    public ArrayList<String> getAllImages() {
+    public ArrayList<String> getAllStringImages() {
         ArrayList<ImageItem> itemList = new ArrayList<>(imageRealm.where(ImageItem.class).findAll());
         ArrayList<String> imagesList = new ArrayList<>();
         for(int i = 0; i < itemList.size(); i++){
@@ -35,6 +35,26 @@ public class ImagesGalleryRepositoryImpl implements ImagesGalleryRepository {
         }
 
         return imagesList;
+    }
+
+    @Override
+    public ArrayList<ImageItem> getAllImages() {
+        return new ArrayList<>(imageRealm.where(ImageItem.class).findAll());
+    }
+
+    @Override
+    public int getImageIdByPosition(int position) {
+        return getAllImages().get(position).getId();
+    }
+
+    @Override
+    public String getStringImageByPosition(int position) {
+        return getAllStringImages().get(position);
+    }
+
+    @Override
+    public ImageItem getImageItemByPosition(int position) {
+        return getAllImages().get(position);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.ayoprez.castro.ui.viewholders.images;
 
+import android.support.v4.app.Fragment;
+
 import com.ayoprez.castro.common.CommonListItemView;
 
 /**

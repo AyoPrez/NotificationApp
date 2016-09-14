@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/playerImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/players_image_width"
+        android:layout_height="@dimen/players_image_height"
         android:contentDescription="@string/imagesContentDescription" />
 
     <TextView

@@ -6,8 +6,9 @@
 
     <ImageView
         android:id="@+id/iv_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/gallery_image_height"
+        android:layout_height="@dimen/gallery_image_height"
+        android:layout_margin="2dp"
         android:contentDescription="@string/imagesContentDescription"/>
 
 </LinearLayout>

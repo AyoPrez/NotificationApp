@@ -59,22 +59,28 @@ public class SplashPresenterImpl implements SplashPresenter {
     public void getDataFromServer() {
         view.showLoadBar();
 
-        Thread thread = new Thread() {
+        Thread thread1 = new Thread() {
             @Override
             public void run() {
                 eventsRestfulService.getRestfulEvents(view);
                 playerRestfulService.getRestfulPlayers(view);
                 arenaRestfulService.getRestfulArena(view);
                 aboutUsRestfulService.getRestfulAboutUs(view);
-                imageRestfulService.getRestfulImages(view);
-                videoRestfulService.getRestfulVideos(view);
-                sponsorRestfulService.getRestfulSponsors(view);
-                gamesRestfulService.getRestfulGames(view);
             }
         };
 
-        thread.start();
+        Thread thread2 = new Thread() {
+            @Override
+            public void run() {
+                imageRestfulService.getRestfulImages(view);
+                videoRestfulService.getRestfulVideos(view);
+                sponsorRestfulService.getRestfulSponsors(view);
+//                gamesRestfulService.getRestfulGames(view);
+            }
+        };
 
+        thread1.start();
+        thread2.start();
 
         Thread threadSplashWait = new Thread() {
             @Override

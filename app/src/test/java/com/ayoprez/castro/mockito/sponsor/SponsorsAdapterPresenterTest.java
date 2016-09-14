@@ -4,7 +4,7 @@ import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.models.SponsorItem;
 import com.ayoprez.castro.models.SponsorItemMeta;
 import com.ayoprez.castro.presenter.adapters.sponsors.SponsorListAdapterPresenter;
-import com.ayoprez.castro.presenter.adapters.sponsors.SponsorsListAdapterPresenterImpl;
+import com.ayoprez.castro.presenter.sponsors.SponsorsPresenterImpl;
 import com.ayoprez.castro.repository.SponsorRepository;
 import com.ayoprez.castro.ui.viewholders.sponsor.SponsorItemView;
 
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.anyByte;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -50,7 +49,7 @@ public class SponsorsAdapterPresenterTest {
         when(mockRepository.getAllSponsors()).thenReturn(itemsList);
 
         mockView = mock(SponsorItemView.class);
-        presenter = new SponsorsListAdapterPresenterImpl(mockRepository);
+        presenter = new SponsorsPresenterImpl(mockRepository);
     }
 
     public SponsorItem initSponsorItem(int id,String title, String image, String url){
@@ -68,7 +67,7 @@ public class SponsorsAdapterPresenterTest {
     public void shouldBeAbleToLoadTheImageFromRepositoryWhenValidImageIsPresent(){
         when(mockView.getItemPosition()).thenReturn(1);
 
-        presenter.setView(mockView);
+        presenter.setItemView(mockView);
 
         verify(mockRepository, times(1)).getSponsor(anyInt());
         verify(mockRepository, never()).getAllSponsors();
@@ -83,7 +82,7 @@ public class SponsorsAdapterPresenterTest {
         when(mockView.getItemPosition()).thenReturn(1);
 
         when(mockRepository.getSponsor(anyInt())).thenReturn(null);
-        presenter.setView(mockView);
+        presenter.setItemView(mockView);
 
         verify(mockRepository, times(1)).getSponsor(anyInt());
 
@@ -100,7 +99,7 @@ public class SponsorsAdapterPresenterTest {
 
         when(mockRepository.getSponsor(anyInt())).thenReturn(item);
 
-        presenter.setView(mockView);
+        presenter.setItemView(mockView);
 
         verify(mockRepository, times(1)).getSponsor(anyInt());
 
@@ -111,14 +110,14 @@ public class SponsorsAdapterPresenterTest {
 
     @Test
     public void shouldGetTotalNumberOfImages(){
-        presenter.setView(mockView);
+        presenter.setItemView(mockView);
 
         assertEquals(presenter.getSponsorsCountSize(), 3);
     }
 
     @Test(expected = ViewNotFoundException.class)
     public void shouldThrowViewNotFoundExceptionWhenViewIsNull(){
-        presenter.setView(null);
+        presenter.setItemView(null);
 
         presenter.loadSponsors();
     }

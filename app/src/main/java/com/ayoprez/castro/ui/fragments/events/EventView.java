@@ -1,13 +1,19 @@
 package com.ayoprez.castro.ui.fragments.events;
 
-import android.support.v4.app.Fragment;
-
-import com.ayoprez.castro.common.CommonListView;
+import com.ayoprez.castro.common.CommonActivityView;
 
 /**
- * Created by ayo on 10.07.16.
+ * Created by ayo on 10.09.16.
  */
-public interface EventView extends CommonListView {
+public interface EventView extends CommonActivityView {
 
-    void changeFragment(Fragment fragment);
+    void displayTitle(String title);
+    void displaySubtitle(String subtitle);
+    void displayTime(String time);
+    void displayDate(String date);
+    void displayDescription(String description);
+    void displayImage(String image);
+    void displayPrice(String price);
+    void buttonNotify();
+    void buttonShare();
 }

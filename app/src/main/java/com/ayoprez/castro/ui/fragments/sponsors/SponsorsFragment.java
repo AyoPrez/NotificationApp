@@ -2,9 +2,11 @@ package com.ayoprez.castro.ui.fragments.sponsors;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,9 @@ import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.presenter.sponsors.SponsorsPresenter;
-import com.ayoprez.castro.ui.adapters.ImagesGalleryListAdapter;
+import com.ayoprez.castro.ui.adapters.SponsorsListAdapter;
 
 import javax.inject.Inject;
 
@@ -28,9 +31,9 @@ public class SponsorsFragment extends Fragment implements SponsorsView {
     @Inject
     SponsorsPresenter sponsorsPresenter;
 
-    protected ImagesGalleryListAdapter adapter;
+    protected SponsorsListAdapter adapter;
 
-    @BindView(R.id.eventList)
+    @BindView(R.id.recyclerViewList)
     protected RecyclerView recyclerView;
 
     public SponsorsFragment(){ }
@@ -57,13 +60,22 @@ public class SponsorsFragment extends Fragment implements SponsorsView {
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        Snackbar.make(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Snackbar.LENGTH_LONG).show();
     }
 
     @Override
-    public void initRecyclerView() {
-        adapter = new ImagesGalleryListAdapter(getActivity());
+    public void initRecyclerView() throws Exception{
+        adapter = new SponsorsListAdapter(getActivity());
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void changeFragment(Fragment fragment) {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack("sponsor")
+                .commit();
     }
 }

@@ -14,10 +14,11 @@ import android.widget.Toast;
 
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.MainPresenter;
+import com.ayoprez.castro.ui.fragments.players.PlayersBaseFragment;
 import com.ayoprez.castro.ui.fragments.sponsors.SponsorsFragment;
 import com.ayoprez.castro.ui.fragments.aboutus.AboutUsFragment;
 import com.ayoprez.castro.ui.fragments.arena.ArenaFragment;
-import com.ayoprez.castro.ui.fragments.events.EventFragment;
+import com.ayoprez.castro.ui.fragments.events.EventListFragment;
 import com.ayoprez.castro.ui.fragments.games.GamesFragment;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryFragment;
 import com.ayoprez.castro.ui.fragments.players.PlayersFragment;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        changeFragment(new EventFragment());
+        changeFragment(new EventListFragment());
     }
 
 
@@ -96,13 +97,13 @@ public class MainActivity extends AppCompatActivity
 
         switch(item.getItemId()){
             case R.id.nav_events:
-                changeFragment(new EventFragment());
+                changeFragment(new EventListFragment());
                 break;
             case R.id.nav_games:
                 changeFragment(new GamesFragment());
                 break;
             case R.id.nav_players:
-                changeFragment(new PlayersFragment());
+                changeFragment(new PlayersBaseFragment());
                 break;
             case R.id.nav_arena:
                 changeFragment(new ArenaFragment());

@@ -14,9 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.arena.ArenaPresenter;
-import com.squareup.picasso.Picasso;
+
 
 import javax.inject.Inject;
 
@@ -31,6 +32,9 @@ public class ArenaFragment extends Fragment implements ArenaView {
 
     @Inject
     ArenaPresenter arenaPresenter;
+
+    @Inject
+    ImageLib imageLib;
 
     @BindView(R.id.iv_arena)
     ImageView ivArena;
@@ -77,7 +81,7 @@ public class ArenaFragment extends Fragment implements ArenaView {
 
     @Override
     public void displayImage(String image) {
-        Picasso.with(getActivity()).load(image).fit().into(ivArena);
+        imageLib.setImageIntoView(image, ivArena);
     }
 
     @Override

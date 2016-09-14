@@ -9,7 +9,11 @@ import java.util.ArrayList;
  */
 public interface ImagesGalleryRepository {
     String getImage(int id);
-    ArrayList<String> getAllImages();
+    ArrayList<String> getAllStringImages();
+    ArrayList<ImageItem> getAllImages();
+    int getImageIdByPosition(int position);
+    String getStringImageByPosition(int position);
+    ImageItem getImageItemByPosition(int position);
 
     void saveImages(ArrayList<ImageItem> images);
     void deleteAllImages();

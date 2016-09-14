@@ -12,6 +12,9 @@ public interface VideosGalleryRepository {
     VideoItem getVideo(int id);
     ArrayList<VideoItem> getAllVideos();
 
+    int getIdByPosition(int position);
+    VideoItem getItemByPosition(int position);
+
     void saveVideos(ArrayList<VideoItem> videos);
     void deleteAllVideos();
     void closeRealm();

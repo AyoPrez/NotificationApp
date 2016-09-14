@@ -7,6 +7,7 @@ import com.ayoprez.castro.di.AppComponent;
 import com.ayoprez.castro.di.DaggerAppComponent;
 
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
