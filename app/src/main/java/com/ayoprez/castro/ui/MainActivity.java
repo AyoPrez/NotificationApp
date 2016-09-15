@@ -21,7 +21,6 @@ import com.ayoprez.castro.ui.fragments.arena.ArenaFragment;
 import com.ayoprez.castro.ui.fragments.events.EventListFragment;
 import com.ayoprez.castro.ui.fragments.games.GamesFragment;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryFragment;
-import com.ayoprez.castro.ui.fragments.players.PlayersFragment;
 import com.ayoprez.castro.ui.fragments.videos.VideosGalleryFragment;
 
 import javax.inject.Inject;

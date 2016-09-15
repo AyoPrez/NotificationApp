@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class PlayersPresenterImpl extends ErrorManager implements PlayersPresenter, PlayerAdapterPresenter{
 
-    protected static PlayersView playersView;
+    protected PlayersView playersView;
     protected PlayersRepository repository;
     private String categoryTag;
     protected PlayerListItemView itemView;

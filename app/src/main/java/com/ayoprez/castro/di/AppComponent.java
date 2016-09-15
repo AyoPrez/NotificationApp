@@ -23,7 +23,6 @@ import com.ayoprez.castro.ui.fragments.events.EventListFragment;
 import com.ayoprez.castro.ui.fragments.games.GamesCalendarFragment;
 import com.ayoprez.castro.ui.fragments.games.GamesTableFragment;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryFragment;
-import com.ayoprez.castro.ui.fragments.players.PlayersFragment;
 import com.ayoprez.castro.ui.fragments.videos.VideosGalleryFragment;
 import com.ayoprez.castro.ui.viewholders.events.EventsViewHolder;
 import com.ayoprez.castro.ui.viewholders.images.GalleryItemViewHolder;
@@ -47,7 +46,6 @@ public interface AppComponent {
     void inject(EventsListAdapter eventsListAdapter);
     void inject(Fragment fragment);
     void inject(Activity activity);
-    void inject(PlayersFragment playerFragment);
     void inject(PlayersSeniorFragment playersSeniorFragment);
     void inject(PlayersCadetFragment playersCadetFragment);
     void inject(PlayersJuniorFragment playersJuniorFragment);

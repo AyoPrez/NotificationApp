@@ -8,9 +8,14 @@ import com.ayoprez.castro.di.DaggerAppComponent;
 
 import com.crashlytics.android.Crashlytics;
 
+import java.security.SecureRandom;
+
 import io.fabric.sdk.android.Fabric;
+import io.realm.DynamicRealm;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmMigration;
+import io.realm.RealmSchema;
 
 
 /**
@@ -30,9 +35,11 @@ public class CastroApplication extends Application {
     }
 
     private void initRealm(){
+
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
                 .name("realmTeam")
                 .schemaVersion(R.string.app_version)
+                .deleteRealmIfMigrationNeeded()
                 .build();
 
         Realm.setDefaultConfiguration(realmConfiguration);

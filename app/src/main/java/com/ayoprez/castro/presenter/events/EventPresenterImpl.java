@@ -75,7 +75,7 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
     }
 
     private void applyListDisplayEvents(EventItem eventItem) {
-        if(!eventItem.getMeta().getImage().isEmpty() && !eventItem.getTitle().isEmpty() && !eventItem.getMeta().getSubtitle().isEmpty()){
+        if(!eventItem.getMeta().getImage().isEmpty() && !eventItem.getTitle().isEmpty()){
             listItemView.displayEventImage(eventItem.getMeta().getImage());
             listItemView.displayEventTitle(eventItem.getTitle());
             listItemView.displayEventSubtitle(eventItem.getMeta().getSubtitle());
@@ -85,7 +85,7 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
     }
 
     private void applyDetailsDisplayEvent(EventItem eventItem) {
-        if(!eventItem.getMeta().getImage().isEmpty() && !eventItem.getTitle().isEmpty() && !eventItem.getMeta().getSubtitle().isEmpty()){
+        if(!eventItem.getMeta().getImage().isEmpty() && !eventItem.getTitle().isEmpty()){
             eventView.displayTitle(eventItem.getTitle());
             eventView.displaySubtitle(eventItem.getMeta().getSubtitle());
             eventView.displayTime(eventItem.getMeta().getTime());
