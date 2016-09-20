@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.anyByte;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyShort;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -37,14 +38,14 @@ public class EventAdapterPresenterTest {
     public void setUp(){
         mockRepository = mock(EventsRepository.class);
 
-        item = initEventItem(1, "www.img.com/1", "Title", "Subtitle", "Party1", "Mañana", "Noche");
+        item = initEventItem((short)1, "www.img.com/1", "Title", "Subtitle", "Party1", "Mañana", "Noche");
 
         itemsList = new ArrayList<>();
-        itemsList.add(initEventItem(1, "www.img.com/1", "Title", "Subtitle", "Party1", "Miércoles", "22:00"));
-        itemsList.add(initEventItem(2, "www.img.com/2", "Title2", "Subtitle2", "Party2", "Miércoles", "22:00"));
-        itemsList.add(initEventItem(3, "www.img.com/3", "Title3", "Subtitle3","Party3", "Jueves", "23:00"));
+        itemsList.add(initEventItem((short)1, "www.img.com/1", "Title", "Subtitle", "Party1", "Miércoles", "22:00"));
+        itemsList.add(initEventItem((short)2, "www.img.com/2", "Title2", "Subtitle2", "Party2", "Miércoles", "22:00"));
+        itemsList.add(initEventItem((short)3, "www.img.com/3", "Title3", "Subtitle3","Party3", "Jueves", "23:00"));
 
-        when(mockRepository.getEvent(anyInt())).thenReturn(item);
+        when(mockRepository.getEvent(anyShort())).thenReturn(item);
 
         when(mockRepository.getAllEvents()).thenReturn(itemsList);
 
@@ -52,7 +53,7 @@ public class EventAdapterPresenterTest {
         presenter = new EventPresenterImpl(mockRepository);
     }
 
-    public EventItem initEventItem(int id, String image, String title, String subtitle, String description, String date, String time){
+    public EventItem initEventItem(short id, String image, String title, String subtitle, String description, String date, String time){
         EventItem eventItem = new EventItem();
         EventItemMeta eventItemMeta = new EventItemMeta();
 
@@ -73,7 +74,7 @@ public class EventAdapterPresenterTest {
 
         presenter.setListItemView(mockView);
 
-        verify(mockRepository, times(1)).getEvent(anyInt());
+        verify(mockRepository, times(1)).getEvent(anyShort());
         verify(mockRepository, never()).getAllEvents();
 
         verify(mockView, times(1)).getEventPosition();
@@ -87,10 +88,10 @@ public class EventAdapterPresenterTest {
     public void shouldShowErrorMessageOnItemViewWhenEventIsNotPresenter(){
         when(mockView.getEventPosition()).thenReturn(1);
 
-        when(mockRepository.getEvent(anyInt())).thenReturn(null);
+        when(mockRepository.getEvent(anyShort())).thenReturn(null);
         presenter.setListItemView(mockView);
 
-        verify(mockRepository, times(1)).getEvent(anyInt());
+        verify(mockRepository, times(1)).getEvent(anyShort());
 
         verify(mockView, times(1)).getEventPosition();
         verify(mockView, never()).displayEventImage("www.img.com/1");
@@ -105,11 +106,11 @@ public class EventAdapterPresenterTest {
 
         item.setTitle("");
 
-        when(mockRepository.getEvent(anyInt())).thenReturn(item);
+        when(mockRepository.getEvent(anyShort())).thenReturn(item);
 
         presenter.setListItemView(mockView);
 
-        verify(mockRepository, times(1)).getEvent(anyInt());
+        verify(mockRepository, times(1)).getEvent(anyShort());
 
         verify(mockView, times(2)).getEventPosition();
         verify(mockView, never()).displayEventImage("www.img.com/1");

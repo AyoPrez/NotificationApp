@@ -1,21 +1,31 @@
 package com.ayoprez.castro.ui.fragments.events;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.AlarmNotificationReceiver;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
-import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
+
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -32,6 +42,12 @@ public class EventFragment extends Fragment implements EventView {
 
     @Inject
     EventAdapterPresenter eventAdapterPresenter;
+
+    @Inject
+    ErrorNotification errorNotification;
+
+//    @Inject
+//    TimeUtils timeUtils;
 
     @BindView(R.id.image_event)
     protected ImageView iVEvent;
@@ -52,6 +68,8 @@ public class EventFragment extends Fragment implements EventView {
     @BindView(R.id.tv_description_event)
     protected TextView tvDescription;
 
+    protected short eventId;
+
     public EventFragment(){}
 
     @Override
@@ -66,7 +84,10 @@ public class EventFragment extends Fragment implements EventView {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
         ButterKnife.bind(this, view);
 
-        eventAdapterPresenter.setEventView(this, (EventItem)getArguments().getSerializable("event"));
+        eventId = getArguments().getShort("eventId");
+
+        eventAdapterPresenter.setEventView(this, eventId);
+
         return view;
     }
 
@@ -110,7 +131,7 @@ public class EventFragment extends Fragment implements EventView {
         bNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                eventAdapterPresenter.notifyEvent();
+                eventAdapterPresenter.notifyEvent(eventId);
             }
         });
     }
@@ -120,13 +141,74 @@ public class EventFragment extends Fragment implements EventView {
         bShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                eventAdapterPresenter.shareEventContent();
+                eventAdapterPresenter.shareEventContent(eventId);
             }
         });
     }
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+    }
+
+    @Override
+    public void shareContent(HashMap<String, String> eventItemData){
+        String shareText = String.format(getString(R.string.shareText),
+                eventItemData.get("DATE"),
+                eventItemData.get("TIME"),
+                eventItemData.get("TITLE"),
+                eventItemData.get("PRICE"));
+
+        Intent shareIntent = ShareCompat.IntentBuilder.from(getActivity())
+                .setType("text/plain")
+                .setText(shareText)
+                .getIntent();
+        if (shareIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(shareIntent);
+        }
+    }
+    @Override
+    public void notifyAlarmEvent(long time, String eventTitle){
+        String notificationText = String.format(getString(R.string.notificationText), eventTitle);
+
+        Notification notification = getNotificationLogic(notificationText);
+        alarmManagerLogic(notification, time);
+    }
+
+    protected Notification getNotificationLogic(String content){
+
+        String action = "EVENT";
+
+        // Create a pending intent to open the the application when the notification is clicked.
+        //Restart the app.
+        Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage(getActivity().getPackageName());
+
+        Bundle bundle = new Bundle();
+        bundle.putShort("eventId", eventId);
+
+        if(launchIntent != null){
+            launchIntent.setAction(action);
+            launchIntent.putExtras(bundle);
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification.Builder builder = new Notification.Builder(getActivity());
+        builder.setContentTitle(getString(R.string.app_name));
+        builder.setContentText(content);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentIntent(pendingIntent);
+
+        return builder.build();
+    }
+
+    protected void alarmManagerLogic(Notification notification, long time){
+        Intent notificationIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+        notificationIntent.putExtra(AlarmNotificationReceiver.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(AlarmNotificationReceiver.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, pendingIntent);
     }
 }

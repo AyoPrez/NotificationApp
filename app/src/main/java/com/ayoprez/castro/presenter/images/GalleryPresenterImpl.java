@@ -1,11 +1,15 @@
 package com.ayoprez.castro.presenter.images;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.presenter.adapters.images.GalleryAdapterPresenter;
 import com.ayoprez.castro.repository.ImagesGalleryRepository;
+import com.ayoprez.castro.ui.MainActivity;
 import com.ayoprez.castro.ui.fragments.ImageFragment;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryView;
 import com.ayoprez.castro.ui.viewholders.images.GalleryItemView;
@@ -30,6 +34,15 @@ public class GalleryPresenterImpl extends ErrorManager implements GalleryPresent
             galleryView = view;
         }
         initView();
+    }
+
+    @Override
+    public void changeToolbarVisibility(Activity activity) {
+        Toolbar toolbar = ((MainActivity)activity).getToolbar();
+
+        if(toolbar.getVisibility() == View.GONE){
+            toolbar.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initView(){

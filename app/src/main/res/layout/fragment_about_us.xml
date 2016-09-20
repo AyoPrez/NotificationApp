@@ -50,7 +50,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/colorAccent">
 
                 <TextView
                     android:id="@+id/tv_name_aboutus"
@@ -59,8 +60,7 @@
                     android:gravity="center"
                     android:textSize="30sp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/colorPrimary"
-                    android:text="Bar title"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"/>
 
                 <LinearLayout
@@ -73,22 +73,28 @@
                         android:id="@+id/button_share_aboutus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_menu_share"/>
+                        android:padding="@dimen/margin_10"
+                        android:layout_margin="@dimen/margin_10"
+                        android:background="@drawable/roundbutton"
+                        android:src="@drawable/ic_share_black_36dp"/>
 
                     <ImageButton
                         android:id="@+id/button_call_aboutus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_menu_camera"/>
+                        android:padding="@dimen/margin_10"
+                        android:layout_margin="@dimen/margin_10"
+                        android:background="@drawable/roundbutton"
+                        android:src="@drawable/ic_phone_black_36dp"/>
 
                     <ImageButton
                         android:id="@+id/button_mail_aboutus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_menu_send"/>
+                        android:padding="@dimen/margin_10"
+                        android:layout_margin="@dimen/margin_10"
+                        android:background="@drawable/roundbutton"
+                        android:src="@drawable/ic_mail_outline_black_36dp"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -99,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="30dp"
                 android:textSize="18sp"
-                android:text="Description"/>
+                android:textColor="@color/colorPrimaryDark"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

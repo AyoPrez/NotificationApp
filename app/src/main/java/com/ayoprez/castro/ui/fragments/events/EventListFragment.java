@@ -8,13 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.ErrorManager;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.presenter.events.EventPresenter;
 import com.ayoprez.castro.ui.adapters.EventsListAdapter;
 
+import javax.crypto.ExemptionMechanismException;
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -27,6 +29,9 @@ public class EventListFragment extends Fragment implements EventListView {
 
     @Inject
     EventPresenter eventPresenter;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     protected EventsListAdapter adapter;
 
@@ -46,6 +51,7 @@ public class EventListFragment extends Fragment implements EventListView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         ButterKnife.bind(this, v);
+
         return v;
     }
 
@@ -56,17 +62,26 @@ public class EventListFragment extends Fragment implements EventListView {
     }
 
     @Override
-    public void changeFragment(Fragment fragment) {
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack("events")
-                .commit();
+    public void changeFragment(Fragment fragment, short id) {
+
+        Bundle bundle = new Bundle();
+        bundle.putShort("eventId", id);
+        fragment.setArguments(bundle);
+
+        try {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .addToBackStack("events")
+                    .commit();
+        }catch(Exception e){
+            showEmptyListMessage(ErrorManager.ERROR);
+        }
     }
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(this.getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

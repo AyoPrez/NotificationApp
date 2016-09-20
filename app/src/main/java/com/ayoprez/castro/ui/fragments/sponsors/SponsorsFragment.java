@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.ErrorManager;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.presenter.sponsors.SponsorsPresenter;
 import com.ayoprez.castro.ui.adapters.SponsorsListAdapter;
 
@@ -30,6 +31,9 @@ public class SponsorsFragment extends Fragment implements SponsorsView {
 
     @Inject
     SponsorsPresenter sponsorsPresenter;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     protected SponsorsListAdapter adapter;
 
@@ -60,7 +64,7 @@ public class SponsorsFragment extends Fragment implements SponsorsView {
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        Snackbar.make(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Snackbar.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

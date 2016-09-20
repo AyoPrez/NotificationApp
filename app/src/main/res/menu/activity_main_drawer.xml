@@ -3,34 +3,34 @@
 
     <item
         android:id="@+id/nav_events"
-        android:icon="@drawable/ic_menu_camera"
+        android:icon="@drawable/ic_event_black_24dp"
         android:title="@string/events" />
     <item
         android:id="@+id/nav_games"
-        android:icon="@drawable/ic_menu_slideshow"
+        android:icon="@drawable/ic_new_releases_black_24dp"
         android:title="@string/games" />
     <item
         android:id="@+id/nav_players"
-        android:icon="@drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_assignment_ind_black_24dp"
         android:title="@string/players" />
     <item
         android:id="@+id/nav_arena"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/arena" />
     <item
         android:id="@+id/nav_about_us"
-        android:icon="@drawable/ic_menu_camera"
+        android:icon="@drawable/ic_wallpaper_black_24dp"
         android:title="@string/about_us" />
     <item
         android:id="@+id/nav_gallery"
-        android:icon="@drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_collections_black_24dp"
         android:title="@string/pictures" />
     <item
         android:id="@+id/nav_videos"
-        android:icon="@drawable/ic_menu_slideshow"
+        android:icon="@drawable/ic_videocam_black_24dp"
         android:title="@string/videos" />
     <item
         android:id="@+id/nav_sponsors"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/ic_toys_black_24dp"
         android:title="@string/sponsors" />
 </menu>

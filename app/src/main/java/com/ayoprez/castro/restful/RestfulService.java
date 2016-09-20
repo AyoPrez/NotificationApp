@@ -29,7 +29,7 @@ public interface RestfulService {
     @GET("/wp-json/posts?type=terrero&filter[posts_per_page]=-1")
     Call<ArrayList<Arena>> getArenaFromServer();
 
-    @GET("/wp-json/posts?type=calendario&filter[posts_per_page]=-1")
+    @GET("/wp-json/posts?type=luchada&filter[posts_per_page]=-1")
     Call<ArrayList<CalendarItem>> getCalendarFromServer();
 
     @GET("/wp-json/posts?type=evento&filter[posts_per_page]=-1")

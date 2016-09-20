@@ -1,7 +1,9 @@
 package com.ayoprez.castro;
 
 import com.ayoprez.castro.common.Constants;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
+import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.presenter.SplashPresenter;
 import com.ayoprez.castro.presenter.SplashPresenterImpl;
 import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenter;
@@ -254,4 +256,14 @@ public class AppModule {
     public ImageLib providePicassoLibrary(){
         return new ImageLib();
     }
+
+    @Provides
+    public ErrorNotification provideErrorNotification() {
+        return new ErrorNotification();
+    }
+
+//    @Provides
+//    public TimeUtils provideTimeUtils(){
+//        return new TimeUtils();
+//    }
 }

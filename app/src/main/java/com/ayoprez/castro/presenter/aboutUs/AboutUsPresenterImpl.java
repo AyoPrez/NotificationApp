@@ -1,5 +1,7 @@
 package com.ayoprez.castro.presenter.aboutUs;
 
+import android.text.Html;
+
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.AboutUs;
@@ -28,8 +30,17 @@ public class AboutUsPresenterImpl extends ErrorManager implements AboutUsPresent
             showError(view, ERROR_EMPTY_ABOUTUS);
         }else{
             view.displayName(aboutUs.getTitle());
-            view.displayDescription(aboutUs.getMeta().getDescription());
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                view.displayDescription(Html.fromHtml(aboutUs.getMeta().getDescription(), Html.FROM_HTML_MODE_LEGACY).toString());
+            } else {
+                view.displayDescription(Html.fromHtml(aboutUs.getMeta().getDescription()).toString());
+            }
+
             view.displayImage(aboutUs.getMeta().getShare_image());
+            view.clickCallButton();
+            view.clickMailButton();
+            view.clickShareButton();
         }
     }
 

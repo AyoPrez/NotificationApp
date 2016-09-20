@@ -1,10 +1,12 @@
 package com.ayoprez.castro.ui.fragments.aboutus;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ErrorManager;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.aboutUs.AboutUsPresenter;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.io.Serializable;
 
 import javax.inject.Inject;
 
@@ -26,13 +38,16 @@ import butterknife.ButterKnife;
 /**
  * Created by ayo on 03.07.16.
  */
-public class AboutUsFragment extends Fragment implements AboutUsView{
+public class AboutUsFragment extends Fragment implements AboutUsView {
 
     @Inject
     ImageLib imageLib;
 
     @Inject
     AboutUsPresenter aboutUsPresenter;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     @BindView(R.id.tv_name_aboutus)
     TextView tvAboutUsName;
@@ -119,10 +134,30 @@ public class AboutUsFragment extends Fragment implements AboutUsView{
     }
 
     @Override
-    public void openPhone(String number) {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:" + number));
-        startActivity(callIntent);
+    public void openPhone(final String number) {
+        try {
+            Dexter.checkPermission(new PermissionListener() {
+                @Override
+                public void onPermissionGranted(PermissionGrantedResponse response) {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + number));
+                    startActivity(callIntent);
+                }
+
+                @Override
+                public void onPermissionDenied(PermissionDeniedResponse response) {
+
+                }
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                    token.continuePermissionRequest();
+                }
+            }, Manifest.permission.CALL_PHONE);
+        }catch (Exception e){
+            showErrorMessage(ErrorManager.ERROR);
+        }
+
     }
 
     @Override
@@ -139,7 +174,7 @@ public class AboutUsFragment extends Fragment implements AboutUsView{
     public void openMail(String mail) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_EMAIL,mail);
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, "");
         sendIntent.setType("message/rfc822");
         startActivity(sendIntent);
@@ -147,6 +182,6 @@ public class AboutUsFragment extends Fragment implements AboutUsView{
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

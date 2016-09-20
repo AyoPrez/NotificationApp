@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.presenter.images.GalleryPresenter;
 import com.ayoprez.castro.ui.adapters.ImagesGalleryListAdapter;
 
@@ -30,6 +31,9 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
 
     @Inject
     GalleryPresenter galleryPresenter;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     protected ImagesGalleryListAdapter adapter;
 
@@ -49,6 +53,7 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         ButterKnife.bind(this, v);
+        galleryPresenter.changeToolbarVisibility(getActivity());
         return v;
     }
 
@@ -60,7 +65,7 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        Snackbar.make(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Snackbar.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.ayoprez.castro.ui;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +14,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.ErrorNotification;
+import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.presenter.MainPresenter;
+import com.ayoprez.castro.ui.fragments.events.EventFragment;
 import com.ayoprez.castro.ui.fragments.players.PlayersBaseFragment;
 import com.ayoprez.castro.ui.fragments.sponsors.SponsorsFragment;
 import com.ayoprez.castro.ui.fragments.aboutus.AboutUsFragment;
@@ -40,6 +44,9 @@ public class MainActivity extends AppCompatActivity
     @Inject
     MainPresenter mainPresenter;
 
+    @Inject
+    ErrorNotification errorNotification;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +54,31 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+
+        toolbar.setTitle(R.string.app_name);
+
         initDrawerMenu();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        changeFragment(new EventListFragment());
+        if((getIntent() != null && getIntent().getAction() != null) && getIntent().getAction().equals("EVENT")){
+            changeToEvent(getIntent().getExtras());
+        } else {
+            changeFragment(new EventListFragment());
+        }
     }
 
+    public Toolbar getToolbar(){
+        return toolbar;
+    }
+
+    private void changeToEvent(Bundle eventBundle){
+        EventFragment eventFragment = new EventFragment();
+        eventFragment.setArguments(eventBundle);
+
+        changeFragment(eventFragment);
+    }
 
     private void initDrawerMenu(){
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -92,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()){
             case R.id.nav_events:
@@ -144,6 +168,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(this, getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(findViewById(android.R.id.content).getRootView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

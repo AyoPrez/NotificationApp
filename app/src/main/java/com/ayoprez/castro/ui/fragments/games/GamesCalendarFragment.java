@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.games.GamesCalendarPresenter;
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by ayo on 16.08.16.
@@ -28,7 +30,12 @@ public class GamesCalendarFragment extends Fragment implements GamesCalendarView
     GamesCalendarPresenter presenter;
 
     @Inject
+    ErrorNotification errorNotification;
+
+    @Inject
     ImageLib imageLib;
+
+    protected PhotoViewAttacher photoZoom;
 
     @BindView(R.id.iv_season_calendar)
     ImageView iVCalendar;
@@ -67,10 +74,11 @@ public class GamesCalendarFragment extends Fragment implements GamesCalendarView
     @Override
     public void displayCalendar(String url) {
         imageLib.setImageIntoView(url, iVCalendar);
+        photoZoom = new PhotoViewAttacher(iVCalendar);
     }
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

@@ -1,26 +1,23 @@
 package com.ayoprez.castro.models;
 
-
-import java.io.Serializable;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by ayo on 19.06.16.
  */
-public class EventItem extends RealmObject implements Serializable{
+public class EventItem extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private short id;
     private String title;
     private EventItemMeta meta;
 
-    public int getId() {
+    public short getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(short id) {
         this.id = id;
     }
 

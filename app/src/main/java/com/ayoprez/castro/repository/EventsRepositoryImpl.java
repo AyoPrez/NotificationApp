@@ -1,9 +1,15 @@
 package com.ayoprez.castro.repository;
 
+import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.models.EventItemMeta;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -14,14 +20,14 @@ import io.realm.RealmResults;
 public class EventsRepositoryImpl implements EventsRepository{
 
     private Realm eventRealm;
-    private int lastId;
+    private short lastId;
 
     public EventsRepositoryImpl(){
         eventRealm = Realm.getDefaultInstance();
     }
 
     @Override
-    public EventItem getEvent(int id) {
+    public EventItem getEvent(short id) {
         return eventRealm.where(EventItem.class).equalTo("id", id).findFirst();
     }
 
@@ -47,30 +53,39 @@ public class EventsRepositoryImpl implements EventsRepository{
 
         Realm eventRealm = Realm.getDefaultInstance();
 
-        for(EventItem player : events) {
-            eventRealm.beginTransaction();
+        for(EventItem event : events) {
 
-            eventItem = new EventItem();
-            eventItem.setId(player.getId()+getLastId());
-            eventItem.setTitle(player.getTitle());
+//            if(isFutureDate(event.getMeta().getDate(), event.getMeta().getTime())) {
 
-            eventItemMeta = new EventItemMeta();
-            eventItemMeta.setImage(player.getMeta().getImage());
-            eventItemMeta.setDescription(player.getMeta().getDescription());
-            eventItemMeta.setDate(player.getMeta().getDate());
-            eventItemMeta.setPrice(player.getMeta().getPrice());
-            eventItemMeta.setSubtitle(player.getMeta().getSubtitle());
-            eventItemMeta.setTime(player.getMeta().getTime());
-            eventItem.setMeta(eventItemMeta);
+                eventRealm.beginTransaction();
 
-            EventItemMeta itemMeta = eventRealm.copyToRealm(eventItemMeta);
-            EventItem itemTable = eventRealm.copyToRealm(eventItem);
+                eventItem = new EventItem();
+                eventItem.setId((short) (event.getId() + getLastId()));
+                eventItem.setTitle(event.getTitle());
 
-            eventRealm.commitTransaction();
-        }
+                eventItemMeta = new EventItemMeta();
+                eventItemMeta.setImage(event.getMeta().getImage());
+                eventItemMeta.setDescription(event.getMeta().getDescription());
+                eventItemMeta.setDate(event.getMeta().getDate());
+                eventItemMeta.setPrice(event.getMeta().getPrice());
+                eventItemMeta.setSubtitle(event.getMeta().getSubtitle());
+                eventItemMeta.setTime(event.getMeta().getTime());
+                eventItem.setMeta(eventItemMeta);
+
+                EventItemMeta itemMeta = eventRealm.copyToRealm(eventItemMeta);
+                EventItem itemTable = eventRealm.copyToRealm(eventItem);
+
+                eventRealm.commitTransaction();
+            }
+//        }
 
         eventRealm.close();
     }
+
+//    TODO
+//    private boolean isFutureDate(String date, String time){
+//
+//    }
 
     @Override
     public void deleteAllEvents() {
@@ -87,7 +102,7 @@ public class EventsRepositoryImpl implements EventsRepository{
         Realm.getDefaultInstance().close();
     }
 
-    private int getLastId(){
+    private short getLastId(){
         return lastId++;
     }
 

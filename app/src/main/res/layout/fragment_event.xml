@@ -29,15 +29,7 @@
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
-                android:src="@mipmap/ic_launcher"
                 app:layout_collapseMode="parallax"/>
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -58,6 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:background="@color/colorAccent">
 
                 <TextView
@@ -66,9 +60,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="30sp"
-                    android:layout_marginTop="10dp"
-                    android:text="Event title"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:id="@+id/tv_subtitle_event"
@@ -78,8 +71,8 @@
                     android:textSize="25sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Event subtitle"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:id="@+id/tv_date_event"
@@ -88,8 +81,8 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:layout_marginTop="10dp"
-                    android:text="Event date"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:id="@+id/tv_time_event"
@@ -98,8 +91,8 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:layout_marginTop="10dp"
-                    android:text="Event time"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:id="@+id/tv_price_event"
@@ -108,8 +101,8 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:layout_marginBottom="10dp"
-                    android:text="Event price"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -122,7 +115,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:padding="@dimen/margin_10"
+                        android:layout_margin="@dimen/margin_10"
+                        android:visibility="gone"
+                        android:background="@drawable/roundbutton"
                         android:src="@mipmap/ic_notifications_black_36dp"/>
 
                     <ImageButton
@@ -130,6 +126,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:padding="@dimen/margin_10"
+                        android:layout_margin="@dimen/margin_10"
+                        android:background="@drawable/roundbutton"
                         android:src="@mipmap/ic_share_black_36dp"/>
 
                 </LinearLayout>
@@ -142,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:textSize="18sp"
-                android:text="Description"/>
+                android:textColor="@color/colorPrimaryDark"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

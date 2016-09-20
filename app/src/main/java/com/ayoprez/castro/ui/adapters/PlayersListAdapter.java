@@ -23,7 +23,7 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersViewHolder> 
     private static final String TAG = PlayersListAdapter.class.getSimpleName();
 
     protected Context context;
-    protected ArrayList<PlayerItem> playerItems;
+    private ArrayList<PlayerItem> playerItems;
 
     @Inject
     PlayerAdapterPresenter playersPresenter;

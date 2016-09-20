@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.presenter.videos.VideosGalleryPresenter;
 import com.ayoprez.castro.ui.adapters.VideosGalleryListAdapter;
 
@@ -28,6 +29,9 @@ public class VideosGalleryFragment extends Fragment implements VideosGalleryView
 
     @BindView(R.id.recyclerViewList)
     protected RecyclerView recyclerView;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     VideosGalleryListAdapter adapter;
 
@@ -58,7 +62,7 @@ public class VideosGalleryFragment extends Fragment implements VideosGalleryView
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

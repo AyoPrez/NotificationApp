@@ -3,7 +3,8 @@
     android:id="@+id/eventItem"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent">
 
     <ImageView
         android:id="@+id/eventImage"
@@ -11,25 +12,25 @@
         android:layout_height="@dimen/event_image_list_height"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_gravity="center"
-        android:background="@mipmap/ic_launcher"/>
+        android:background="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/eventTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_5"
-        android:layout_marginBottom="@dimen/margin_5"
-        android:text="Large Text"/>
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_5"/>
 
     <TextView
         android:id="@+id/eventSubtitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:maxLines="3"
         android:layout_marginTop="@dimen/margin_5"
-        android:layout_marginBottom="@dimen/margin_5"
-        android:text="Large Text"/>
+        android:layout_marginBottom="@dimen/margin_10"/>
 </LinearLayout>

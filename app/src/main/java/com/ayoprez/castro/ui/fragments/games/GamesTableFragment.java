@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.games.GamesTablePresenter;
@@ -30,6 +31,9 @@ public class GamesTableFragment extends Fragment implements GamesTableView{
 
     @Inject
     ImageLib imageLib;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     @BindView(R.id.table_image)
     ImageView ivTable;
@@ -74,6 +78,6 @@ public class GamesTableFragment extends Fragment implements GamesTableView{
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

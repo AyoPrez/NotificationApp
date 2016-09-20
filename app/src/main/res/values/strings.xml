@@ -48,10 +48,14 @@
     <string name="base_error_restful_aboutus">There was an error obtaining the data of the club </string>
     <string name="error">There was an error</string>
 
-
     <!-- Players -->
     <string name="senior">Senior</string>
     <string name="cadet">Cadet</string>
     <string name="junior">Junior</string>
+
+
+    <!-- Event -->
+    <string name="shareText">Check this out! On %1$s at %2$s, %3$s. It cost %4$s</string>
+    <string name="notificationText">Don\'t forget. In 3 hours will be held the event %1$s.</string>
 
 </resources>

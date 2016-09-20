@@ -32,12 +32,10 @@ public class EventsViewHolder extends RecyclerView.ViewHolder implements EventLi
     public TextView eventTitle;
     @BindView(R.id.eventSubtitle)
     public TextView eventSubtitle;
-    private Context context;
 
 
     public EventsViewHolder(View itemView) {
         super(itemView);
-        this.context = itemView.getContext();
         ButterKnife.bind(this, itemView);
         ((CastroApplication)itemView.getContext().getApplicationContext()).getComponent().inject(this);
     }
@@ -54,7 +52,11 @@ public class EventsViewHolder extends RecyclerView.ViewHolder implements EventLi
 
     @Override
     public void displayEventSubtitle(String subtitle) {
-        eventSubtitle.setText(subtitle);
+        if( subtitle == null || subtitle.equals("")) {
+            eventSubtitle.setVisibility(View.GONE);
+        }else{
+            eventSubtitle.setText(subtitle);
+        }
     }
 
     @Override

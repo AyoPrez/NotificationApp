@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.di.AppComponent;
 import com.ayoprez.castro.presenter.SplashPresenter;
 
@@ -23,6 +24,9 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Inject
     SplashPresenter presenter;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,7 +60,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void showErrorMessage(byte errorMessage) {
         if(Looper.getMainLooper().getThread() == Thread.currentThread()) {
-            Toast.makeText(this, getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+            errorNotification.showNotification(findViewById(android.R.id.content).getRootView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
         }
     }
 }

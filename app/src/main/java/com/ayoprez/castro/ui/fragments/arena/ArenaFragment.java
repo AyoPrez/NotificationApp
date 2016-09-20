@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.arena.ArenaPresenter;
@@ -35,6 +36,9 @@ public class ArenaFragment extends Fragment implements ArenaView {
 
     @Inject
     ImageLib imageLib;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     @BindView(R.id.iv_arena)
     ImageView ivArena;
@@ -96,7 +100,7 @@ public class ArenaFragment extends Fragment implements ArenaView {
 
     @Override
     public void displayMap(String address) {
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + address);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
@@ -104,6 +108,6 @@ public class ArenaFragment extends Fragment implements ArenaView {
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

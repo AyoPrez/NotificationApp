@@ -51,6 +51,8 @@ public class ImageFragment extends Fragment {
 
         String url = getArguments().getString("image");
 
+        ((MainActivity)getActivity()).getToolbar().setVisibility(View.GONE);
+
         imageLib.setImageIntoView(url, imageView);
         photoZoom = new PhotoViewAttacher(imageView);
 

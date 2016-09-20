@@ -75,7 +75,7 @@ public class SplashPresenterImpl implements SplashPresenter {
                 imageRestfulService.getRestfulImages(view);
                 videoRestfulService.getRestfulVideos(view);
                 sponsorRestfulService.getRestfulSponsors(view);
-//                gamesRestfulService.getRestfulGames(view);
+                gamesRestfulService.getRestfulGames(view);
             }
         };
 

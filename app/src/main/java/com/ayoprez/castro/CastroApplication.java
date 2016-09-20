@@ -7,6 +7,7 @@ import com.ayoprez.castro.di.AppComponent;
 import com.ayoprez.castro.di.DaggerAppComponent;
 
 import com.crashlytics.android.Crashlytics;
+import com.karumi.dexter.Dexter;
 
 import java.security.SecureRandom;
 
@@ -28,10 +29,14 @@ public class CastroApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
         initComponent();
         initRealm();
         initFabric();
+        initDexter();
+    }
+
+    private void initDexter(){
+        Dexter.initialize(this);
     }
 
     private void initRealm(){

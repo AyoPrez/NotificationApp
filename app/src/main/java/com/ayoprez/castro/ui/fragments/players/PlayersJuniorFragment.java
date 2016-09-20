@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.models.PlayerItem;
 import com.ayoprez.castro.presenter.players.PlayersPresenter;
 import com.ayoprez.castro.ui.adapters.PlayersListAdapter;
@@ -30,6 +31,9 @@ public class PlayersJuniorFragment extends Fragment implements PlayersView {
 
     @Inject
     PlayersPresenter playersPresenter;
+
+    @Inject
+    ErrorNotification errorNotification;
 
     protected PlayersListAdapter adapter;
 
@@ -73,6 +77,6 @@ public class PlayersJuniorFragment extends Fragment implements PlayersView {
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        Toast.makeText(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage], Toast.LENGTH_LONG).show();
+        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }
