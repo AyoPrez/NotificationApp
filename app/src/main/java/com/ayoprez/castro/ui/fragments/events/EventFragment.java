@@ -24,6 +24,7 @@ import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
+import com.ayoprez.castro.ui.MainActivity;
 
 import java.util.HashMap;
 
@@ -87,7 +88,6 @@ public class EventFragment extends Fragment implements EventView {
         eventId = getArguments().getShort("eventId");
 
         eventAdapterPresenter.setEventView(this, eventId);
-
         return view;
     }
 
@@ -148,7 +148,8 @@ public class EventFragment extends Fragment implements EventView {
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+        if (isAdded())
+            errorNotification.showNotification(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

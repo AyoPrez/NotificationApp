@@ -26,6 +26,16 @@ public class GamesFragment extends Fragment {
     @BindView(R.id.viewpager_season)
     ViewPager viewPager;
 
+    public static GamesFragment instance;
+
+    public static GamesFragment getInstance() {
+        if (instance == null){
+            instance = new GamesFragment();
+        }
+
+        return instance;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -10,6 +10,7 @@ import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenter;
+import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.viewholders.events.EventsViewHolder;
 
 import javax.inject.Inject;
@@ -22,7 +23,10 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsViewHolder> {
     @Inject
     EventAdapterPresenter presenter;
 
-    public EventsListAdapter(Context context){
+    private EventListView eventListView;
+
+    public EventsListAdapter(Context context, EventListView eventListView){
+        this.eventListView = eventListView;
         ((CastroApplication) context.getApplicationContext()).getComponent().inject(this);
     }
 
@@ -38,13 +42,13 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.openDetailedView(holder.getEventPosition());
+                presenter.openDetailedView(eventListView, holder.getEventPosition());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return presenter.getEventsCountSize();
+        return presenter.getEventsCountSize(eventListView);
     }
 }

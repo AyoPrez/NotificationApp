@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
@@ -31,6 +32,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         startComponents();
     }
@@ -60,7 +62,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void showErrorMessage(byte errorMessage) {
         if(Looper.getMainLooper().getThread() == Thread.currentThread()) {
-            errorNotification.showNotification(findViewById(android.R.id.content).getRootView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+            errorNotification.showNotification(this, getResources().getStringArray(R.array.errorsArray)[errorMessage]);
         }
     }
 }

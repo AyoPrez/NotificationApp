@@ -20,27 +20,28 @@ import org.junit.Test;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyByte;
+import static org.mockito.Matchers.anyShort;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by ayo on 26.06.16.
  */
 public class EventPresenterTests {
 
-    EventListView mockView;
-    EventPresenter presenter;
-    EventAdapterPresenter eventAdapterPresenter;
-    EventItem item;
-    EventItemMeta itemMeta;
-    EventsRepository mockRepository;
+    private EventListView mockView;
+    private EventPresenter presenter;
+    private EventAdapterPresenter eventAdapterPresenter;
+    private EventItem item;
+    private EventsRepository mockRepository;
 
     @Before
     public void setup(){
         item = new EventItem();
-        itemMeta = new EventItemMeta();
+        EventItemMeta itemMeta = new EventItemMeta();
 
         item.setId((short)1);
         item.setTitle("EventName");
@@ -62,59 +63,46 @@ public class EventPresenterTests {
     public void shouldThrowViewNotFoundExceptionWhenViewIsNull(){
         presenter.setView(null);
 
-        eventAdapterPresenter.openDetailedView(item.getId());
+        eventAdapterPresenter.openDetailedView(mockView, item.getId());
     }
 
     @Test
-    public void shouldShowErrorMessageWhenItemIsNull(){
-        presenter.setView(mockView);
-        eventAdapterPresenter.openDetailedView(-1);
-
-        verify(mockView, times(1)).showEmptyListMessage(anyByte());
-        try {
-            verify(mockView, times(1)).initRecyclerView();
-        }catch(Exception e){
-            verify(mockView, times(1)).showEmptyListMessage(anyByte());
-        }
-//        verify(mockView, never()).changeFragment(any(Fragment.class));
-    }
-
-    @Test
-    public void shouldShowErrorMessageWhenItemTitleIsNull(){
+    public void shouldShowErrorMessageWhenItemTitleIsNull() throws Exception{
 
         item.setTitle(null);
 
         presenter.setView(mockView);
-        eventAdapterPresenter.openDetailedView(item.getId());
+        eventAdapterPresenter.openDetailedView(mockView, item.getId());
 
-        verify(mockView, times(1)).showEmptyListMessage(anyByte());
         try {
             verify(mockView, times(1)).initRecyclerView();
         }catch(Exception e){
             verify(mockView, times(1)).showEmptyListMessage(anyByte());
         }
-//        verify(mockView, never()).changeFragment(any(Fragment.class));
+
+        verify(mockView, times(1)).showEmptyListMessage(anyByte());
     }
 
     @Test
-    public void shouldShowErrorMessageWhenItemTitleIsEmpty(){
+    public void shouldShowErrorMessageWhenItemTitleIsEmpty() throws Exception{
 
         item.setTitle("");
 
         presenter.setView(mockView);
-        eventAdapterPresenter.openDetailedView(item.getId());
+        eventAdapterPresenter.openDetailedView(mockView, item.getId());
 
-        verify(mockView, times(1)).showEmptyListMessage(anyByte());
         try {
             verify(mockView, times(1)).initRecyclerView();
         }catch(Exception e){
             verify(mockView, times(1)).showEmptyListMessage(anyByte());
         }
+
+        verify(mockView, times(1)).showEmptyListMessage(anyByte());
 //        verify(mockView, never()).changeFragment(any(Fragment.class));
     }
 
-    @Test
-    public void shouldGiveCorrectDate(){
-
-    }
+//    @Test
+//    public void shouldGiveCorrectDate(){
+//
+//    }
 }

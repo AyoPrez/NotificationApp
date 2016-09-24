@@ -9,13 +9,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.ErrorNotification;
-import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.presenter.MainPresenter;
 import com.ayoprez.castro.ui.fragments.events.EventFragment;
 import com.ayoprez.castro.ui.fragments.players.PlayersBaseFragment;
@@ -50,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         setSupportActionBar(toolbar);
 
@@ -96,53 +94,37 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()){
             case R.id.nav_events:
-                changeFragment(new EventListFragment());
+                changeFragment(EventListFragment.getInstance());
                 break;
             case R.id.nav_games:
-                changeFragment(new GamesFragment());
+                changeFragment(GamesFragment.getInstance());
                 break;
             case R.id.nav_players:
-                changeFragment(new PlayersBaseFragment());
+                changeFragment(PlayersBaseFragment.getInstance());
                 break;
             case R.id.nav_arena:
-                changeFragment(new ArenaFragment());
+                changeFragment(ArenaFragment.getInstance());
                 break;
             case R.id.nav_about_us:
-                changeFragment(new AboutUsFragment());
+                changeFragment(AboutUsFragment.getInstance());
                 break;
             case R.id.nav_gallery:
-                changeFragment(new ImagesGalleryFragment());
+                changeFragment(ImagesGalleryFragment.getInstance());
                 break;
             case R.id.nav_videos:
-                changeFragment(new VideosGalleryFragment());
+                changeFragment(VideosGalleryFragment.getInstance());
                 break;
             case R.id.nav_sponsors:
-                changeFragment(new SponsorsFragment());
+                changeFragment(SponsorsFragment.getInstance());
                 break;
+//            case R.id.nav_settings:
+//                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -153,6 +135,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, fragment)
+                .attach(fragment)
                 .commit();
     }
 
@@ -168,6 +151,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        errorNotification.showNotification(findViewById(android.R.id.content).getRootView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+        errorNotification.showNotification(this, getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

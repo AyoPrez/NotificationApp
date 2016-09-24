@@ -3,7 +3,10 @@ package com.ayoprez.castro.di;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
-import com.ayoprez.castro.AppModule;
+import com.ayoprez.castro.di.modules.AppModule;
+import com.ayoprez.castro.di.modules.LibsModule;
+import com.ayoprez.castro.di.modules.RepositoryModule;
+import com.ayoprez.castro.di.modules.RestfulModule;
 import com.ayoprez.castro.presenter.SplashPresenterImpl;
 import com.ayoprez.castro.ui.SplashActivity;
 import com.ayoprez.castro.ui.adapters.EventsListAdapter;
@@ -38,7 +41,7 @@ import dagger.Component;
  * Created by ayo on 19.06.16.
  */
 @Singleton
-@Component(modules = { AppModule.class })
+@Component(modules = { AppModule.class, RepositoryModule.class, RestfulModule.class, LibsModule.class})
 public interface AppComponent {
     void inject(EventListFragment eventFragment);
     void inject(ArenaFragment arenaFragment);

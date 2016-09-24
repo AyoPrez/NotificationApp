@@ -79,6 +79,7 @@ public class GamesCalendarFragment extends Fragment implements GamesCalendarView
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+        if (isAdded())
+            errorNotification.showNotification(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

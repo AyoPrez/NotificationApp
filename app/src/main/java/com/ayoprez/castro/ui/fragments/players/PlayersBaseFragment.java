@@ -26,6 +26,16 @@ public class PlayersBaseFragment extends Fragment {
     @BindView(R.id.viewpager_categories)
     ViewPager viewPager;
 
+    public static PlayersBaseFragment instance;
+
+    public static PlayersBaseFragment getInstance() {
+        if (instance == null){
+            instance = new PlayersBaseFragment();
+        }
+
+        return instance;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +57,8 @@ public class PlayersBaseFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         adapter.addFragment(new PlayersSeniorFragment(), getString(R.string.senior));
-        adapter.addFragment(new PlayersCadetFragment(), getString(R.string.cadet));
         adapter.addFragment(new PlayersJuniorFragment(), getString(R.string.junior));
+        adapter.addFragment(new PlayersCadetFragment(), getString(R.string.cadet));
         viewPager.setAdapter(adapter);
     }
 }

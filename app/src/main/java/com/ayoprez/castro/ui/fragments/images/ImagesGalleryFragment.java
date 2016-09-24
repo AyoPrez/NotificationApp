@@ -40,6 +40,16 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
     @BindView(R.id.recyclerViewList)
     protected RecyclerView recyclerView;
 
+    public static ImagesGalleryFragment instance;
+
+    public static ImagesGalleryFragment getInstance(){
+        if(instance == null){
+            instance = new ImagesGalleryFragment();
+        }
+
+        return instance;
+    }
+
     public ImagesGalleryFragment(){ }
 
     @Override
@@ -65,7 +75,8 @@ public class ImagesGalleryFragment extends Fragment implements ImagesGalleryView
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+        if (isAdded())
+            errorNotification.showNotification(getContext(), getActivity().getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

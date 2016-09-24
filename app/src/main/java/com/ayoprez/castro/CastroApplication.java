@@ -1,22 +1,17 @@
 package com.ayoprez.castro;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.ayoprez.castro.di.AppComponent;
 import com.ayoprez.castro.di.DaggerAppComponent;
 
+import com.ayoprez.castro.di.modules.AppModule;
 import com.crashlytics.android.Crashlytics;
 import com.karumi.dexter.Dexter;
 
-import java.security.SecureRandom;
-
 import io.fabric.sdk.android.Fabric;
-import io.realm.DynamicRealm;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmMigration;
-import io.realm.RealmSchema;
 
 
 /**
@@ -29,10 +24,19 @@ public class CastroApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initComponent();
-        initRealm();
-        initFabric();
-        initDexter();
+
+        Thread threadInitComponents = new Thread() {
+            @Override
+            public void run() {
+
+                initComponent();
+                initRealm();
+                initFabric();
+                initDexter();
+            }
+        };
+
+        threadInitComponents.run();
     }
 
     private void initDexter(){

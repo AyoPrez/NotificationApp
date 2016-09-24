@@ -38,6 +38,16 @@ public class VideosGalleryFragment extends Fragment implements VideosGalleryView
     @Inject
     VideosGalleryPresenter presenter;
 
+    public static VideosGalleryFragment instance;
+
+    public static VideosGalleryFragment getInstance() {
+        if (instance == null){
+            instance = new VideosGalleryFragment();
+        }
+
+        return instance;
+    }
+
     public VideosGalleryFragment(){ }
 
     @Override
@@ -62,7 +72,8 @@ public class VideosGalleryFragment extends Fragment implements VideosGalleryView
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+        if (isAdded())
+            errorNotification.showNotification(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

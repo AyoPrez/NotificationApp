@@ -40,6 +40,16 @@ public class SponsorsFragment extends Fragment implements SponsorsView {
     @BindView(R.id.recyclerViewList)
     protected RecyclerView recyclerView;
 
+    public static SponsorsFragment instance;
+
+    public static SponsorsFragment getInstance() {
+        if (instance == null){
+            instance = new SponsorsFragment();
+        }
+
+        return instance;
+    }
+
     public SponsorsFragment(){ }
 
     @Override
@@ -64,7 +74,8 @@ public class SponsorsFragment extends Fragment implements SponsorsView {
 
     @Override
     public void showEmptyListMessage(byte errorMessage) {
-        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+        if (isAdded())
+            errorNotification.showNotification(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 
     @Override

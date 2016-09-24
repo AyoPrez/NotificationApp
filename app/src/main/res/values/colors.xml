@@ -3,5 +3,6 @@
     <color name="colorPrimary">#424242</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#BDBDBD</color>
+    <color name="colorEventListText">#DADADA</color>
     <color name="splashLoadColor">#9E9E9E</color>
 </resources>

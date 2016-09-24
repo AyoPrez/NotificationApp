@@ -51,6 +51,16 @@ public class ArenaFragment extends Fragment implements ArenaView {
     @BindView(R.id.button_map_arena)
     ImageButton btnArenaMap;
 
+    public static ArenaFragment instance;
+
+    public static ArenaFragment getInstance() {
+        if(instance == null){
+            instance = new ArenaFragment();
+        }
+
+        return instance;
+    }
+
     public ArenaFragment(){}
 
     @Override
@@ -108,6 +118,7 @@ public class ArenaFragment extends Fragment implements ArenaView {
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        errorNotification.showNotification(getView(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+        if (isAdded())
+            errorNotification.showNotification(getContext(), getResources().getStringArray(R.array.errorsArray)[errorMessage]);
     }
 }

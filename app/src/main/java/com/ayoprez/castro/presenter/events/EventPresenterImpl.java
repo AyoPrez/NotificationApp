@@ -23,7 +23,7 @@ import java.util.Locale;
  */
 public class EventPresenterImpl extends ErrorManager implements EventPresenter, EventAdapterPresenter {
 
-    private static EventListView listView;
+    private EventListView listView;
     private EventListItemView listItemView;
     private EventView eventView;
     private EventItem eventItem;
@@ -35,15 +35,15 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
 
     @Override
     public void setView(EventListView view) {
-        if(listView == null) {
+        if(view != null) {
             listView = view;
         }
 
-        if(view == null){
+        if(listView == null){
             throw new ViewNotFoundException();
         }else{
             try {
-                view.initRecyclerView();
+                listView.initRecyclerView();
             }catch(Exception e){
                 showError(listView, ERROR);
             }
@@ -118,7 +118,7 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
     }
 
     @Override
-    public void openDetailedView(int position) {
+    public void openDetailedView(EventListView listView, int position) {
         EventItem item = repository.getEventByPosition(position);
 
         if(item == null || item.getTitle() == null || item.getTitle().trim().equals("")) {
@@ -127,13 +127,17 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
             EventFragment eventFragment = new EventFragment();
 
             if(listView != null) {
-                listView.changeFragment(eventFragment, (short) item.getId());
+                listView.changeFragment(eventFragment, item.getId());
             }
         }
     }
 
     @Override
-    public int getEventsCountSize() {
+    public int getEventsCountSize(EventListView listView) {
+        if(repository.getAllEvents().size() == 0){
+            listView.showEmptyListMessage(ERROR_EMPTY_EVENTS);
+        }
+
         return repository.getAllEvents().size();
     }
 

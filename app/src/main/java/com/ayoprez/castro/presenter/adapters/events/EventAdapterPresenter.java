@@ -16,10 +16,10 @@ public interface EventAdapterPresenter {
 
     void loadEventData();
 
-    int getEventsCountSize();
+    int getEventsCountSize(EventListView eventListView);
 
     void shareEventContent(short id);
     void notifyEvent(short id);
 
-    void openDetailedView(int position);
+    void openDetailedView(EventListView eventListView, int position);
 }
