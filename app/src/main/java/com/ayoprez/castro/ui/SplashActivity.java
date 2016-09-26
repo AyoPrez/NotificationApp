@@ -1,5 +1,6 @@
 package com.ayoprez.castro.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
@@ -16,6 +17,8 @@ import com.ayoprez.castro.di.AppComponent;
 import com.ayoprez.castro.presenter.SplashPresenter;
 
 import javax.inject.Inject;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by ayo on 20.08.16.
@@ -64,5 +67,10 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         if(Looper.getMainLooper().getThread() == Thread.currentThread()) {
             errorNotification.showNotification(this, getResources().getStringArray(R.array.errorsArray)[errorMessage]);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

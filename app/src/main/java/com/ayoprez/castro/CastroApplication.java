@@ -12,6 +12,7 @@ import com.karumi.dexter.Dexter;
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 
 /**
@@ -33,10 +34,18 @@ public class CastroApplication extends Application {
                 initRealm();
                 initFabric();
                 initDexter();
+                initCalligraphy();
             }
         };
 
         threadInitComponents.run();
+    }
+
+    private void initCalligraphy(){
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/PlayfairDisplay-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
     }
 
     private void initDexter(){

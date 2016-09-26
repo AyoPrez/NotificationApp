@@ -6,6 +6,7 @@ import com.ayoprez.castro.models.EventItemMeta;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenterImpl;
 import com.ayoprez.castro.repository.EventsRepository;
+import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.viewholders.events.EventListItemView;
 
 import org.junit.Before;
@@ -32,6 +33,7 @@ public class EventAdapterPresenterTest {
     private EventListItemView mockView;
     private EventAdapterPresenter presenter;
     private EventItem item;
+    private EventListView eventListView;
 
     @Before
     public void setUp(){
@@ -49,6 +51,7 @@ public class EventAdapterPresenterTest {
         when(mockRepository.getAllEvents()).thenReturn(itemsList);
 
         mockView = mock(EventListItemView.class);
+        eventListView = mock(EventListView.class);
         presenter = new EventPresenterImpl(mockRepository);
     }
 
@@ -118,7 +121,7 @@ public class EventAdapterPresenterTest {
     public void shouldGetTotalNumberOfEvents(){
         presenter.setListItemView(mockView);
 
-        assertEquals(presenter.getEventsCountSize(), 3);
+        assertEquals(presenter.getEventsCountSize(eventListView), 3);
     }
 
     @Test(expected = ViewNotFoundException.class)

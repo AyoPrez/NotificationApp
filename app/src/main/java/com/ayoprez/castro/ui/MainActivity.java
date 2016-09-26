@@ -1,5 +1,6 @@
 package com.ayoprez.castro.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -28,6 +29,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
@@ -152,5 +154,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void showErrorMessage(byte errorMessage) {
         errorNotification.showNotification(this, getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
