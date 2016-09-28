@@ -4,6 +4,7 @@ import com.ayoprez.castro.BuildConfig;
 import com.ayoprez.castro.common.Constants;
 import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
+import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.restful.RestfulService;
 
 import dagger.Module;
@@ -48,8 +49,8 @@ public class LibsModule {
         return new ErrorNotification();
     }
 
-//    @Provides
-//    public TimeUtils provideTimeUtils(){
-//        return new TimeUtils();
-//    }
+    @Provides
+    public TimeUtils provideTimeUtils(){
+        return new TimeUtils();
+    }
 }

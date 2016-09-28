@@ -21,6 +21,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.anyByte;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -110,4 +111,26 @@ public class EventsRestfulServiceTest {
 
         verify(mockRepository, times(1)).deleteAllEvents();
     }
+
+//    @Test
+//    public void shouldSortTheEventsByDate(){
+//        EventItem eventItem = new EventItem();
+//        EventItemMeta eventItemMeta = new EventItemMeta();
+//        eventItemMeta.setDate("Lunes 26 de Septiembre de 2016");
+//        eventItem.setMeta(eventItemMeta);
+//
+//        EventItem eventItem2 = new EventItem();
+//        EventItemMeta eventItemMeta2 = new EventItemMeta();
+//        eventItemMeta2.setDate("Lunes 3 de Octubre de 2016");
+//        eventItem2.setMeta(eventItemMeta2);
+//
+//        ArrayList<EventItem> eventItemsList = new ArrayList<>();
+//
+//        eventItemsList.add(eventItem);
+//        eventItemsList.add(eventItem2);
+//
+//        presenter.getRestfulEvents(mockView);
+//
+//
+//    }
 }

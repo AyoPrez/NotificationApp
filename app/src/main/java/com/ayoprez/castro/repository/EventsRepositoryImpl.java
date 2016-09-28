@@ -51,11 +51,13 @@ public class EventsRepositoryImpl implements EventsRepository{
         EventItem eventItem;
         EventItemMeta eventItemMeta;
 
+        TimeUtils timeUtils = new TimeUtils();
+
         Realm eventRealm = Realm.getDefaultInstance();
 
         for(EventItem event : events) {
 
-//            if(isFutureDate(event.getMeta().getDate(), event.getMeta().getTime())) {
+            if(timeUtils.isFutureDate(event.getMeta().getDate(), event.getMeta().getTime())) {
 
                 eventRealm.beginTransaction();
 
@@ -77,15 +79,10 @@ public class EventsRepositoryImpl implements EventsRepository{
 
                 eventRealm.commitTransaction();
             }
-//        }
+        }
 
         eventRealm.close();
     }
-
-//    TODO
-//    private boolean isFutureDate(String date, String time){
-//
-//    }
 
     @Override
     public void deleteAllEvents() {

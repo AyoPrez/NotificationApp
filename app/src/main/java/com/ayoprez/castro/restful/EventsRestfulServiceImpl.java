@@ -9,6 +9,8 @@ import com.ayoprez.castro.repository.EventsRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Response;
 
@@ -37,7 +39,7 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
             Response<ArrayList<EventItem>> response = service.getEventsFromServer().execute();
 
             if (response.isSuccessful()) {
-                repository.saveEvents(response.body());
+                repository.saveEvents(getSortArrayListByDate(response.body()));
             }else{
                 showError(view, ERROR_RESTFUL_EVENTS);
             }
@@ -46,5 +48,16 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_EVENTS);
         }
+    }
+
+    private ArrayList<EventItem> getSortArrayListByDate(ArrayList<EventItem> eventList){
+
+        Collections.sort(eventList, new Comparator<EventItem>() {
+            public int compare(EventItem m1, EventItem m2) {
+                return m1.getMeta().getDate().compareTo(m2.getMeta().getDate()); //TODO esta ordenando por número, no por fecha. Por ejemplo Lunes 27 de Septiembre iría antes que Viernes 6 de Septiembre porque empieza por 2
+            }
+        });
+
+        return eventList;
     }
 }
