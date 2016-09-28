@@ -4,10 +4,12 @@ import android.util.Log;
 
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
+import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.repository.EventsRepository;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,9 +54,15 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
 
     private ArrayList<EventItem> getSortArrayListByDate(ArrayList<EventItem> eventList){
 
+        final TimeUtils timeUtils = new TimeUtils();
+
         Collections.sort(eventList, new Comparator<EventItem>() {
             public int compare(EventItem m1, EventItem m2) {
-                return m1.getMeta().getDate().compareTo(m2.getMeta().getDate()); //TODO esta ordenando por número, no por fecha. Por ejemplo Lunes 27 de Septiembre iría antes que Viernes 6 de Septiembre porque empieza por 2
+
+                Date date1 = new Date(timeUtils.getDateInMilliseconds(m1.getMeta().getDate(), m1.getMeta().getTime()));
+                Date date2 = new Date(timeUtils.getDateInMilliseconds(m2.getMeta().getDate(), m2.getMeta().getTime()));
+
+                return date1.compareTo(date2);
             }
         });
 
