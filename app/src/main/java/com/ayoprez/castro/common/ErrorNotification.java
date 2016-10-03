@@ -20,5 +20,7 @@ public class ErrorNotification {
                 dialog.cancel();
             }
         });
+
+        alertDialog.create().show();
     }
 }

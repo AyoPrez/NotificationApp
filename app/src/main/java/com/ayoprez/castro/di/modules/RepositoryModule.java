@@ -1,5 +1,6 @@
 package com.ayoprez.castro.di.modules;
 
+import com.ayoprez.castro.models.NotificationEvents;
 import com.ayoprez.castro.repository.AboutUsRepository;
 import com.ayoprez.castro.repository.AboutUsRepositoryImpl;
 import com.ayoprez.castro.repository.ArenaRepository;
@@ -10,6 +11,8 @@ import com.ayoprez.castro.repository.GamesRepository;
 import com.ayoprez.castro.repository.GamesRepositoryImpl;
 import com.ayoprez.castro.repository.ImagesGalleryRepository;
 import com.ayoprez.castro.repository.ImagesGalleryRepositoryImpl;
+import com.ayoprez.castro.repository.NotificationEventsRepository;
+import com.ayoprez.castro.repository.NotificationEventsRepositoryImpl;
 import com.ayoprez.castro.repository.PlayersRepository;
 import com.ayoprez.castro.repository.PlayersRepositoryImpl;
 import com.ayoprez.castro.repository.SponsorRepository;
@@ -64,6 +67,11 @@ public class RepositoryModule {
     @Provides
     public VideosGalleryRepository provideVideosGalleryRepository(){
         return new VideosGalleryRepositoryImpl();
+    }
+
+    @Provides
+    public NotificationEventsRepository provideNotificationEvents(){
+        return new NotificationEventsRepositoryImpl();
     }
 
 }

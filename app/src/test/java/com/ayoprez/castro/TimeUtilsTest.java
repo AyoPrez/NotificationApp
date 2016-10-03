@@ -243,4 +243,13 @@ public class TimeUtilsTest {
         assertFalse(timeUtils.isFutureDate(date, time));
     }
 
+    @Test
+    public void shouldGiveTimeWith4HoursLess(){
+        TimeUtils timeUtils = new TimeUtils();
+
+        String time = "1:00";
+
+        assertEquals("21:00", timeUtils.getFourHoursLessTime(time));
+    }
+
 }

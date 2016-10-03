@@ -18,9 +18,11 @@ public interface EventView extends CommonActivityView {
     void displayDescription(String description);
     void displayImage(String image);
     void displayPrice(String price);
+    void displayNotificationButtonState(boolean state);
     void buttonNotify();
     void buttonShare();
+    void confirmNotification();
 
     void shareContent(HashMap<String, String> eventItemData);
-    void notifyAlarmEvent(long time, String eventTitle);
+    void notifyAlarmEvent(String date, String time, String eventTitle);
 }

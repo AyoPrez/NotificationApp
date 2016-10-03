@@ -113,7 +113,6 @@
                         android:layout_gravity="center"
                         android:padding="@dimen/margin_10"
                         android:layout_margin="@dimen/margin_10"
-                        android:visibility="gone"
                         android:background="@drawable/roundbutton"
                         android:src="@mipmap/ic_notifications_black_36dp"/>
 

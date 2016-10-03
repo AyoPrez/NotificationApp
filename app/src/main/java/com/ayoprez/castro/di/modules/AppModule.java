@@ -30,6 +30,7 @@ import com.ayoprez.castro.repository.ArenaRepository;
 import com.ayoprez.castro.repository.EventsRepository;
 import com.ayoprez.castro.repository.GamesRepository;
 import com.ayoprez.castro.repository.ImagesGalleryRepository;
+import com.ayoprez.castro.repository.NotificationEventsRepository;
 import com.ayoprez.castro.repository.PlayersRepository;
 import com.ayoprez.castro.repository.SponsorRepository;
 import com.ayoprez.castro.repository.VideosGalleryRepository;
@@ -44,8 +45,8 @@ import dagger.Provides;
 public class AppModule {
 
     @Provides
-    public EventPresenter provideEventPresenter(EventsRepository eventsRepository){
-        return new EventPresenterImpl(eventsRepository);
+    public EventPresenter provideEventPresenter(EventsRepository eventsRepository, NotificationEventsRepository notificationEventsRepository){
+        return new EventPresenterImpl(eventsRepository, notificationEventsRepository);
     }
 
     @Provides
@@ -59,8 +60,8 @@ public class AppModule {
     }
 
     @Provides
-    public EventAdapterPresenter provideEventAdapterPresenter(EventsRepository eventsRepository){
-        return new EventPresenterImpl(eventsRepository);
+    public EventAdapterPresenter provideEventAdapterPresenter(EventsRepository eventsRepository, NotificationEventsRepository notificationEventsRepository){
+        return new EventPresenterImpl(eventsRepository, notificationEventsRepository);
     }
 
     @Provides

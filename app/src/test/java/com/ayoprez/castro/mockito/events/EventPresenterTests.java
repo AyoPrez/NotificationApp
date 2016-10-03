@@ -12,6 +12,7 @@ import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenterImpl;
 import com.ayoprez.castro.repository.EventsRepository;
+import com.ayoprez.castro.repository.NotificationEventsRepository;
 import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.fragments.events.EventView;
 
@@ -37,6 +38,7 @@ public class EventPresenterTests {
     private EventAdapterPresenter eventAdapterPresenter;
     private EventItem item;
     private EventsRepository mockRepository;
+    private NotificationEventsRepository mockNotificationRepository;
 
     @Before
     public void setup(){
@@ -54,9 +56,10 @@ public class EventPresenterTests {
 
         mockView = mock(EventListView.class);
         mockRepository = mock(EventsRepository.class);
+        mockNotificationRepository = mock(NotificationEventsRepository.class);
 
-        presenter = new EventPresenterImpl(mockRepository);
-        eventAdapterPresenter = new EventPresenterImpl(mockRepository);
+        presenter = new EventPresenterImpl(mockRepository, mockNotificationRepository);
+        eventAdapterPresenter = new EventPresenterImpl(mockRepository, mockNotificationRepository);
     }
 
     @Test(expected = ViewNotFoundException.class)

@@ -11,7 +11,7 @@ android {
         applicationId "com.ayoprez.castro"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 6
+        versionCode 7
         versionName app_version
     }
     buildTypes {

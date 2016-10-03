@@ -3,6 +3,8 @@ package com.ayoprez.castro.di;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
+import com.ayoprez.castro.common.AlarmNotificationReceiver;
+import com.ayoprez.castro.common.DeviceBootReceiver;
 import com.ayoprez.castro.di.modules.AppModule;
 import com.ayoprez.castro.di.modules.LibsModule;
 import com.ayoprez.castro.di.modules.RepositoryModule;
@@ -64,6 +66,8 @@ public interface AppComponent {
     void inject(SplashActivity splashActivity);
     void inject(EventFragment eventFragment);
     void inject(ImageFragment imageFragment);
+    void inject(AlarmNotificationReceiver alarmNotificationReceiver);
+    void inject(DeviceBootReceiver deviceBootReceiver);
 
 //    Restful service
     void inject(SplashPresenterImpl splashPresenter);

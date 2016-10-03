@@ -61,8 +61,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
 
-        if((getIntent() != null && getIntent().getAction() != null) && getIntent().getAction().equals("EVENT")){
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if((getIntent() != null && getIntent().getStringExtra("action") != null) && getIntent().getStringExtra("action").equals("EVENT")){
             changeToEvent(getIntent().getExtras());
         } else {
             changeFragment(new EventListFragment());

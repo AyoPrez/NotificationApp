@@ -20,6 +20,7 @@ public interface EventAdapterPresenter {
 
     void shareEventContent(short id);
     void notifyEvent(short id);
+    void confirmScheduledEvent(short eventId);
 
     void openDetailedView(EventListView eventListView, int position);
 }

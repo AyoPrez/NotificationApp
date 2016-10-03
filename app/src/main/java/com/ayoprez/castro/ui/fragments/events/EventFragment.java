@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,10 @@ import com.ayoprez.castro.common.AlarmNotificationReceiver;
 import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
+import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
+import com.ayoprez.castro.repository.NotificationEventsRepository;
+import com.ayoprez.castro.repository.NotificationEventsRepositoryImpl;
 import com.ayoprez.castro.ui.MainActivity;
 
 import java.util.HashMap;
@@ -47,15 +52,15 @@ public class EventFragment extends Fragment implements EventView {
     @Inject
     ErrorNotification errorNotification;
 
-//    @Inject
-//    TimeUtils timeUtils;
+    @Inject
+    TimeUtils timeUtils;
 
     @BindView(R.id.image_event)
     protected ImageView iVEvent;
     @BindView(R.id.tv_title_event)
-    protected TextView tvSubtitle;
-    @BindView(R.id.tv_subtitle_event)
     protected TextView tvTitle;
+    @BindView(R.id.tv_subtitle_event)
+    protected TextView tvSubtitle;
     @BindView(R.id.tv_date_event)
     protected TextView tvDate;
     @BindView(R.id.tv_time_event)
@@ -127,6 +132,11 @@ public class EventFragment extends Fragment implements EventView {
     }
 
     @Override
+    public void displayNotificationButtonState(boolean state) {
+        bNotification.setVisibility(state ? View.GONE : View.VISIBLE);
+    }
+
+    @Override
     public void buttonNotify() {
         bNotification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,47 +179,31 @@ public class EventFragment extends Fragment implements EventView {
         }
     }
     @Override
-    public void notifyAlarmEvent(long time, String eventTitle){
+    public void notifyAlarmEvent(String date, String time, String eventTitle){
         String notificationText = String.format(getString(R.string.notificationText), eventTitle);
 
-        Notification notification = getNotificationLogic(notificationText);
-        alarmManagerLogic(notification, time);
+        alarmManagerLogic(notificationText, timeUtils.getDateInMilliseconds(date, timeUtils.getFourHoursLessTime(time)));
+        Log.e("Date", "" + date);
+        Log.e("Time", "" + timeUtils.getFourHoursLessTime(time));
+        Log.e("Millis", timeUtils.getDateInMilliseconds(date, timeUtils.getFourHoursLessTime(time)) + "");
     }
 
-    protected Notification getNotificationLogic(String content){
-
-        String action = "EVENT";
-
-        // Create a pending intent to open the the application when the notification is clicked.
-        //Restart the app.
-        Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage(getActivity().getPackageName());
-
-        Bundle bundle = new Bundle();
-        bundle.putShort("eventId", eventId);
-
-        if(launchIntent != null){
-            launchIntent.setAction(action);
-            launchIntent.putExtras(bundle);
-        }
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Notification.Builder builder = new Notification.Builder(getActivity());
-        builder.setContentTitle(getString(R.string.app_name));
-        builder.setContentText(content);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentIntent(pendingIntent);
-
-        return builder.build();
-    }
-
-    protected void alarmManagerLogic(Notification notification, long time){
+    protected void alarmManagerLogic(String notificationText, long time){
         Intent notificationIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
         notificationIntent.putExtra(AlarmNotificationReceiver.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(AlarmNotificationReceiver.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationIntent.putExtra("content", notificationText);
+        notificationIntent.putExtra("id", eventId);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+
+        eventAdapterPresenter.confirmScheduledEvent(eventId);
+    }
+
+    @Override
+    public void confirmNotification(){
+        errorNotification.showNotification(getActivity(), getActivity().getString(R.string.notification_scheduled));
     }
 }

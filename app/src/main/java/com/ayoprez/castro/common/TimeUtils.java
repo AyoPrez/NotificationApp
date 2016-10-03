@@ -116,4 +116,14 @@ public class TimeUtils {
         return date.contains(" of ") ? Locale.ENGLISH : new Locale("es", "ES");
     }
 
+    public String getFourHoursLessTime(String time) {
+
+        int hour = getHourFromTime(time);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.add(Calendar.HOUR_OF_DAY, -4);
+
+        return calendar.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d", getMinutesFromTime(time));
+    }
 }

@@ -30,14 +30,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".common.AlarmNotificationReceiver" />
-        <receiver android:name=".common.DeviceBootReceiver"
+        <receiver
+            android:name=".common.AlarmNotificationReceiver"
+            android:enabled="true" >
+        </receiver>
+        <receiver
+            android:name="com.ayoprez.castro.common.DeviceBootReceiver"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4fefaf4e21f6e6d61917898a34d1a95c16b98090" />

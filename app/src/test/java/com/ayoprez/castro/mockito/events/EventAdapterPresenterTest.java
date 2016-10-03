@@ -6,6 +6,7 @@ import com.ayoprez.castro.models.EventItemMeta;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenterImpl;
 import com.ayoprez.castro.repository.EventsRepository;
+import com.ayoprez.castro.repository.NotificationEventsRepository;
 import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.viewholders.events.EventListItemView;
 
@@ -30,6 +31,7 @@ import static org.mockito.Mockito.when;
 public class EventAdapterPresenterTest {
 
     private EventsRepository mockRepository;
+    private NotificationEventsRepository mockNotificationRepository;
     private EventListItemView mockView;
     private EventAdapterPresenter presenter;
     private EventItem item;
@@ -38,6 +40,7 @@ public class EventAdapterPresenterTest {
     @Before
     public void setUp(){
         mockRepository = mock(EventsRepository.class);
+        mockNotificationRepository = mock(NotificationEventsRepository.class);
 
         item = initEventItem((short)1, "www.img.com/1", "Title", "Subtitle", "Party1", "Mañana", "Noche");
 
@@ -52,7 +55,7 @@ public class EventAdapterPresenterTest {
 
         mockView = mock(EventListItemView.class);
         eventListView = mock(EventListView.class);
-        presenter = new EventPresenterImpl(mockRepository);
+        presenter = new EventPresenterImpl(mockRepository, mockNotificationRepository);
     }
 
     private EventItem initEventItem(short id, String image, String title, String subtitle, String description, String date, String time){

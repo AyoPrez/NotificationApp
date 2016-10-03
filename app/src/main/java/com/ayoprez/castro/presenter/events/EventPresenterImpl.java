@@ -1,12 +1,15 @@
 package com.ayoprez.castro.presenter.events;
 
+import android.content.SharedPreferences;
 import android.text.Html;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.EventItem;
+import com.ayoprez.castro.models.NotificationEvents;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
 import com.ayoprez.castro.repository.EventsRepository;
+import com.ayoprez.castro.repository.NotificationEventsRepository;
 import com.ayoprez.castro.ui.fragments.events.EventFragment;
 import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.fragments.events.EventView;
@@ -28,9 +31,11 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
     private EventView eventView;
     private EventItem eventItem;
     protected EventsRepository repository;
+    protected NotificationEventsRepository notificationEventsRepository;
 
-    public EventPresenterImpl(EventsRepository eventsRepository) {
+    public EventPresenterImpl(EventsRepository eventsRepository, NotificationEventsRepository notificationEventsRepository) {
         this.repository = eventsRepository;
+        this.notificationEventsRepository = notificationEventsRepository;
     }
 
     @Override
@@ -112,6 +117,7 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
             eventView.displayImage(eventItem.getMeta().getImage());
             eventView.buttonNotify();
             eventView.buttonShare();
+            getNotificationButtonState(eventItem.getId());
         }else{
             showError(eventView, ERROR_NO_DATA_EVENT);
         }
@@ -157,24 +163,24 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
 
     @Override
     public void notifyEvent(short id) {
-
         EventItem eventItem = repository.getEvent(id);
-
-        eventView.notifyAlarmEvent(formatDate(eventItem.getMeta().getDate(), eventItem.getMeta().getTime()).getTime(), eventItem.getTitle());
+        eventView.notifyAlarmEvent(eventItem.getMeta().getDate(), eventItem.getMeta().getTime(), eventItem.getTitle());
     }
 
-    //TODO test
-    private Date formatDate(String date, String time){
+    @Override
+    public void confirmScheduledEvent(short eventId) {
+        EventItem event = repository.getEvent(eventId);
+        notificationEventsRepository.saveNotificationEvents(event);
 
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("EE dd MM yyyy HH:mm", Locale.GERMANY);
+        eventView.confirmNotification();
 
-        try {
-            cal.setTime(sdf.parse(date + " " + time));
-        }catch(Exception e){
-            showError(eventView, ERROR);
-        }
-
-        return cal.getTime();
+        getNotificationButtonState(eventId);
     }
+
+    private void getNotificationButtonState(short eventId){
+        boolean state = notificationEventsRepository.isEventScheduled(eventId);
+
+        eventView.displayNotificationButtonState(state);
+    }
+
 }

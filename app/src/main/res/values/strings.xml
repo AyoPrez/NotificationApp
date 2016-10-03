@@ -9,7 +9,7 @@
     <!-- Drawer menu-->
     <string name="events">Events</string>
     <string name="players">Wrestlers</string>
-    <string name="games">Wrestling</string>
+    <string name="games">Table</string>
     <string name="arena">Arena</string>
     <string name="about_us">About us</string>
     <string name="pictures">Pictures</string>
@@ -56,6 +56,7 @@
 
     <!-- Event -->
     <string name="shareText">Check this out! On %1$s at %2$s, %3$s. It cost %4$s</string>
-    <string name="notificationText">Don\'t forget. In 3 hours will be held the event %1$s.</string>
+    <string name="notificationText">Don\'t forget. In 4 hours will be held the event %1$s.</string>
+    <string name="notification_scheduled">I will notify you 4 hours before the event.</string>
 
 </resources>
