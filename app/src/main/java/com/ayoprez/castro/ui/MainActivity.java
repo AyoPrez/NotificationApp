@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.presenter.MainPresenter;
@@ -24,6 +25,11 @@ import com.ayoprez.castro.ui.fragments.events.EventListFragment;
 import com.ayoprez.castro.ui.fragments.games.GamesFragment;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryFragment;
 import com.ayoprez.castro.ui.fragments.videos.VideosGalleryFragment;
+import com.etiennelawlor.imagegallery.library.ImageGalleryFragment;
+import com.etiennelawlor.imagegallery.library.activities.ImageGalleryActivity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -54,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+        ((CastroApplication)getApplication()).getComponent().inject(this);
 
         toolbar.setTitle(R.string.app_name);
 
@@ -146,6 +153,7 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
+
     @Override
     public void showProgress() {
 
@@ -155,6 +163,19 @@ public class MainActivity extends AppCompatActivity
     public void hideProgress() {
 
     }
+
+    @Override
+    public void initImageGallery(ArrayList picturesUrl) {
+        ImageGalleryFragment galleryFragment = new ImageGalleryFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList(ImageGalleryActivity.KEY_IMAGES, picturesUrl);
+        bundle.putString(ImageGalleryActivity.KEY_TITLE, "Unsplash Images");
+        galleryFragment.setArguments(bundle);
+
+        changeFragment(galleryFragment);
+    }
+
 
     @Override
     public void showErrorMessage(byte errorMessage) {

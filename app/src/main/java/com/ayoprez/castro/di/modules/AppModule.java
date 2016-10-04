@@ -1,5 +1,7 @@
 package com.ayoprez.castro.di.modules;
 
+import com.ayoprez.castro.presenter.MainPresenter;
+import com.ayoprez.castro.presenter.MainPresenterImpl;
 import com.ayoprez.castro.presenter.SplashPresenter;
 import com.ayoprez.castro.presenter.SplashPresenterImpl;
 import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenter;
@@ -43,6 +45,11 @@ import dagger.Provides;
  */
 @Module
 public class AppModule {
+
+    @Provides
+    public MainPresenter provideMainPresenter(ImagesGalleryRepository imagesGalleryRepository){
+        return new MainPresenterImpl(imagesGalleryRepository);
+    }
 
     @Provides
     public EventPresenter provideEventPresenter(EventsRepository eventsRepository, NotificationEventsRepository notificationEventsRepository){

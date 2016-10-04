@@ -72,10 +72,9 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
         bigText.bigText(content);
         bigText.setBigContentTitle(context.getString(R.string.app_name));
         builder.setStyle(bigText);
-        builder.setContentInfo("Content info");
-        builder.setContentText("Content text");
-        builder.setContentTitle("Content title");
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentText(content);
+        builder.setContentTitle(context.getString(R.string.remind_title));
+        builder.setSmallIcon(R.drawable.ic_stat_escudo_castro_blanco_1);
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
 

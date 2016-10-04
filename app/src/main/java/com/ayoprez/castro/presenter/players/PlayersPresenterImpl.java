@@ -64,7 +64,7 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
                     playersView.initRecyclerView(repository.getCadetPlayers());
                     break;
 
-                case "Junio":
+                case "Junior":
                     playersView.initRecyclerView(repository.getJuniorPlayers());
                     break;
             }

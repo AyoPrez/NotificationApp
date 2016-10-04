@@ -10,6 +10,7 @@ import com.ayoprez.castro.di.modules.LibsModule;
 import com.ayoprez.castro.di.modules.RepositoryModule;
 import com.ayoprez.castro.di.modules.RestfulModule;
 import com.ayoprez.castro.presenter.SplashPresenterImpl;
+import com.ayoprez.castro.ui.MainActivity;
 import com.ayoprez.castro.ui.SplashActivity;
 import com.ayoprez.castro.ui.adapters.EventsListAdapter;
 import com.ayoprez.castro.ui.adapters.ImagesGalleryListAdapter;
@@ -51,6 +52,7 @@ public interface AppComponent {
     void inject(EventsListAdapter eventsListAdapter);
     void inject(Fragment fragment);
     void inject(Activity activity);
+    void inject(MainActivity mainActivity);
     void inject(PlayersSeniorFragment playersSeniorFragment);
     void inject(PlayersCadetFragment playersCadetFragment);
     void inject(PlayersJuniorFragment playersJuniorFragment);

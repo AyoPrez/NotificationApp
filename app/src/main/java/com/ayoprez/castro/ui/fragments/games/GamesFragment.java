@@ -47,6 +47,7 @@ public class GamesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_seasoninfo, container, false);
         ButterKnife.bind(this, v);
 
+        viewPager.setOffscreenPageLimit(2);
         setupViewPager(viewPager);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -55,7 +56,7 @@ public class GamesFragment extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(GamesCalendarFragment.getInstance(), getString(R.string.results));
         adapter.addFragment(GamesTableFragment.getInstance(), getString(R.string.table));
         viewPager.setAdapter(adapter);

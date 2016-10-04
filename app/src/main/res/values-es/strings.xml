@@ -69,5 +69,6 @@
     <string name="shareText">¡No te pierdas esto! El %1$s a las %2$s, %3$s. Cuesta %4$s</string>
     <string name="notificationText">No lo olvides. En 4 horas tendrá lugar el evento %1$s.</string>
     <string name="notification_scheduled">Te avisaré cuando falten 4 horas para el evento</string>
+    <string name="remind_title">Recordatorio</string>
 
 </resources>

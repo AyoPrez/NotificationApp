@@ -1,8 +1,11 @@
 package com.ayoprez.castro.common;
 
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 /**
  * Created by ayo on 12.09.16.
