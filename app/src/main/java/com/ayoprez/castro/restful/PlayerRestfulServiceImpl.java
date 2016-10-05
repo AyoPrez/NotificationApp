@@ -8,6 +8,7 @@ import com.ayoprez.castro.models.PlayerItem;
 import com.ayoprez.castro.repository.PlayersRepository;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 import retrofit2.Response;
@@ -40,7 +41,9 @@ public class PlayerRestfulServiceImpl extends ErrorManager implements PlayerRest
             }else{
                 showError(view, ERROR_RESTFUL_PLAYERS);
             }
-
+        } catch (SocketTimeoutException stoe){
+            Log.e(TAG, "Error: ", stoe);
+            getRestfulPlayers(view);
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_PLAYERS);

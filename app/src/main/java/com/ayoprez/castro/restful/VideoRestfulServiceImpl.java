@@ -8,6 +8,7 @@ import com.ayoprez.castro.models.VideoItem;
 import com.ayoprez.castro.repository.VideosGalleryRepository;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 import retrofit2.Response;
@@ -40,7 +41,9 @@ public class VideoRestfulServiceImpl extends ErrorManager implements VideoRestfu
             }else{
                 showError(view, ERROR_RESTFUL_VIDEOS);
             }
-
+        } catch (SocketTimeoutException stoe){
+            Log.e(TAG, "Error: ", stoe);
+            getRestfulVideos(view);
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_VIDEOS);

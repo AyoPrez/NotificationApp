@@ -20,14 +20,14 @@ import io.realm.RealmResults;
 public class EventsRepositoryImpl implements EventsRepository{
 
     private Realm eventRealm;
-    private short lastId;
+    private int lastId;
 
     public EventsRepositoryImpl(){
         eventRealm = Realm.getDefaultInstance();
     }
 
     @Override
-    public EventItem getEvent(short id) {
+    public EventItem getEvent(int id) {
         return eventRealm.where(EventItem.class).equalTo("id", id).findFirst();
     }
 
@@ -62,7 +62,7 @@ public class EventsRepositoryImpl implements EventsRepository{
                 eventRealm.beginTransaction();
 
                 eventItem = new EventItem();
-                eventItem.setId((short) (event.getId() + getLastId()));
+                eventItem.setId(event.getId() + getLastId());
                 eventItem.setTitle(event.getTitle());
 
                 eventItemMeta = new EventItemMeta();
@@ -99,7 +99,7 @@ public class EventsRepositoryImpl implements EventsRepository{
         Realm.getDefaultInstance().close();
     }
 
-    private short getLastId(){
+    private int getLastId(){
         return lastId++;
     }
 

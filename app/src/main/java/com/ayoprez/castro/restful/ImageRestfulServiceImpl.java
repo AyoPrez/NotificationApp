@@ -8,6 +8,7 @@ import com.ayoprez.castro.models.ImageItem;
 import com.ayoprez.castro.repository.ImagesGalleryRepository;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 import retrofit2.Response;
@@ -40,7 +41,9 @@ public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfu
             }else{
                 showError(view, ERROR_RESTFUL_IMAGES);
             }
-
+        } catch (SocketTimeoutException stoe){
+            Log.e(TAG, "Error: ", stoe);
+            getRestfulImages(view);
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_IMAGES);

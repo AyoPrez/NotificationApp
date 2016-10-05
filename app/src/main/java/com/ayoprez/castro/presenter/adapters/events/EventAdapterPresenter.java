@@ -12,15 +12,15 @@ import com.ayoprez.castro.ui.viewholders.events.EventListItemView;
  */
 public interface EventAdapterPresenter {
     void setListItemView(EventListItemView view);
-    void setEventView(EventView eventView, short eventId);
+    void setEventView(EventView eventView, int eventId);
 
     void loadEventData();
 
     int getEventsCountSize(EventListView eventListView);
 
-    void shareEventContent(short id);
-    void notifyEvent(short id);
-    void confirmScheduledEvent(short eventId);
+    void shareEventContent(int id);
+    void notifyEvent(int id);
+    void confirmScheduledEvent(int eventId);
 
     void openDetailedView(EventListView eventListView, int position);
 }

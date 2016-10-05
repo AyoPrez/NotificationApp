@@ -74,7 +74,7 @@ public class EventFragment extends Fragment implements EventView {
     @BindView(R.id.tv_description_event)
     protected TextView tvDescription;
 
-    protected short eventId;
+    protected int eventId;
 
     public EventFragment(){}
 
@@ -90,7 +90,7 @@ public class EventFragment extends Fragment implements EventView {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
         ButterKnife.bind(this, view);
 
-        eventId = getArguments().getShort("eventId");
+        eventId = getArguments().getInt("eventId");
 
         eventAdapterPresenter.setEventView(this, eventId);
         return view;

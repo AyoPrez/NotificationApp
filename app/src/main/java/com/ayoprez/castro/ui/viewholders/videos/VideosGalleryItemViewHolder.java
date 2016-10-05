@@ -3,6 +3,7 @@ package com.ayoprez.castro.ui.viewholders.videos;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.common.ImageLib;
@@ -24,6 +25,8 @@ public class VideosGalleryItemViewHolder extends RecyclerView.ViewHolder impleme
 
     @BindView(R.id.iv_gallery)
     ImageView ivGalleryVideo;
+    @BindView(R.id.videoTitle)
+    TextView tvVideoTitle;
 
     public VideosGalleryItemViewHolder(View itemView) {
         super(itemView);
@@ -39,6 +42,11 @@ public class VideosGalleryItemViewHolder extends RecyclerView.ViewHolder impleme
     @Override
     public void displayItemPreview(String image) {
         imageLib.setImageIntoView(image, ivGalleryVideo);
+    }
+
+    @Override
+    public void displayItemTitle(String title) {
+        tvVideoTitle.setText(title);
     }
 
     @Override

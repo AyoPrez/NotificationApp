@@ -11,16 +11,16 @@ import java.util.ArrayList;
 
 public interface NotificationEventsRepository {
 
-    NotificationEvents getNotificationEvent(short id);
-    NotificationEvents getNotificationEventByEventId(short id);
+    NotificationEvents getNotificationEvent(int id);
+    NotificationEvents getNotificationEventByEventId(int id);
     ArrayList<NotificationEvents> getAllNotificationEvents();
     int getNotificationEventIdByPosition(int position);
     NotificationEvents getNotificationEventByPosition(int position);
 
     void saveNotificationEvents(EventItem events);
-    boolean isEventScheduled(short id);
+    boolean isEventScheduled(int id);
     void deleteAllNotificationEvents();
-    void deleteNotificationEventById(short id);
+    void deleteNotificationEventById(int id);
     void deleteNotificationEventByEventId(short id);
     void closeRealm();
 }

@@ -1,6 +1,5 @@
 package com.ayoprez.castro.common;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -8,11 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.models.NotificationEvents;
 import com.ayoprez.castro.repository.EventsRepository;
+import com.ayoprez.castro.repository.EventsRepositoryImpl;
 import com.ayoprez.castro.repository.NotificationEventsRepository;
 import com.ayoprez.castro.repository.NotificationEventsRepositoryImpl;
 
@@ -24,14 +23,10 @@ public class DeviceBootReceiver extends BroadcastReceiver {
     private static final String LOG_TAG = DeviceBootReceiver.class.getSimpleName();
 
     @Inject
-    EventsRepository eventsRepository;
-
-    @Inject
     TimeUtils timeUtils;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
            reSchedule(context);
         }else{
@@ -40,6 +35,8 @@ public class DeviceBootReceiver extends BroadcastReceiver {
     }
 
     public void reSchedule(Context context){
+
+        EventsRepository eventsRepository = new EventsRepositoryImpl();
         NotificationEventsRepository notificationEventsRepository = new NotificationEventsRepositoryImpl();
 
         ArrayList<NotificationEvents> notificationEvents = notificationEventsRepository.getAllNotificationEvents();

@@ -72,10 +72,10 @@ public class EventListFragment extends Fragment implements EventListView {
     }
 
     @Override
-    public void changeFragment(Fragment fragment, short id) {
+    public void changeFragment(Fragment fragment, int id) {
 
         Bundle bundle = new Bundle();
-        bundle.putShort("eventId", id);
+        bundle.putInt("eventId", id);
         fragment.setArguments(bundle);
 
         try {

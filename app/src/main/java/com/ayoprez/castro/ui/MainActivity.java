@@ -1,6 +1,8 @@
 package com.ayoprez.castro.ui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,8 +11,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
@@ -26,7 +32,13 @@ import com.ayoprez.castro.ui.fragments.games.GamesFragment;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryFragment;
 import com.ayoprez.castro.ui.fragments.videos.VideosGalleryFragment;
 import com.etiennelawlor.imagegallery.library.ImageGalleryFragment;
+import com.etiennelawlor.imagegallery.library.activities.FullScreenImageGalleryActivity;
 import com.etiennelawlor.imagegallery.library.activities.ImageGalleryActivity;
+import com.etiennelawlor.imagegallery.library.adapters.FullScreenImageGalleryAdapter;
+import com.etiennelawlor.imagegallery.library.adapters.ImageGalleryAdapter;
+import com.etiennelawlor.imagegallery.library.enums.PaletteColorType;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Callback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +50,7 @@ import butterknife.ButterKnife;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainView {
+        implements NavigationView.OnNavigationItemSelectedListener, MainView, ImageGalleryAdapter.ImageThumbnailLoader, FullScreenImageGalleryAdapter.FullScreenImageLoader {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -52,6 +64,8 @@ public class MainActivity extends AppCompatActivity
     @Inject
     ErrorNotification errorNotification;
 
+    private PaletteColorType paletteColorType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +75,9 @@ public class MainActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
         ((CastroApplication)getApplication()).getComponent().inject(this);
+
+        ImageGalleryFragment.setImageThumbnailLoader(this);
+        FullScreenImageGalleryActivity.setFullScreenImageLoader(this);
 
         toolbar.setTitle(R.string.app_name);
 
@@ -130,6 +147,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_gallery:
                 changeFragment(ImagesGalleryFragment.getInstance());
+//                mainPresenter.initGallery(this);
                 break;
             case R.id.nav_videos:
                 changeFragment(VideosGalleryFragment.getInstance());
@@ -166,14 +184,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void initImageGallery(ArrayList picturesUrl) {
-        ImageGalleryFragment galleryFragment = new ImageGalleryFragment();
-
         Bundle bundle = new Bundle();
         bundle.putStringArrayList(ImageGalleryActivity.KEY_IMAGES, picturesUrl);
-        bundle.putString(ImageGalleryActivity.KEY_TITLE, "Unsplash Images");
-        galleryFragment.setArguments(bundle);
 
-        changeFragment(galleryFragment);
+        changeFragment(ImageGalleryFragment.newInstance(bundle));
     }
 
 
@@ -185,5 +199,164 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    //Cambiar de sitio
+    @Override
+    public void loadImageThumbnail(ImageView iv, String imageUrl, int dimension) {
+        if (!TextUtils.isEmpty(imageUrl)) {
+            Picasso.with(iv.getContext())
+                    .load(imageUrl)
+                    .resize(dimension, dimension)
+                    .centerCrop()
+                    .into(iv);
+        } else {
+            iv.setImageDrawable(null);
+        }
+    }
+
+    //Cambiar de sitio
+    @Override
+    public void loadFullScreenImage(final ImageView iv, String imageUrl, int width, final LinearLayout bgLinearLayout) {
+        if (!TextUtils.isEmpty(imageUrl)) {
+            Picasso.with(iv.getContext())
+                    .load(imageUrl)
+                    .resize(width, 0)
+                    .into(iv, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            Bitmap bitmap = ((BitmapDrawable) iv.getDrawable()).getBitmap();
+                            Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                                public void onGenerated(Palette palette) {
+                                    applyPalette(palette, bgLinearLayout);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
+        } else {
+            iv.setImageDrawable(null);
+        }
+    }
+
+    private void applyPalette(Palette palette, LinearLayout bgLinearLayout){
+        int bgColor = getBackgroundColor(palette);
+        if (bgColor != -1)
+            bgLinearLayout.setBackgroundColor(bgColor);
+    }
+
+    private int getBackgroundColor(Palette palette) {
+        int bgColor = -1;
+
+        int vibrantColor = palette.getVibrantColor(0x000000);
+        int lightVibrantColor = palette.getLightVibrantColor(0x000000);
+        int darkVibrantColor = palette.getDarkVibrantColor(0x000000);
+
+        int mutedColor = palette.getMutedColor(0x000000);
+        int lightMutedColor = palette.getLightMutedColor(0x000000);
+        int darkMutedColor = palette.getDarkMutedColor(0x000000);
+
+        if (paletteColorType != null) {
+            switch (paletteColorType) {
+                case VIBRANT:
+                    if (vibrantColor != 0) { // primary option
+                        bgColor = vibrantColor;
+                    } else if (lightVibrantColor != 0) { // fallback options
+                        bgColor = lightVibrantColor;
+                    } else if (darkVibrantColor != 0) {
+                        bgColor = darkVibrantColor;
+                    } else if (mutedColor != 0) {
+                        bgColor = mutedColor;
+                    } else if (lightMutedColor != 0) {
+                        bgColor = lightMutedColor;
+                    } else if (darkMutedColor != 0) {
+                        bgColor = darkMutedColor;
+                    }
+                    break;
+                case LIGHT_VIBRANT:
+                    if (lightVibrantColor != 0) { // primary option
+                        bgColor = lightVibrantColor;
+                    } else if (vibrantColor != 0) { // fallback options
+                        bgColor = vibrantColor;
+                    } else if (darkVibrantColor != 0) {
+                        bgColor = darkVibrantColor;
+                    } else if (mutedColor != 0) {
+                        bgColor = mutedColor;
+                    } else if (lightMutedColor != 0) {
+                        bgColor = lightMutedColor;
+                    } else if (darkMutedColor != 0) {
+                        bgColor = darkMutedColor;
+                    }
+                    break;
+                case DARK_VIBRANT:
+                    if (darkVibrantColor != 0) { // primary option
+                        bgColor = darkVibrantColor;
+                    } else if (vibrantColor != 0) { // fallback options
+                        bgColor = vibrantColor;
+                    } else if (lightVibrantColor != 0) {
+                        bgColor = lightVibrantColor;
+                    } else if (mutedColor != 0) {
+                        bgColor = mutedColor;
+                    } else if (lightMutedColor != 0) {
+                        bgColor = lightMutedColor;
+                    } else if (darkMutedColor != 0) {
+                        bgColor = darkMutedColor;
+                    }
+                    break;
+                case MUTED:
+                    if (mutedColor != 0) { // primary option
+                        bgColor = mutedColor;
+                    } else if (lightMutedColor != 0) { // fallback options
+                        bgColor = lightMutedColor;
+                    } else if (darkMutedColor != 0) {
+                        bgColor = darkMutedColor;
+                    } else if (vibrantColor != 0) {
+                        bgColor = vibrantColor;
+                    } else if (lightVibrantColor != 0) {
+                        bgColor = lightVibrantColor;
+                    } else if (darkVibrantColor != 0) {
+                        bgColor = darkVibrantColor;
+                    }
+                    break;
+                case LIGHT_MUTED:
+                    if (lightMutedColor != 0) { // primary option
+                        bgColor = lightMutedColor;
+                    } else if (mutedColor != 0) { // fallback options
+                        bgColor = mutedColor;
+                    } else if (darkMutedColor != 0) {
+                        bgColor = darkMutedColor;
+                    } else if (vibrantColor != 0) {
+                        bgColor = vibrantColor;
+                    } else if (lightVibrantColor != 0) {
+                        bgColor = lightVibrantColor;
+                    } else if (darkVibrantColor != 0) {
+                        bgColor = darkVibrantColor;
+                    }
+                    break;
+                case DARK_MUTED:
+                    if (darkMutedColor != 0) { // primary option
+                        bgColor = darkMutedColor;
+                    } else if (mutedColor != 0) { // fallback options
+                        bgColor = mutedColor;
+                    } else if (lightMutedColor != 0) {
+                        bgColor = lightMutedColor;
+                    } else if (vibrantColor != 0) {
+                        bgColor = vibrantColor;
+                    } else if (lightVibrantColor != 0) {
+                        bgColor = lightVibrantColor;
+                    } else if (darkVibrantColor != 0) {
+                        bgColor = darkVibrantColor;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return bgColor;
     }
 }

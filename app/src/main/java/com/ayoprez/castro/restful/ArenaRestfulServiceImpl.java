@@ -8,6 +8,7 @@ import com.ayoprez.castro.models.Arena;
 import com.ayoprez.castro.repository.ArenaRepository;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 import retrofit2.Response;
@@ -39,10 +40,11 @@ public class ArenaRestfulServiceImpl extends ErrorManager implements ArenaRestfu
             if (response.isSuccessful()) {
                 repository.saveArena(response.body().get(0));
             }else{
-
                 showError(view, ERROR_RESTFUL_ARENA);
             }
-
+        } catch (SocketTimeoutException stoe){
+            Log.e(TAG, "Error: ", stoe);
+            getRestfulArena(view);
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
 

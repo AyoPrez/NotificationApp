@@ -70,7 +70,7 @@ public class VideosGalleryPresenterImpl extends ErrorManager implements VideosGa
         if(item == null){
             showError(itemView, ERROR_EMPTY_VIDEOS, itemPosition);
         }else{
-            applyDisplayVideoPreview(item.getMeta().getPreview());
+            applyDisplayVideoPreview(item);
         }
     }
 
@@ -96,11 +96,12 @@ public class VideosGalleryPresenterImpl extends ErrorManager implements VideosGa
         }
     }
 
-    private void applyDisplayVideoPreview(String image){
-        if(image == null || image.isEmpty()){
+    private void applyDisplayVideoPreview(VideoItem videoItem){
+        if(videoItem == null || videoItem.getMeta().getPreview().isEmpty()){
             showError(itemView, ERROR_NO_DATA_VIDEO, itemView.getItemPosition());
         }else {
-            itemView.displayItemPreview(image);
+            itemView.displayItemPreview(videoItem.getMeta().getPreview());
+            itemView.displayItemTitle(videoItem.getTitle());
         }
     }
 

@@ -10,5 +10,5 @@ import com.ayoprez.castro.models.EventItem;
  */
 public interface EventListView extends CommonListView {
 
-    void changeFragment(Fragment fragment, short id);
+    void changeFragment(Fragment fragment, int id);
 }

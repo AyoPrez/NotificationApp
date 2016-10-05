@@ -8,6 +8,7 @@ import com.ayoprez.castro.models.AboutUs;
 import com.ayoprez.castro.repository.AboutUsRepository;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 import retrofit2.Response;
@@ -40,7 +41,9 @@ public class AboutUsRestfulServiceImpl extends ErrorManager implements AboutUsRe
             }else{
                 showError(view, ERROR_RESTFUL_ABOUTUS);
             }
-
+        } catch (SocketTimeoutException stoe){
+            Log.e(TAG, "Error: ", stoe);
+            getRestfulAboutUs(view);
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_ABOUTUS);

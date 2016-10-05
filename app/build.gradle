@@ -11,7 +11,7 @@ android {
         applicationId "com.ayoprez.castro"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 7
+        versionCode 8
         versionName app_version
     }
     buildTypes {
@@ -40,6 +40,8 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:palette-v7:24.2.1'
+
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     compile 'com.google.dagger:dagger:2.0.2'
     provided 'javax.annotation:jsr250-api:1.0'

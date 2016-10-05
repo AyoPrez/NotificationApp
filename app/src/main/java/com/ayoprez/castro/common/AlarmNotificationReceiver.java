@@ -7,6 +7,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -72,6 +74,7 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
         bigText.bigText(content);
         bigText.setBigContentTitle(context.getString(R.string.app_name));
         builder.setStyle(bigText);
+        builder.setColor(context.getResources().getColor(R.color.colorPrimaryDark));
         builder.setContentText(content);
         builder.setContentTitle(context.getString(R.string.remind_title));
         builder.setSmallIcon(R.drawable.ic_stat_escudo_castro_blanco_1);

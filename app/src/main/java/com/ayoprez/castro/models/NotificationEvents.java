@@ -10,15 +10,15 @@ import io.realm.annotations.PrimaryKey;
 public class NotificationEvents extends RealmObject {
 
     @PrimaryKey
-    private short id;
-    private short eventId;
+    private int id;
+    private int eventId;
     private String eventTitle;
 
     public int getId() {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -26,7 +26,7 @@ public class NotificationEvents extends RealmObject {
         return eventId;
     }
 
-    public void setEventId(short eventId) {
+    public void setEventId(int eventId) {
         this.eventId = eventId;
     }
 

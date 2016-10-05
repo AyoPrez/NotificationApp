@@ -15,19 +15,18 @@ import io.realm.RealmResults;
 public class NotificationEventsRepositoryImpl implements NotificationEventsRepository {
 
     private Realm eventRealm;
-    private short lastId;
 
     public NotificationEventsRepositoryImpl(){
         eventRealm = Realm.getDefaultInstance();
     }
 
     @Override
-    public NotificationEvents getNotificationEvent(short id) {
+    public NotificationEvents getNotificationEvent(int id) {
         return eventRealm.where(NotificationEvents.class).equalTo("id", id).findFirst();
     }
 
     @Override
-    public NotificationEvents getNotificationEventByEventId(short id) {
+    public NotificationEvents getNotificationEventByEventId(int id) {
         return eventRealm.where(NotificationEvents.class).equalTo("eventId", id).findFirst();
     }
 
@@ -55,7 +54,7 @@ public class NotificationEventsRepositoryImpl implements NotificationEventsRepos
         eventRealm.beginTransaction();
 
         notificationEvent = new NotificationEvents();
-        notificationEvent.setId((short) (notificationEvent.getId() + getLastId()));
+        notificationEvent.setId(getLastId());
         notificationEvent.setEventId(events.getId());
         notificationEvent.setEventTitle(events.getTitle());
 
@@ -67,12 +66,13 @@ public class NotificationEventsRepositoryImpl implements NotificationEventsRepos
     }
 
     @Override
-    public boolean isEventScheduled(short id) {
+    public boolean isEventScheduled(int id) {
         return getNotificationEventByEventId(id) != null;
     }
 
-    private short getLastId(){
-        return lastId++;
+    private int getLastId(){
+        ArrayList<?> list = getAllNotificationEvents();
+        return getAllNotificationEvents().get(list.size() - 1).getId() + 1;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class NotificationEventsRepositoryImpl implements NotificationEventsRepos
     }
 
     @Override
-    public void deleteNotificationEventById(final short id) {
+    public void deleteNotificationEventById(final int id) {
         Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

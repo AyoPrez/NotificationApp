@@ -62,7 +62,7 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
     }
 
     @Override
-    public void setEventView(EventView eventView, short eventId) {
+    public void setEventView(EventView eventView, int eventId) {
         this.eventView = eventView;
 
         eventItem = repository.getEvent(eventId);
@@ -148,7 +148,7 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
     }
 
     @Override
-    public void shareEventContent(short id) {
+    public void shareEventContent(int id) {
         EventItem eventItem = repository.getEvent(id);
 
         HashMap<String, String> hashMapEventData = new HashMap<>();
@@ -162,13 +162,13 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
     }
 
     @Override
-    public void notifyEvent(short id) {
+    public void notifyEvent(int id) {
         EventItem eventItem = repository.getEvent(id);
         eventView.notifyAlarmEvent(eventItem.getMeta().getDate(), eventItem.getMeta().getTime(), eventItem.getTitle());
     }
 
     @Override
-    public void confirmScheduledEvent(short eventId) {
+    public void confirmScheduledEvent(int eventId) {
         EventItem event = repository.getEvent(eventId);
         notificationEventsRepository.saveNotificationEvents(event);
 
@@ -177,7 +177,7 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
         getNotificationButtonState(eventId);
     }
 
-    private void getNotificationButtonState(short eventId){
+    private void getNotificationButtonState(int eventId){
         boolean state = notificationEventsRepository.isEventScheduled(eventId);
 
         eventView.displayNotificationButtonState(state);

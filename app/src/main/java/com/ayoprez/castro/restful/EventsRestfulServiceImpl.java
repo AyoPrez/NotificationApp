@@ -9,6 +9,7 @@ import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.repository.EventsRepository;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +47,9 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
                 showError(view, ERROR_RESTFUL_EVENTS);
             }
 
+        } catch (SocketTimeoutException stoe){
+            Log.e(TAG, "Error: ", stoe);
+            getRestfulEvents(view);
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_EVENTS);

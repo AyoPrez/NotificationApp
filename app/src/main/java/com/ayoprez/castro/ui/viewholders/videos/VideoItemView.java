@@ -9,5 +9,6 @@ public interface VideoItemView extends CommonListItemView {
 
     int getItemPosition();
     void displayItemPreview(String image);
+    void displayItemTitle(String title);
 
 }

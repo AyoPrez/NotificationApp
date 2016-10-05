@@ -9,15 +9,15 @@ import io.realm.annotations.PrimaryKey;
 public class EventItem extends RealmObject {
 
     @PrimaryKey
-    private short id;
+    private int id;
     private String title;
     private EventItemMeta meta;
 
-    public short getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -8,6 +8,7 @@ import com.ayoprez.castro.models.SponsorItem;
 import com.ayoprez.castro.repository.SponsorRepository;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 import retrofit2.Response;
@@ -41,7 +42,9 @@ public class SponsorsRestfulServiceImpl extends ErrorManager implements Sponsors
 
                 showError(view, ERROR_RESTFUL_SPONSORS);
             }
-
+        } catch (SocketTimeoutException stoe){
+            Log.e(TAG, "Error: ", stoe);
+            getRestfulSponsors(view);
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_SPONSORS);
