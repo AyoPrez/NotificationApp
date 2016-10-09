@@ -25,14 +25,13 @@ public class AboutUsRestfulServiceImpl extends ErrorManager implements AboutUsRe
     public AboutUsRestfulServiceImpl(AboutUsRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getAboutUs() != null){
-            repository.deleteAboutUs();
-        }
     }
 
     @Override
     public void getRestfulAboutUs(final CommonActivityView view) {
+
+        deleteCompleteAboutUsData();
+
         try {
             Response<ArrayList<AboutUs>> response = service.getAboutUsFromServer().execute();
 
@@ -49,5 +48,12 @@ public class AboutUsRestfulServiceImpl extends ErrorManager implements AboutUsRe
             showError(view, ERROR_RESTFUL_ABOUTUS);
         }
 
+    }
+
+    @Override
+    public void deleteCompleteAboutUsData() {
+        if(repository.getAboutUs() != null){
+            repository.deleteAboutUs();
+        }
     }
 }

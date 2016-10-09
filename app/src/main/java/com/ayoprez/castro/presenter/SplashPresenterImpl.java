@@ -1,5 +1,8 @@
 package com.ayoprez.castro.presenter;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.ayoprez.castro.di.AppComponent;
@@ -51,36 +54,39 @@ public class SplashPresenterImpl implements SplashPresenter {
     public void setView(AppComponent component, SplashView view) {
         this.view = view;
         component.inject(this);
-
-        getDataFromServer();
     }
 
     @Override
-    public void getDataFromServer() {
+    public void getDataFromServer(boolean isConnected, final boolean isWifi) {
         view.showLoadBar();
 
-        Thread thread1 = new Thread() {
-            @Override
-            public void run() {
-                eventsRestfulService.getRestfulEvents(view);
-                playerRestfulService.getRestfulPlayers(view);
-                arenaRestfulService.getRestfulArena(view);
-                aboutUsRestfulService.getRestfulAboutUs(view);
-            }
-        };
+        if(isConnected) {
 
-        Thread thread2 = new Thread() {
-            @Override
-            public void run() {
-                imageRestfulService.getRestfulImages(view);
-                videoRestfulService.getRestfulVideos(view);
-                sponsorRestfulService.getRestfulSponsors(view);
-                gamesRestfulService.getRestfulGames(view);
-            }
-        };
+            Thread thread1 = new Thread() {
+                @Override
+                public void run() {
+                    eventsRestfulService.getRestfulEvents(view);
+                    gamesRestfulService.getRestfulGames(view);
+                    imageRestfulService.getRestfulImages(view);
+                    videoRestfulService.getRestfulVideos(view);
+                }
+            };
 
-        thread1.start();
-        thread2.start();
+            thread1.start();
+
+            if(isWifi) {
+                Thread thread2 = new Thread() {
+                    @Override
+                    public void run() {
+                        sponsorRestfulService.getRestfulSponsors(view);
+                        playerRestfulService.getRestfulPlayers(view);
+                        arenaRestfulService.getRestfulArena(view);
+                        aboutUsRestfulService.getRestfulAboutUs(view);
+                    }
+                };
+                thread2.start();
+            }
+        }
 
         Thread threadSplashWait = new Thread() {
             @Override

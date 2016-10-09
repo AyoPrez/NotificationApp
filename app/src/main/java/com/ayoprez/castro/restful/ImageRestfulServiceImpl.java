@@ -25,14 +25,13 @@ public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfu
     public ImageRestfulServiceImpl(ImagesGalleryRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getAllStringImages().size() > 0){
-            repository.deleteAllImages();
-        }
     }
 
     @Override
     public void getRestfulImages(final CommonActivityView view) {
+
+        deleteCompleteImagesData();
+
         try {
             Response<ArrayList<ImageItem>> response = service.getImagesFromServer().execute();
 
@@ -47,6 +46,13 @@ public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfu
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_IMAGES);
+        }
+    }
+
+    @Override
+    public void deleteCompleteImagesData() {
+        if(repository.getAllStringImages().size() > 0){
+            repository.deleteAllImages();
         }
     }
 }

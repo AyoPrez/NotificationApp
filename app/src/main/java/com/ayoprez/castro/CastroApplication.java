@@ -54,12 +54,13 @@ public class CastroApplication extends Application {
 
     private void initRealm(){
 
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
-                .name("realmTeam")
+        Realm.init(this);
+
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .name("castroApp")
                 .schemaVersion(R.string.app_version)
                 .deleteRealmIfMigrationNeeded()
                 .build();
-
         Realm.setDefaultConfiguration(realmConfiguration);
     }
 

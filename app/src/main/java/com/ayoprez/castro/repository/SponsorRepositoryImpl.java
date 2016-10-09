@@ -27,7 +27,7 @@ public class SponsorRepositoryImpl implements SponsorRepository {
 
     @Override
     public ArrayList<SponsorItem> getAllSponsors() {
-        return new ArrayList<>(sponsorRealm.where(SponsorItem.class).findAll());
+        return new ArrayList<>(Realm.getDefaultInstance().where(SponsorItem.class).findAll());
     }
 
     @Override

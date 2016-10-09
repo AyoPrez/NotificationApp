@@ -9,5 +9,5 @@ import com.ayoprez.castro.ui.SplashView;
 public interface SplashPresenter {
 
     void setView(AppComponent component, SplashView view);
-    void getDataFromServer();
+    void getDataFromServer(boolean isConnected, boolean isWiFi);
 }

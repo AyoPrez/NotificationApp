@@ -27,7 +27,7 @@ public class VideosGalleryRepositoryImpl implements VideosGalleryRepository {
 
     @Override
     public ArrayList<VideoItem> getAllVideos() {
-        return new ArrayList<>(videoRealm.where(VideoItem.class).findAll());
+        return new ArrayList<>(Realm.getDefaultInstance().where(VideoItem.class).findAll());
     }
 
     @Override

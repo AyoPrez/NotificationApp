@@ -32,7 +32,7 @@ public class NotificationEventsRepositoryImpl implements NotificationEventsRepos
 
     @Override
     public ArrayList<NotificationEvents> getAllNotificationEvents() {
-        return new ArrayList<>(eventRealm.where(NotificationEvents.class).findAll());
+        return new ArrayList<>(Realm.getDefaultInstance().where(NotificationEvents.class).findAll());
     }
 
     @Override
@@ -72,7 +72,14 @@ public class NotificationEventsRepositoryImpl implements NotificationEventsRepos
 
     private int getLastId(){
         ArrayList<?> list = getAllNotificationEvents();
-        return getAllNotificationEvents().get(list.size() - 1).getId() + 1;
+
+        if(list.size() != 0){
+            return getAllNotificationEvents().get(list.size() - 1).getId() + 1;
+        }else {
+            return 0;
+        }
+
+
     }
 
     @Override

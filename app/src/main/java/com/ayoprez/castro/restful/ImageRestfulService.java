@@ -7,4 +7,5 @@ import com.ayoprez.castro.common.CommonActivityView;
  */
 public interface ImageRestfulService {
     void getRestfulImages(CommonActivityView view);
+    void deleteCompleteImagesData();
 }

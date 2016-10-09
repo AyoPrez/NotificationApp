@@ -1,5 +1,6 @@
 package com.ayoprez.castro.repository;
 
+import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.models.EventItemMeta;
@@ -12,12 +13,13 @@ import java.util.Date;
 import java.util.Locale;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 /**
  * Created by ayo on 26.06.16.
  */
-public class EventsRepositoryImpl implements EventsRepository{
+public class EventsRepositoryImpl implements EventsRepository {
 
     private Realm eventRealm;
     private int lastId;
@@ -33,7 +35,7 @@ public class EventsRepositoryImpl implements EventsRepository{
 
     @Override
     public ArrayList<EventItem> getAllEvents() {
-        return new ArrayList<>(eventRealm.where(EventItem.class).findAll());
+        return new ArrayList<>(Realm.getDefaultInstance().where(EventItem.class).findAll());
     }
 
     @Override

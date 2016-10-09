@@ -26,18 +26,13 @@ public class GamesRestfulServiceImpl extends ErrorManager implements GamesRestfu
     public GamesRestfulServiceImpl(GamesRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getCalendar() != null){
-            repository.deleteCalendar();
-        }
-
-        if(repository.getTable() != null){
-            repository.deleteTable();
-        }
     }
 
     @Override
     public void getRestfulGames(final CommonActivityView view) {
+
+        deleteCompleteGamesData();
+
         try {
             Response<ArrayList<CalendarItem>> response = service.getCalendarFromServer().execute();
 
@@ -66,6 +61,17 @@ public class GamesRestfulServiceImpl extends ErrorManager implements GamesRestfu
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_GAMES);
+        }
+    }
+
+    @Override
+    public void deleteCompleteGamesData() {
+        if(repository.getCalendar() != null){
+            repository.deleteCalendar();
+        }
+
+        if(repository.getTable() != null){
+            repository.deleteTable();
         }
     }
 

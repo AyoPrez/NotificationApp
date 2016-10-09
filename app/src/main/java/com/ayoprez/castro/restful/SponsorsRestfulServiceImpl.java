@@ -25,14 +25,13 @@ public class SponsorsRestfulServiceImpl extends ErrorManager implements Sponsors
     public SponsorsRestfulServiceImpl(SponsorRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getAllSponsors().size() > 0){
-            repository.deleteAllSponsors();
-        }
     }
 
     @Override
     public void getRestfulSponsors(final CommonActivityView view) {
+
+        deleteCompleteSponsorsData();
+
         try {
             Response<ArrayList<SponsorItem>> response = service.getSponsorsFromServer().execute();
 
@@ -48,6 +47,13 @@ public class SponsorsRestfulServiceImpl extends ErrorManager implements Sponsors
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_SPONSORS);
+        }
+    }
+
+    @Override
+    public void deleteCompleteSponsorsData() {
+        if(repository.getAllSponsors().size() > 0){
+            repository.deleteAllSponsors();
         }
     }
 }

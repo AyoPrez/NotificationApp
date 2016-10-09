@@ -44,7 +44,7 @@ import dagger.Component;
  * Created by ayo on 19.06.16.
  */
 @Singleton
-@Component(modules = { AppModule.class, RepositoryModule.class, RestfulModule.class, LibsModule.class})
+@Component(modules = {AppModule.class, RepositoryModule.class, RestfulModule.class, LibsModule.class})
 public interface AppComponent {
     void inject(EventListFragment eventFragment);
     void inject(ArenaFragment arenaFragment);

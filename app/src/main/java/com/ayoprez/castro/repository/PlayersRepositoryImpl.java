@@ -27,7 +27,7 @@ public class PlayersRepositoryImpl implements PlayersRepository {
 
     @Override
     public ArrayList<PlayerItem> getAllPlayers() {
-        return new ArrayList<>(playerRealm.where(PlayerItem.class).findAll());
+        return new ArrayList<>(Realm.getDefaultInstance().where(PlayerItem.class).findAll());
     }
 
     @Override

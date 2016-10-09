@@ -7,4 +7,5 @@ import com.ayoprez.castro.common.CommonActivityView;
  */
 public interface AboutUsRestfulService {
     void getRestfulAboutUs(CommonActivityView view);
+    void deleteCompleteAboutUsData();
 }

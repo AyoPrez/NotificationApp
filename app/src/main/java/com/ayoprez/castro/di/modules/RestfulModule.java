@@ -1,5 +1,8 @@
 package com.ayoprez.castro.di.modules;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+
 import com.ayoprez.castro.repository.AboutUsRepository;
 import com.ayoprez.castro.repository.ArenaRepository;
 import com.ayoprez.castro.repository.EventsRepository;

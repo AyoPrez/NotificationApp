@@ -20,7 +20,7 @@ public class ArenaRepositoryImpl implements ArenaRepository {
 
     @Override
     public Arena getArena() {
-        return arenaRealm.where(Arena.class).findFirst();
+        return Realm.getDefaultInstance().where(Arena.class).findFirst();
     }
 
     @Override

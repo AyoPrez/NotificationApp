@@ -19,7 +19,7 @@ public class AboutUsRepositoryImpl implements AboutUsRepository {
 
     @Override
     public AboutUs getAboutUs() {
-        return aboutUsRealm.where(AboutUs.class).findFirst();
+        return Realm.getDefaultInstance().where(AboutUs.class).findFirst();
     }
 
     @Override

@@ -29,14 +29,12 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
     public EventsRestfulServiceImpl(EventsRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getAllEvents().size() > 0){
-            repository.deleteAllEvents();
-        }
     }
 
     @Override
     public void getRestfulEvents(final CommonActivityView view) {
+
+        deleteCompleteEventsData();
 
         try {
             Response<ArrayList<EventItem>> response = service.getEventsFromServer().execute();
@@ -53,6 +51,13 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_EVENTS);
+        }
+    }
+
+    @Override
+    public void deleteCompleteEventsData() {
+        if(repository.getAllEvents().size() > 0){
+            repository.deleteAllEvents();
         }
     }
 

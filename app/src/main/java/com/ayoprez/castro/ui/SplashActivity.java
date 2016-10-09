@@ -2,6 +2,8 @@ package com.ayoprez.castro.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -45,6 +47,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         super.onResume();
         AppComponent component = ((CastroApplication)getApplication()).getComponent();
         presenter.setView(component, this);
+        presenter.getDataFromServer(isConnected(), isWiFi());
     }
 
     private void startComponents(){
@@ -54,6 +57,24 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void showLoadBar() {
 
+    }
+
+    private NetworkInfo getNetworkInfo(){
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo();
+    }
+
+    private boolean isConnected(){
+        NetworkInfo activeNetwork = getNetworkInfo();
+
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+    }
+
+    private boolean isWiFi(){
+        return getNetworkInfo() != null && getNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     @Override

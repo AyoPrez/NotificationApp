@@ -7,4 +7,5 @@ import com.ayoprez.castro.common.CommonActivityView;
  */
 public interface EventsRestfulService {
     void getRestfulEvents(CommonActivityView view);
+    void deleteCompleteEventsData();
 }

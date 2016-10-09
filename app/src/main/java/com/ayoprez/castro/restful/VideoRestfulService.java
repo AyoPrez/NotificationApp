@@ -7,4 +7,5 @@ import com.ayoprez.castro.common.CommonActivityView;
  */
 public interface VideoRestfulService {
     void getRestfulVideos(CommonActivityView view);
+    void deleteCompleteVideoData();
 }

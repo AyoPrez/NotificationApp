@@ -7,4 +7,5 @@ import com.ayoprez.castro.common.CommonActivityView;
  */
 public interface GamesRestfulService {
     void getRestfulGames(CommonActivityView view);
+    void deleteCompleteGamesData();
 }

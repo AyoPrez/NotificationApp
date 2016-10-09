@@ -7,4 +7,5 @@ import com.ayoprez.castro.common.CommonActivityView;
  */
 public interface SponsorsRestfulService {
     void getRestfulSponsors(CommonActivityView view);
+    void deleteCompleteSponsorsData();
 }

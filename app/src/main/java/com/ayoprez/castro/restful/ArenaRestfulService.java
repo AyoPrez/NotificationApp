@@ -7,4 +7,5 @@ import com.ayoprez.castro.common.CommonActivityView;
  */
 public interface ArenaRestfulService {
     void getRestfulArena(CommonActivityView view);
+    void deleteCompleteArenaData();
 }

@@ -88,7 +88,7 @@ public class VideosGalleryFragment extends Fragment implements VideosGalleryView
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, fragment)
-                .addToBackStack("videos")
+                .attach(fragment)
                 .commit();
     }
 }

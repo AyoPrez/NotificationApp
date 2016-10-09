@@ -22,12 +22,12 @@ public class GamesRepositoryImpl implements GamesRepository {
 
     @Override
     public CalendarItem getCalendar() {
-        return gamesRealm.where(CalendarItem.class).findFirst();
+        return Realm.getDefaultInstance().where(CalendarItem.class).findFirst();
     }
 
     @Override
     public TableItem getTable() {
-        return gamesRealm.where(TableItem.class).findFirst();
+        return Realm.getDefaultInstance().where(TableItem.class).findFirst();
     }
 
     @Override

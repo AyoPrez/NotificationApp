@@ -57,4 +57,22 @@ public class WebViewFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        webView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        webView.destroy();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        webView.stopLoading();
+    }
 }

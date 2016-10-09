@@ -25,14 +25,13 @@ public class PlayerRestfulServiceImpl extends ErrorManager implements PlayerRest
     public PlayerRestfulServiceImpl(PlayersRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getAllPlayers().size() > 0){
-            repository.deleteAllPlayers();
-        }
     }
 
     @Override
     public void getRestfulPlayers(final CommonActivityView view) {
+
+        deleteCompletePlayersData();
+
         try {
             Response<ArrayList<PlayerItem>> response = service.getPlayersFromServer().execute();
 
@@ -47,6 +46,13 @@ public class PlayerRestfulServiceImpl extends ErrorManager implements PlayerRest
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_PLAYERS);
+        }
+    }
+
+    @Override
+    public void deleteCompletePlayersData() {
+        if(repository.getAllPlayers().size() > 0){
+            repository.deleteAllPlayers();
         }
     }
 }

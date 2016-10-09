@@ -25,14 +25,12 @@ public class ArenaRestfulServiceImpl extends ErrorManager implements ArenaRestfu
     public ArenaRestfulServiceImpl(ArenaRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getArena() != null){
-            repository.deleteArena();
-        }
     }
 
     @Override
     public void getRestfulArena(final CommonActivityView view) {
+
+        deleteCompleteArenaData();
 
         try {
             Response<ArrayList<Arena>> response = service.getArenaFromServer().execute();
@@ -49,6 +47,13 @@ public class ArenaRestfulServiceImpl extends ErrorManager implements ArenaRestfu
             Log.e(TAG, "Error: ", e);
 
             showError(view, ERROR_RESTFUL_ARENA);
+        }
+    }
+
+    @Override
+    public void deleteCompleteArenaData() {
+        if(repository.getArena() != null){
+            repository.deleteArena();
         }
     }
 }

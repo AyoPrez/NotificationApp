@@ -140,9 +140,9 @@ public class EventPresenterImpl extends ErrorManager implements EventPresenter, 
 
     @Override
     public int getEventsCountSize(EventListView listView) {
-        if(repository.getAllEvents().size() == 0){
-            listView.showEmptyListMessage(ERROR_EMPTY_EVENTS);
-        }
+//        if(repository.getAllEvents().size() == 0){
+//            listView.showEmptyListMessage(ERROR_EMPTY_EVENTS);
+//        }
 
         return repository.getAllEvents().size();
     }

@@ -23,12 +23,12 @@ public class ImagesGalleryRepositoryImpl implements ImagesGalleryRepository {
 
     @Override
     public String getImage(int id) {
-        return imageRealm.where(ImageItem.class).equalTo("id", id).findFirst().getMeta().getPhoto();
+        return Realm.getDefaultInstance().where(ImageItem.class).equalTo("id", id).findFirst().getMeta().getPhoto();
     }
 
     @Override
     public ArrayList<String> getAllStringImages() {
-        ArrayList<ImageItem> itemList = new ArrayList<>(imageRealm.where(ImageItem.class).findAll());
+        ArrayList<ImageItem> itemList = new ArrayList<>(Realm.getDefaultInstance().where(ImageItem.class).findAll());
         ArrayList<String> imagesList = new ArrayList<>();
         for(int i = 0; i < itemList.size(); i++){
             imagesList.add(itemList.get(i).getMeta().getPhoto());

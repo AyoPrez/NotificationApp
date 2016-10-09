@@ -25,14 +25,13 @@ public class VideoRestfulServiceImpl extends ErrorManager implements VideoRestfu
     public VideoRestfulServiceImpl(VideosGalleryRepository repository, RestfulService service){
         this.repository = repository;
         this.service = service;
-
-        if(repository.getAllVideos().size() > 0){
-            repository.deleteAllVideos();
-        }
     }
 
     @Override
     public void getRestfulVideos(final CommonActivityView view) {
+
+        deleteCompleteVideoData();
+
         try {
             Response<ArrayList<VideoItem>> response = service.getVideosFromServer().execute();
 
@@ -47,6 +46,13 @@ public class VideoRestfulServiceImpl extends ErrorManager implements VideoRestfu
         } catch (IOException e) {
             Log.e(TAG, "Error: ", e);
             showError(view, ERROR_RESTFUL_VIDEOS);
+        }
+    }
+
+    @Override
+    public void deleteCompleteVideoData() {
+        if(repository.getAllVideos().size() > 0){
+            repository.deleteAllVideos();
         }
     }
 }
