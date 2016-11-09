@@ -1,17 +1,16 @@
 package com.ayoprez.castro.restful;
 
-import android.util.Log;
-
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.SponsorItem;
 import com.ayoprez.castro.repository.SponsorRepository;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayo on 20.08.16.
@@ -21,6 +20,8 @@ public class SponsorsRestfulServiceImpl extends ErrorManager implements Sponsors
 
     private SponsorRepository repository;
     private RestfulService service;
+    private Subscription subscription;
+
 
     public SponsorsRestfulServiceImpl(SponsorRepository repository, RestfulService service){
         this.repository = repository;
@@ -30,24 +31,29 @@ public class SponsorsRestfulServiceImpl extends ErrorManager implements Sponsors
     @Override
     public void getRestfulSponsors(final CommonActivityView view) {
 
-        deleteCompleteSponsorsData();
+        subscription = service.getSponsorsFromServer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<SponsorItem>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-        try {
-            Response<ArrayList<SponsorItem>> response = service.getSponsorsFromServer().execute();
+                    @Override
+                    public void onStart() {
+                        deleteCompleteSponsorsData();
+                    }
 
-            if (response.isSuccessful()) {
-                repository.saveSponsor(response.body());
-            }else{
+                    @Override
+                    public void onError(Throwable e) {
+                        showError(view, ERROR_RESTFUL_SPONSORS);
+                    }
 
-                showError(view, ERROR_RESTFUL_SPONSORS);
-            }
-        } catch (SocketTimeoutException stoe){
-            Log.e(TAG, "Error: ", stoe);
-            getRestfulSponsors(view);
-        } catch (IOException e) {
-            Log.e(TAG, "Error: ", e);
-            showError(view, ERROR_RESTFUL_SPONSORS);
-        }
+                    @Override
+                    public void onNext(ArrayList<SponsorItem> sponsor) {
+                        repository.saveSponsor(sponsor);
+                    }
+                });
     }
 
     @Override

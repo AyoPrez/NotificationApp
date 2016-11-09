@@ -65,9 +65,9 @@ public class AboutUsPresenterTest {
         verify(mockView, times(1)).displayDescription("Sumergete en la descripción");
         verify(mockView, times(1)).displayImage("www.url.es/mierda");
         verify(mockView, never()).showErrorMessage(anyByte());
-        verify(mockView, never()).clickCallButton();
-        verify(mockView, never()).clickShareButton();
-        verify(mockView, never()).clickMailButton();
+        verify(mockView, times(1)).clickCallButton();
+        verify(mockView, times(1)).clickShareButton();
+        verify(mockView, times(1)).clickMailButton();
         verify(mockView, never()).openPhone(aboutUs.getMeta().getNumber());
         verify(mockView, never()).openMail(aboutUs.getMeta().getEmail());
         verify(mockView, never()).openShare(aboutUs.getMeta().getShare_text());

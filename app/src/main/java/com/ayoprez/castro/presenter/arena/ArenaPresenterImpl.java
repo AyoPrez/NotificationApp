@@ -32,13 +32,7 @@ public class ArenaPresenterImpl extends ErrorManager implements ArenaPresenter {
         } else {
             view.displayName(arena.getTitle());
             view.displayAddress(arena.getMeta().getCoordinates().getAddress());
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                view.displayDescription(Html.fromHtml(arena.getMeta().getDescription(), Html.FROM_HTML_MODE_LEGACY).toString());
-            } else {
-                view.displayDescription(Html.fromHtml(arena.getMeta().getDescription()).toString());
-            }
-
+            view.displayDescription(arena.getMeta().getDescription());
             view.displayImage(arena.getMeta().getPhoto());
             view.clickMapButton(arena.getMeta().getCoordinates().getAddress());
         }

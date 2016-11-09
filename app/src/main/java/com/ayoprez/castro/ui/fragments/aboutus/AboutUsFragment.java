@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,7 +97,11 @@ public class AboutUsFragment extends Fragment implements AboutUsView {
 
     @Override
     public void displayDescription(String description) {
-        tvAboutUsDescription.setText(description);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            tvAboutUsDescription.setText(Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY).toString());
+        } else {
+            tvAboutUsDescription.setText(Html.fromHtml(description).toString());
+        }
     }
 
     @Override

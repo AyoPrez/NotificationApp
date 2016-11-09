@@ -1,17 +1,16 @@
 package com.ayoprez.castro.restful;
 
-import android.util.Log;
-
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.Arena;
 import com.ayoprez.castro.repository.ArenaRepository;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayo on 19.08.16.
@@ -21,6 +20,7 @@ public class ArenaRestfulServiceImpl extends ErrorManager implements ArenaRestfu
 
     private ArenaRepository repository;
     private RestfulService service;
+    private Subscription subscription;
 
     public ArenaRestfulServiceImpl(ArenaRepository repository, RestfulService service){
         this.repository = repository;
@@ -30,24 +30,29 @@ public class ArenaRestfulServiceImpl extends ErrorManager implements ArenaRestfu
     @Override
     public void getRestfulArena(final CommonActivityView view) {
 
-        deleteCompleteArenaData();
+        subscription = service.getArenaFromServer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<Arena>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-        try {
-            Response<ArrayList<Arena>> response = service.getArenaFromServer().execute();
+                    @Override
+                    public void onStart() {
+                        deleteCompleteArenaData();
+                    }
 
-            if (response.isSuccessful()) {
-                repository.saveArena(response.body().get(0));
-            }else{
-                showError(view, ERROR_RESTFUL_ARENA);
-            }
-        } catch (SocketTimeoutException stoe){
-            Log.e(TAG, "Error: ", stoe);
-            getRestfulArena(view);
-        } catch (IOException e) {
-            Log.e(TAG, "Error: ", e);
+                    @Override
+                    public void onError(Throwable e) {
+                        showError(view, ERROR_RESTFUL_ARENA);
+                    }
 
-            showError(view, ERROR_RESTFUL_ARENA);
-        }
+                    @Override
+                    public void onNext(ArrayList<Arena> arena) {
+                        repository.saveArena(arena.get(0));
+                    }
+                });
     }
 
     @Override

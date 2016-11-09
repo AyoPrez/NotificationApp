@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +91,11 @@ public class ArenaFragment extends Fragment implements ArenaView {
 
     @Override
     public void displayDescription(String description) {
-        tvArenaDescription.setText(description);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            tvArenaDescription.setText(Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY).toString());
+        } else {
+            tvArenaDescription.setText(Html.fromHtml(description).toString());
+        }
     }
 
     @Override

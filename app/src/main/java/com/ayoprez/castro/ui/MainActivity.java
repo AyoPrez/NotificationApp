@@ -1,12 +1,18 @@
 package com.ayoprez.castro.ui;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +21,7 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -39,9 +46,14 @@ import com.etiennelawlor.imagegallery.library.adapters.ImageGalleryAdapter;
 import com.etiennelawlor.imagegallery.library.enums.PaletteColorType;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -146,8 +158,8 @@ public class MainActivity extends AppCompatActivity
                 changeFragment(AboutUsFragment.getInstance());
                 break;
             case R.id.nav_gallery:
-                changeFragment(ImagesGalleryFragment.getInstance());
-//                mainPresenter.initGallery(this);
+//                changeFragment(ImagesGalleryFragment.getInstance());
+                mainPresenter.initGallery(this);
                 break;
             case R.id.nav_videos:
                 changeFragment(VideosGalleryFragment.getInstance());
@@ -187,9 +199,10 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = new Bundle();
         bundle.putStringArrayList(ImageGalleryActivity.KEY_IMAGES, picturesUrl);
 
-        changeFragment(ImageGalleryFragment.newInstance(bundle));
-    }
+        ImageGalleryFragment imageGalleryFragment = ImageGalleryFragment.newInstance(bundle);
 
+        changeFragment(imageGalleryFragment);
+    }
 
     @Override
     public void showErrorMessage(byte errorMessage) {
@@ -241,6 +254,23 @@ public class MainActivity extends AppCompatActivity
         } else {
             iv.setImageDrawable(null);
         }
+    }
+
+    @Override
+    public void imageShareOption(Uri image) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, image);
+        shareIntent.setType("image/jpeg");
+
+        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(shareIntent);
+        }
+    }
+
+    @Override
+    public void imageDownloadOption(String url) {
+
     }
 
     private void applyPalette(Palette palette, LinearLayout bgLinearLayout){

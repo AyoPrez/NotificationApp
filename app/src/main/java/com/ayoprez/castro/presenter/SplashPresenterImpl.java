@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.ayoprez.castro.di.AppComponent;
+import com.ayoprez.castro.models.AboutUs;
 import com.ayoprez.castro.restful.AboutUsRestfulService;
 import com.ayoprez.castro.restful.ArenaRestfulService;
 import com.ayoprez.castro.restful.EventsRestfulService;
@@ -61,12 +62,12 @@ public class SplashPresenterImpl implements SplashPresenter {
         view.showLoadBar();
 
         if(isConnected) {
-
             Thread thread1 = new Thread() {
                 @Override
                 public void run() {
                     eventsRestfulService.getRestfulEvents(view);
-                    gamesRestfulService.getRestfulGames(view);
+                    gamesRestfulService.getRestfulCalendarGames(view);
+                    gamesRestfulService.getRestfulTableGames(view);
                     imageRestfulService.getRestfulImages(view);
                     videoRestfulService.getRestfulVideos(view);
                 }
@@ -92,7 +93,7 @@ public class SplashPresenterImpl implements SplashPresenter {
             @Override
             public void run() {
                 try {
-                    sleep(5000);
+                    sleep(3000);
                 } catch (InterruptedException e) {
                     Log.e(TAG, "Error sleeping: ", e);
                 }

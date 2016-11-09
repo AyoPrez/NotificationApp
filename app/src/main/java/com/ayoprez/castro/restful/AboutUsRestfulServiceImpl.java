@@ -1,17 +1,15 @@
 package com.ayoprez.castro.restful;
 
-import android.util.Log;
-
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.AboutUs;
 import com.ayoprez.castro.repository.AboutUsRepository;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayo on 19.08.16.
@@ -21,6 +19,7 @@ public class AboutUsRestfulServiceImpl extends ErrorManager implements AboutUsRe
 
     private AboutUsRepository repository;
     private RestfulService service;
+    private Subscription subscription;
 
     public AboutUsRestfulServiceImpl(AboutUsRepository repository, RestfulService service){
         this.repository = repository;
@@ -30,24 +29,29 @@ public class AboutUsRestfulServiceImpl extends ErrorManager implements AboutUsRe
     @Override
     public void getRestfulAboutUs(final CommonActivityView view) {
 
-        deleteCompleteAboutUsData();
+        subscription = service.getAboutUsFromServer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<AboutUs>>() {
+            @Override
+            public void onCompleted() {
+            }
 
-        try {
-            Response<ArrayList<AboutUs>> response = service.getAboutUsFromServer().execute();
+            @Override
+            public void onStart() {
+                deleteCompleteAboutUsData();
+            }
 
-            if (response.isSuccessful()) {
-                repository.saveAboutUs(response.body().get(0));
-            }else{
+            @Override
+            public void onError(Throwable e) {
                 showError(view, ERROR_RESTFUL_ABOUTUS);
             }
-        } catch (SocketTimeoutException stoe){
-            Log.e(TAG, "Error: ", stoe);
-            getRestfulAboutUs(view);
-        } catch (IOException e) {
-            Log.e(TAG, "Error: ", e);
-            showError(view, ERROR_RESTFUL_ABOUTUS);
-        }
 
+            @Override
+            public void onNext(ArrayList<AboutUs> aboutUses) {
+                repository.saveAboutUs(aboutUses.get(0));
+            }
+        });
     }
 
     @Override

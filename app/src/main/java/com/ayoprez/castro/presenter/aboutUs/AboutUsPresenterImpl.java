@@ -30,13 +30,7 @@ public class AboutUsPresenterImpl extends ErrorManager implements AboutUsPresent
             showError(view, ERROR_EMPTY_ABOUTUS);
         }else{
             view.displayName(aboutUs.getTitle());
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                view.displayDescription(Html.fromHtml(aboutUs.getMeta().getDescription(), Html.FROM_HTML_MODE_LEGACY).toString());
-            } else {
-                view.displayDescription(Html.fromHtml(aboutUs.getMeta().getDescription()).toString());
-            }
-
+            view.displayDescription(aboutUs.getMeta().getDescription());
             view.displayImage(aboutUs.getMeta().getShare_image());
             view.clickCallButton();
             view.clickMailButton();

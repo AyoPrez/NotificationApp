@@ -1,6 +1,5 @@
 package com.ayoprez.castro.restful;
 
-import android.util.Log;
 
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
@@ -8,14 +7,15 @@ import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.repository.EventsRepository;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayo on 20.08.16.
@@ -25,6 +25,7 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
 
     private EventsRepository repository;
     private RestfulService service;
+    private Subscription subscription;
 
     public EventsRestfulServiceImpl(EventsRepository repository, RestfulService service){
         this.repository = repository;
@@ -34,24 +35,29 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
     @Override
     public void getRestfulEvents(final CommonActivityView view) {
 
-        deleteCompleteEventsData();
+        subscription = service.getEventsFromServer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<EventItem>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-        try {
-            Response<ArrayList<EventItem>> response = service.getEventsFromServer().execute();
+                    @Override
+                    public void onStart() {
+                        deleteCompleteEventsData();
+                    }
 
-            if (response.isSuccessful()) {
-                repository.saveEvents(getSortArrayListByDate(response.body()));
-            }else{
-                showError(view, ERROR_RESTFUL_EVENTS);
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        showError(view, ERROR_RESTFUL_EVENTS);
+                    }
 
-        } catch (SocketTimeoutException stoe){
-            Log.e(TAG, "Error: ", stoe);
-            getRestfulEvents(view);
-        } catch (IOException e) {
-            Log.e(TAG, "Error: ", e);
-            showError(view, ERROR_RESTFUL_EVENTS);
-        }
+                    @Override
+                    public void onNext(ArrayList<EventItem> events) {
+                        repository.saveEvents(events);
+                    }
+                });
     }
 
     @Override

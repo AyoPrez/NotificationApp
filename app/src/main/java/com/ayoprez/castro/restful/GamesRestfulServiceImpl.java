@@ -1,18 +1,17 @@
 package com.ayoprez.castro.restful;
 
-import android.util.Log;
-
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.CalendarItem;
 import com.ayoprez.castro.models.TableItem;
 import com.ayoprez.castro.repository.GamesRepository;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayo on 20.08.16.
@@ -22,6 +21,7 @@ public class GamesRestfulServiceImpl extends ErrorManager implements GamesRestfu
 
     private GamesRepository repository;
     private RestfulService service;
+    private Subscription subscription;
 
     public GamesRestfulServiceImpl(GamesRepository repository, RestfulService service){
         this.repository = repository;
@@ -29,50 +29,70 @@ public class GamesRestfulServiceImpl extends ErrorManager implements GamesRestfu
     }
 
     @Override
-    public void getRestfulGames(final CommonActivityView view) {
+    public void getRestfulCalendarGames(final CommonActivityView view) {
+        subscription = service.getCalendarFromServer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<CalendarItem>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-        deleteCompleteGamesData();
+                    @Override
+                    public void onStart() {
+                        deleteCalendarGamesData();
+                    }
 
-        try {
-            Response<ArrayList<CalendarItem>> response = service.getCalendarFromServer().execute();
+                    @Override
+                    public void onError(Throwable e) {
+                        showError(view, ERROR_RESTFUL_GAMES);
+                    }
 
-            if (response.isSuccessful()) {
-                repository.saveCalendar(response.body().get(0));
-            }else{
-                showError(view, ERROR_RESTFUL_GAMES);
-            }
-        } catch (SocketTimeoutException stoe){
-            Log.e(TAG, "Error: ", stoe);
-            getRestfulGames(view);
-        } catch (IOException e) {
-            Log.e(TAG, "Error: ", e);
-            showError(view, ERROR_RESTFUL_GAMES);
-        }
+                    @Override
+                    public void onNext(ArrayList<CalendarItem> calendarItems) {
+                        repository.saveCalendar(calendarItems.get(0));
+                    }
+                });
+    }
 
-        try {
-            Response<ArrayList<TableItem>> response = service.getTableFromServer().execute();
+    @Override
+    public void getRestfulTableGames(final CommonActivityView view) {
+        subscription = service.getTableFromServer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<TableItem>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-            if (response.isSuccessful()) {
-                repository.saveTable(response.body().get(0));
-            }else{
-                showError(view, ERROR_RESTFUL_GAMES);
-            }
+                    @Override
+                    public void onStart() {
+                        deleteTableGamesData();
+                    }
 
-        } catch (IOException e) {
-            Log.e(TAG, "Error: ", e);
-            showError(view, ERROR_RESTFUL_GAMES);
+                    @Override
+                    public void onError(Throwable e) {
+                        showError(view, ERROR_RESTFUL_GAMES);
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<TableItem> tableItems) {
+                        repository.saveTable(tableItems.get(0));
+                    }
+                });
+    }
+
+    @Override
+    public void deleteCalendarGamesData() {
+        if(repository.getCalendar() != null){
+            repository.deleteCalendar();
         }
     }
 
     @Override
-    public void deleteCompleteGamesData() {
-        if(repository.getCalendar() != null){
-            repository.deleteCalendar();
-        }
-
+    public void deleteTableGamesData() {
         if(repository.getTable() != null){
             repository.deleteTable();
         }
     }
-
 }

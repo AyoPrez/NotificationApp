@@ -1,17 +1,16 @@
 package com.ayoprez.castro.restful;
 
-import android.util.Log;
-
 import com.ayoprez.castro.common.CommonActivityView;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.models.ImageItem;
 import com.ayoprez.castro.repository.ImagesGalleryRepository;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayo on 19.08.16.
@@ -21,6 +20,7 @@ public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfu
 
     private ImagesGalleryRepository repository;
     private RestfulService service;
+    private Subscription subscription;
 
     public ImageRestfulServiceImpl(ImagesGalleryRepository repository, RestfulService service){
         this.repository = repository;
@@ -30,23 +30,29 @@ public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfu
     @Override
     public void getRestfulImages(final CommonActivityView view) {
 
-        deleteCompleteImagesData();
+        subscription = service.getImagesFromServer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<ImageItem>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-        try {
-            Response<ArrayList<ImageItem>> response = service.getImagesFromServer().execute();
+                    @Override
+                    public void onStart() {
+                        deleteCompleteImagesData();
+                    }
 
-            if (response.isSuccessful()) {
-                repository.saveImages(response.body());
-            }else{
-                showError(view, ERROR_RESTFUL_IMAGES);
-            }
-        } catch (SocketTimeoutException stoe){
-            Log.e(TAG, "Error: ", stoe);
-            getRestfulImages(view);
-        } catch (IOException e) {
-            Log.e(TAG, "Error: ", e);
-            showError(view, ERROR_RESTFUL_IMAGES);
-        }
+                    @Override
+                    public void onError(Throwable e) {
+                        showError(view, ERROR_RESTFUL_IMAGES);
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<ImageItem> images) {
+                        repository.saveImages(images);
+                    }
+                });
     }
 
     @Override

@@ -61,31 +61,31 @@ public class EventsRestfulServiceTest {
         eventItems = new ArrayList<>(Collections.singletonList(new EventItem()));
     }
 
-    @Test
-    public void shouldSuccess() throws Exception{
-        when(mockRestfulService.getEventsFromServer()).thenReturn(mockCall);
-        Response<ArrayList<EventItem>> res = Response.success(eventItems);
-        when(mockCall.execute()).thenReturn(res);
-        presenter.getRestfulEvents(mockView);
-
-        verify(mockCall, times(1)).execute();
-
-        verify(mockView, never()).showErrorMessage(anyByte());
-        verify(mockRepository, times(1)).saveEvents(res.body());
-    }
-
-    @Test
-    public void shouldFailInSuccess() throws Exception{
-        when(mockRestfulService.getEventsFromServer()).thenReturn(mockCall);
-        Response<ArrayList<EventItem>> res = Response.error(400, ResponseBody.create(MediaType.parse("applicacion/json"), "Body is null"));
-        when(mockCall.execute()).thenReturn(res);
-        presenter.getRestfulEvents(mockView);
-
-        verify(mockCall, times(1)).execute();
-
-        verify(mockView, times(1)).showErrorMessage(anyByte());
-        verify(mockRepository, never()).saveEvents(res.body());
-    }
+//    @Test
+//    public void shouldSuccess() throws Exception{
+//        when(mockRestfulService.getEventsFromServer()).thenReturn(mockCall);
+//        Response<ArrayList<EventItem>> res = Response.success(eventItems);
+//        when(mockCall.execute()).thenReturn(res);
+//        presenter.getRestfulEvents(mockView);
+//
+//        verify(mockCall, times(1)).execute();
+//
+//        verify(mockView, never()).showErrorMessage(anyByte());
+//        verify(mockRepository, times(1)).saveEvents(res.body());
+//    }
+//
+//    @Test
+//    public void shouldFailInSuccess() throws Exception{
+//        when(mockRestfulService.getEventsFromServer()).thenReturn(mockCall);
+//        Response<ArrayList<EventItem>> res = Response.error(400, ResponseBody.create(MediaType.parse("applicacion/json"), "Body is null"));
+//        when(mockCall.execute()).thenReturn(res);
+//        presenter.getRestfulEvents(mockView);
+//
+//        verify(mockCall, times(1)).execute();
+//
+//        verify(mockView, times(1)).showErrorMessage(anyByte());
+//        verify(mockRepository, never()).saveEvents(res.body());
+//    }
 
     @Test
     public void shouldNotDeleteAllIfThereIsNothing(){

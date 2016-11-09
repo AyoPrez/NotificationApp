@@ -12,8 +12,8 @@ import com.ayoprez.castro.models.VideoItem;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
+import rx.Observable;
 
 /**
  * Created by ayo on 18.08.16.
@@ -21,29 +21,29 @@ import retrofit2.http.GET;
 public interface RestfulService {
 
     @GET("/wp-json/posts?type=foto&filter[posts_per_page]=-1")
-    Call<ArrayList<ImageItem>> getImagesFromServer();
+    Observable<ArrayList<ImageItem>> getImagesFromServer();
 
     @GET("/wp-json/posts?type=sobre-nosotros")
-    Call<ArrayList<AboutUs>> getAboutUsFromServer();
+    Observable<ArrayList<AboutUs>> getAboutUsFromServer();
 
     @GET("/wp-json/posts?type=terrero&filter[posts_per_page]=-1")
-    Call<ArrayList<Arena>> getArenaFromServer();
+    Observable<ArrayList<Arena>> getArenaFromServer();
 
     @GET("/wp-json/posts?type=luchada&filter[posts_per_page]=-1")
-    Call<ArrayList<CalendarItem>> getCalendarFromServer();
+    Observable<ArrayList<CalendarItem>> getCalendarFromServer();
 
     @GET("/wp-json/posts?type=evento&filter[posts_per_page]=-1")
-    Call<ArrayList<EventItem>> getEventsFromServer();
+    Observable<ArrayList<EventItem>> getEventsFromServer();
 
     @GET("/wp-json/posts?type=luchadores&filter[posts_per_page]=-1")
-    Call<ArrayList<PlayerItem>> getPlayersFromServer();
+    Observable<ArrayList<PlayerItem>> getPlayersFromServer();
 
     @GET("/wp-json/posts?type=patrocinador&filter[posts_per_page]=-1")
-    Call<ArrayList<SponsorItem>> getSponsorsFromServer();
+    Observable<ArrayList<SponsorItem>> getSponsorsFromServer();
 
     @GET("/wp-json/posts?type=clasificacion&filter[posts_per_page]=-1")
-    Call<ArrayList<TableItem>> getTableFromServer();
+    Observable<ArrayList<TableItem>> getTableFromServer();
 
     @GET("/wp-json/posts?type=video&filter[posts_per_page]=-1")
-    Call<ArrayList<VideoItem>> getVideosFromServer();
+    Observable<ArrayList<VideoItem>> getVideosFromServer();
 }

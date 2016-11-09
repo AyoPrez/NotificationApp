@@ -59,31 +59,31 @@ public class PlayersRestfulServiceTest {
         eventItems = new ArrayList<>(Collections.singletonList(new PlayerItem()));
     }
 
-    @Test
-    public void shouldSuccess() throws Exception{
-        when(mockRestfulService.getPlayersFromServer()).thenReturn(mockCall);
-        Response<ArrayList<PlayerItem>> res = Response.success(eventItems);
-        when(mockRestfulService.getPlayersFromServer().execute()).thenReturn(res);
-        presenter.getRestfulPlayers(mockView);
-
-        verify(mockCall).execute();
-
-        verify(mockView, never()).showErrorMessage(anyByte());
-        verify(mockRepository, times(1)).savePlayers(res.body());
-    }
-
-    @Test
-    public void shouldFailInSuccess() throws Exception{
-        when(mockRestfulService.getPlayersFromServer()).thenReturn(mockCall);
-        Response<ArrayList<PlayerItem>> res = Response.error(400, ResponseBody.create(MediaType.parse("applicacion/json"), "Body is null"));
-        when(mockRestfulService.getPlayersFromServer().execute()).thenReturn(res);
-        presenter.getRestfulPlayers(mockView);
-
-        verify(mockCall).execute();
-
-        verify(mockView, times(1)).showErrorMessage(anyByte());
-        verify(mockRepository, never()).savePlayers(res.body());
-    }
+//    @Test
+//    public void shouldSuccess() throws Exception{
+//        when(mockRestfulService.getPlayersFromServer()).thenReturn(mockCall);
+//        Response<ArrayList<PlayerItem>> res = Response.success(eventItems);
+//        when(mockRestfulService.getPlayersFromServer().execute()).thenReturn(res);
+//        presenter.getRestfulPlayers(mockView);
+//
+//        verify(mockCall).execute();
+//
+//        verify(mockView, never()).showErrorMessage(anyByte());
+//        verify(mockRepository, times(1)).savePlayers(res.body());
+//    }
+//
+//    @Test
+//    public void shouldFailInSuccess() throws Exception{
+//        when(mockRestfulService.getPlayersFromServer()).thenReturn(mockCall);
+//        Response<ArrayList<PlayerItem>> res = Response.error(400, ResponseBody.create(MediaType.parse("applicacion/json"), "Body is null"));
+//        when(mockRestfulService.getPlayersFromServer().execute()).thenReturn(res);
+//        presenter.getRestfulPlayers(mockView);
+//
+//        verify(mockCall).execute();
+//
+//        verify(mockView, times(1)).showErrorMessage(anyByte());
+//        verify(mockRepository, never()).savePlayers(res.body());
+//    }
 
     @Test
     public void shouldNotDeleteAllIfThereIsNothing(){
