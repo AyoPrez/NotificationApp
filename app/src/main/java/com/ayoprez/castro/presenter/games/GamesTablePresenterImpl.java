@@ -2,8 +2,8 @@ package com.ayoprez.castro.presenter.games;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.TableItem;
-import com.ayoprez.castro.repository.GamesRepository;
+import com.ayoprez.castro.model.models.TableItem;
+import com.ayoprez.castro.model.repository.GamesRepository;
 import com.ayoprez.castro.ui.fragments.games.GamesTableView;
 
 /**

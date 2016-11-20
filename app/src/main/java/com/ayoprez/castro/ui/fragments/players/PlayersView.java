@@ -1,8 +1,7 @@
 package com.ayoprez.castro.ui.fragments.players;
 
 import com.ayoprez.castro.common.CommonActivityView;
-import com.ayoprez.castro.common.CommonListView;
-import com.ayoprez.castro.models.PlayerItem;
+import com.ayoprez.castro.model.models.PlayerItem;
 
 import java.util.ArrayList;
 

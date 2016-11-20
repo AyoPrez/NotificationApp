@@ -1,18 +1,17 @@
 package com.ayoprez.castro.mockito.aboutUs;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.AboutUs;
-import com.ayoprez.castro.models.AboutUsMeta;
+import com.ayoprez.castro.model.models.AboutUs;
+import com.ayoprez.castro.model.models.AboutUsMeta;
 import com.ayoprez.castro.presenter.aboutUs.AboutUsPresenter;
 import com.ayoprez.castro.presenter.aboutUs.AboutUsPresenterImpl;
-import com.ayoprez.castro.repository.AboutUsRepository;
+import com.ayoprez.castro.model.repository.AboutUsRepository;
 import com.ayoprez.castro.ui.fragments.aboutus.AboutUsView;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;

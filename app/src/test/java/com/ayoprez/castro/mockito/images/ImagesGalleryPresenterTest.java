@@ -1,11 +1,11 @@
 package com.ayoprez.castro.mockito.images;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.ImageItem;
-import com.ayoprez.castro.models.ImageItemMeta;
+import com.ayoprez.castro.model.models.ImageItem;
+import com.ayoprez.castro.model.models.ImageItemMeta;
 import com.ayoprez.castro.presenter.images.GalleryPresenter;
 import com.ayoprez.castro.presenter.images.GalleryPresenterImpl;
-import com.ayoprez.castro.repository.ImagesGalleryRepository;
+import com.ayoprez.castro.model.repository.ImagesGalleryRepository;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryView;
 
 import org.junit.Before;

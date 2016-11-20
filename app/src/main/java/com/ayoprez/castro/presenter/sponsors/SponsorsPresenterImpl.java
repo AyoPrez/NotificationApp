@@ -1,20 +1,15 @@
 package com.ayoprez.castro.presenter.sponsors;
 
 import android.os.Bundle;
-import android.util.ArrayMap;
-import android.util.Log;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.SponsorItem;
+import com.ayoprez.castro.model.models.SponsorItem;
 import com.ayoprez.castro.presenter.adapters.sponsors.SponsorListAdapterPresenter;
-import com.ayoprez.castro.repository.SponsorRepository;
+import com.ayoprez.castro.model.repository.SponsorRepository;
 import com.ayoprez.castro.ui.fragments.WebViewFragment;
-import com.ayoprez.castro.ui.fragments.sponsors.SponsorsFragment;
 import com.ayoprez.castro.ui.fragments.sponsors.SponsorsView;
 import com.ayoprez.castro.ui.viewholders.sponsor.SponsorItemView;
-
-import java.util.ArrayList;
 
 /**
  * Created by ayo on 17.07.16.

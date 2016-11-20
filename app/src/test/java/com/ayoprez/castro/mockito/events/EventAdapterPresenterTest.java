@@ -1,12 +1,12 @@
 package com.ayoprez.castro.mockito.events;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.EventItem;
-import com.ayoprez.castro.models.EventItemMeta;
+import com.ayoprez.castro.model.models.EventItem;
+import com.ayoprez.castro.model.models.EventItemMeta;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
 import com.ayoprez.castro.presenter.events.EventPresenterImpl;
-import com.ayoprez.castro.repository.EventsRepository;
-import com.ayoprez.castro.repository.NotificationEventsRepository;
+import com.ayoprez.castro.model.repository.EventsRepository;
+import com.ayoprez.castro.model.repository.NotificationEventsRepository;
 import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.viewholders.events.EventListItemView;
 

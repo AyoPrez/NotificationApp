@@ -2,8 +2,8 @@ package com.ayoprez.castro.presenter.games;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.CalendarItem;
-import com.ayoprez.castro.repository.GamesRepository;
+import com.ayoprez.castro.model.models.CalendarItem;
+import com.ayoprez.castro.model.repository.GamesRepository;
 import com.ayoprez.castro.ui.fragments.games.GamesCalendarView;
 
 /**

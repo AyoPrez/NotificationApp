@@ -8,7 +8,7 @@ import android.view.View;
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.presenter.adapters.images.GalleryAdapterPresenter;
-import com.ayoprez.castro.repository.ImagesGalleryRepository;
+import com.ayoprez.castro.model.repository.ImagesGalleryRepository;
 import com.ayoprez.castro.ui.MainActivity;
 import com.ayoprez.castro.ui.fragments.ImageFragment;
 import com.ayoprez.castro.ui.fragments.images.ImagesGalleryView;

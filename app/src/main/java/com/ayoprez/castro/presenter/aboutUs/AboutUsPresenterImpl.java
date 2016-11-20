@@ -1,11 +1,9 @@
 package com.ayoprez.castro.presenter.aboutUs;
 
-import android.text.Html;
-
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.AboutUs;
-import com.ayoprez.castro.repository.AboutUsRepository;
+import com.ayoprez.castro.model.models.AboutUs;
+import com.ayoprez.castro.model.repository.AboutUsRepository;
 import com.ayoprez.castro.ui.fragments.aboutus.AboutUsView;
 
 /**

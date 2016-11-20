@@ -1,12 +1,12 @@
 package com.ayoprez.castro.mockito.aboutUs;
 
 import com.ayoprez.castro.common.CommonActivityView;
-import com.ayoprez.castro.models.AboutUs;
-import com.ayoprez.castro.models.AboutUsMeta;
-import com.ayoprez.castro.repository.AboutUsRepository;
-import com.ayoprez.castro.restful.AboutUsRestfulService;
-import com.ayoprez.castro.restful.AboutUsRestfulServiceImpl;
-import com.ayoprez.castro.restful.RestfulService;
+import com.ayoprez.castro.model.models.AboutUs;
+import com.ayoprez.castro.model.models.AboutUsMeta;
+import com.ayoprez.castro.model.repository.AboutUsRepository;
+import com.ayoprez.castro.model.restful.AboutUsRestfulService;
+import com.ayoprez.castro.model.restful.AboutUsRestfulServiceImpl;
+import com.ayoprez.castro.model.restful.RestfulService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +16,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import retrofit2.Call;
+
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.observers.TestSubscriber;
-import rx.schedulers.Schedulers;
 
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;

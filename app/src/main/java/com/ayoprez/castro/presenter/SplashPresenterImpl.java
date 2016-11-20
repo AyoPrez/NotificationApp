@@ -1,20 +1,16 @@
 package com.ayoprez.castro.presenter;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.ayoprez.castro.di.AppComponent;
-import com.ayoprez.castro.models.AboutUs;
-import com.ayoprez.castro.restful.AboutUsRestfulService;
-import com.ayoprez.castro.restful.ArenaRestfulService;
-import com.ayoprez.castro.restful.EventsRestfulService;
-import com.ayoprez.castro.restful.GamesRestfulService;
-import com.ayoprez.castro.restful.ImageRestfulService;
-import com.ayoprez.castro.restful.PlayerRestfulService;
-import com.ayoprez.castro.restful.SponsorsRestfulService;
-import com.ayoprez.castro.restful.VideoRestfulService;
+import com.ayoprez.castro.model.restful.AboutUsRestfulService;
+import com.ayoprez.castro.model.restful.ArenaRestfulService;
+import com.ayoprez.castro.model.restful.EventsRestfulService;
+import com.ayoprez.castro.model.restful.GamesRestfulService;
+import com.ayoprez.castro.model.restful.ImageRestfulService;
+import com.ayoprez.castro.model.restful.PlayerRestfulService;
+import com.ayoprez.castro.model.restful.SponsorsRestfulService;
+import com.ayoprez.castro.model.restful.VideoRestfulService;
 import com.ayoprez.castro.ui.SplashView;
 
 import javax.inject.Inject;

@@ -2,19 +2,17 @@ package com.ayoprez.castro.mockito.games;
 
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.CalendarItem;
-import com.ayoprez.castro.models.CalendarItemMeta;
+import com.ayoprez.castro.model.models.CalendarItem;
+import com.ayoprez.castro.model.models.CalendarItemMeta;
 import com.ayoprez.castro.presenter.games.GamesCalendarPresenter;
 import com.ayoprez.castro.presenter.games.GamesCalendarPresenterImpl;
-import com.ayoprez.castro.repository.GamesRepository;
+import com.ayoprez.castro.model.repository.GamesRepository;
 import com.ayoprez.castro.ui.fragments.games.GamesCalendarView;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;

@@ -1,11 +1,11 @@
 package com.ayoprez.castro.mockito.videos;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.VideoItem;
-import com.ayoprez.castro.models.VideoItemMeta;
+import com.ayoprez.castro.model.models.VideoItem;
+import com.ayoprez.castro.model.models.VideoItemMeta;
 import com.ayoprez.castro.presenter.videos.VideosGalleryPresenter;
 import com.ayoprez.castro.presenter.videos.VideosGalleryPresenterImpl;
-import com.ayoprez.castro.repository.VideosGalleryRepository;
+import com.ayoprez.castro.model.repository.VideosGalleryRepository;
 import com.ayoprez.castro.ui.fragments.videos.VideosGalleryView;
 
 import org.junit.Before;
@@ -15,11 +15,8 @@ import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

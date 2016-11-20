@@ -1,11 +1,9 @@
 package com.ayoprez.castro.presenter.arena;
 
-import android.text.Html;
-
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.Arena;
-import com.ayoprez.castro.repository.ArenaRepository;
+import com.ayoprez.castro.model.models.Arena;
+import com.ayoprez.castro.model.repository.ArenaRepository;
 import com.ayoprez.castro.ui.fragments.arena.ArenaView;
 
 /**

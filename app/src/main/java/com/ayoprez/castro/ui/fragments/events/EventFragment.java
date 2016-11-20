@@ -1,17 +1,13 @@
 package com.ayoprez.castro.ui.fragments.events;
 
 import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.ShareCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +23,6 @@ import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
-import com.ayoprez.castro.repository.NotificationEventsRepository;
-import com.ayoprez.castro.repository.NotificationEventsRepositoryImpl;
-import com.ayoprez.castro.ui.MainActivity;
 
 import java.util.HashMap;
 

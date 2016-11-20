@@ -1,6 +1,6 @@
 package com.ayoprez.castro.presenter.adapters.players;
 
-import com.ayoprez.castro.models.PlayerItem;
+import com.ayoprez.castro.model.models.PlayerItem;
 import com.ayoprez.castro.ui.viewholders.players.PlayerListItemView;
 
 import java.util.ArrayList;

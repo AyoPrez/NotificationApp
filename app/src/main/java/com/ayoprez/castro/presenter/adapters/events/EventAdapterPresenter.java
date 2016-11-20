@@ -1,8 +1,5 @@
 package com.ayoprez.castro.presenter.adapters.events;
 
-import android.view.View;
-
-import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.fragments.events.EventView;
 import com.ayoprez.castro.ui.viewholders.events.EventListItemView;

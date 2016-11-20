@@ -1,11 +1,11 @@
 package com.ayoprez.castro.mockito.sponsor;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.SponsorItem;
-import com.ayoprez.castro.models.SponsorItemMeta;
+import com.ayoprez.castro.model.models.SponsorItem;
+import com.ayoprez.castro.model.models.SponsorItemMeta;
 import com.ayoprez.castro.presenter.adapters.sponsors.SponsorListAdapterPresenter;
 import com.ayoprez.castro.presenter.sponsors.SponsorsPresenterImpl;
-import com.ayoprez.castro.repository.SponsorRepository;
+import com.ayoprez.castro.model.repository.SponsorRepository;
 import com.ayoprez.castro.ui.viewholders.sponsor.SponsorItemView;
 
 import org.junit.Before;

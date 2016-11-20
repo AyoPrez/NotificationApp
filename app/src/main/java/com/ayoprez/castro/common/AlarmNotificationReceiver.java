@@ -1,25 +1,17 @@
 package com.ayoprez.castro.common;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
-import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
-import com.ayoprez.castro.models.NotificationEvents;
-import com.ayoprez.castro.repository.NotificationEventsRepository;
-import com.ayoprez.castro.repository.NotificationEventsRepositoryImpl;
-
-import javax.inject.Inject;
+import com.ayoprez.castro.model.repository.NotificationEventsRepository;
+import com.ayoprez.castro.model.repository.NotificationEventsRepositoryImpl;
 
 /**
  * Created by ayo on 17.09.16.

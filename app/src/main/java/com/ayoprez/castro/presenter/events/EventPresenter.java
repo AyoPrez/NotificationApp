@@ -1,6 +1,5 @@
 package com.ayoprez.castro.presenter.events;
 
-import com.ayoprez.castro.models.EventItem;
 import com.ayoprez.castro.ui.fragments.events.EventListView;
 
 /**

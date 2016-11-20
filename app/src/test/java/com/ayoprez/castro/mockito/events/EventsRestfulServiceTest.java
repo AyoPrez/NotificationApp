@@ -1,12 +1,12 @@
 package com.ayoprez.castro.mockito.events;
 
 import com.ayoprez.castro.common.CommonActivityView;
-import com.ayoprez.castro.models.EventItem;
-import com.ayoprez.castro.models.EventItemMeta;
-import com.ayoprez.castro.repository.EventsRepository;
-import com.ayoprez.castro.restful.EventsRestfulService;
-import com.ayoprez.castro.restful.EventsRestfulServiceImpl;
-import com.ayoprez.castro.restful.RestfulService;
+import com.ayoprez.castro.model.models.EventItem;
+import com.ayoprez.castro.model.models.EventItemMeta;
+import com.ayoprez.castro.model.repository.EventsRepository;
+import com.ayoprez.castro.model.restful.EventsRestfulService;
+import com.ayoprez.castro.model.restful.EventsRestfulServiceImpl;
+import com.ayoprez.castro.model.restful.RestfulService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,15 +16,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import okhttp3.MediaType;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 
 import static junit.framework.Assert.assertEquals;
-import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;

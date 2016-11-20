@@ -1,11 +1,11 @@
 package com.ayoprez.castro.mockito.players;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.PlayerItem;
-import com.ayoprez.castro.models.PlayerItemMeta;
+import com.ayoprez.castro.model.models.PlayerItem;
+import com.ayoprez.castro.model.models.PlayerItemMeta;
 import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenter;
 import com.ayoprez.castro.presenter.players.PlayersPresenterImpl;
-import com.ayoprez.castro.repository.PlayersRepository;
+import com.ayoprez.castro.model.repository.PlayersRepository;
 import com.ayoprez.castro.ui.viewholders.players.PlayerListItemView;
 
 import org.junit.Before;

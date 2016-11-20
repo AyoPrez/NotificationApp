@@ -2,9 +2,9 @@ package com.ayoprez.castro.presenter.players;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.PlayerItem;
+import com.ayoprez.castro.model.models.PlayerItem;
 import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenter;
-import com.ayoprez.castro.repository.PlayersRepository;
+import com.ayoprez.castro.model.repository.PlayersRepository;
 import com.ayoprez.castro.ui.fragments.players.PlayersView;
 import com.ayoprez.castro.ui.viewholders.players.PlayerListItemView;
 

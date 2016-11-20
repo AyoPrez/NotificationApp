@@ -1,12 +1,12 @@
 package com.ayoprez.castro.mockito.arena;
 
 import com.ayoprez.castro.common.CommonActivityView;
-import com.ayoprez.castro.models.Arena;
-import com.ayoprez.castro.models.ArenaMeta;
-import com.ayoprez.castro.repository.ArenaRepository;
-import com.ayoprez.castro.restful.ArenaRestfulService;
-import com.ayoprez.castro.restful.ArenaRestfulServiceImpl;
-import com.ayoprez.castro.restful.RestfulService;
+import com.ayoprez.castro.model.models.Arena;
+import com.ayoprez.castro.model.models.ArenaMeta;
+import com.ayoprez.castro.model.repository.ArenaRepository;
+import com.ayoprez.castro.model.restful.ArenaRestfulService;
+import com.ayoprez.castro.model.restful.ArenaRestfulServiceImpl;
+import com.ayoprez.castro.model.restful.RestfulService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,15 +16,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import okhttp3.MediaType;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 
-import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

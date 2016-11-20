@@ -1,11 +1,11 @@
 package com.ayoprez.castro.mockito.sponsor;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.SponsorItem;
-import com.ayoprez.castro.models.SponsorItemMeta;
+import com.ayoprez.castro.model.models.SponsorItem;
+import com.ayoprez.castro.model.models.SponsorItemMeta;
 import com.ayoprez.castro.presenter.sponsors.SponsorsPresenter;
 import com.ayoprez.castro.presenter.sponsors.SponsorsPresenterImpl;
-import com.ayoprez.castro.repository.SponsorRepository;
+import com.ayoprez.castro.model.repository.SponsorRepository;
 import com.ayoprez.castro.ui.fragments.sponsors.SponsorsView;
 
 import org.junit.Before;
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;

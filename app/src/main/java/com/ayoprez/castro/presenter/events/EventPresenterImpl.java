@@ -1,25 +1,19 @@
 package com.ayoprez.castro.presenter.events;
 
-import android.content.SharedPreferences;
 import android.text.Html;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.EventItem;
-import com.ayoprez.castro.models.NotificationEvents;
+import com.ayoprez.castro.model.models.EventItem;
 import com.ayoprez.castro.presenter.adapters.events.EventAdapterPresenter;
-import com.ayoprez.castro.repository.EventsRepository;
-import com.ayoprez.castro.repository.NotificationEventsRepository;
+import com.ayoprez.castro.model.repository.EventsRepository;
+import com.ayoprez.castro.model.repository.NotificationEventsRepository;
 import com.ayoprez.castro.ui.fragments.events.EventFragment;
 import com.ayoprez.castro.ui.fragments.events.EventListView;
 import com.ayoprez.castro.ui.fragments.events.EventView;
 import com.ayoprez.castro.ui.viewholders.events.EventListItemView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * Created by ayo on 26.06.16.

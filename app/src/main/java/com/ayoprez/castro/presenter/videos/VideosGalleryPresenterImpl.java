@@ -4,9 +4,9 @@ import android.os.Bundle;
 
 import com.ayoprez.castro.ViewNotFoundException;
 import com.ayoprez.castro.common.ErrorManager;
-import com.ayoprez.castro.models.VideoItem;
+import com.ayoprez.castro.model.models.VideoItem;
 import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenter;
-import com.ayoprez.castro.repository.VideosGalleryRepository;
+import com.ayoprez.castro.model.repository.VideosGalleryRepository;
 import com.ayoprez.castro.ui.fragments.WebViewFragment;
 import com.ayoprez.castro.ui.fragments.videos.VideosGalleryView;
 import com.ayoprez.castro.ui.viewholders.videos.VideoItemView;

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
-import com.ayoprez.castro.models.PlayerItem;
+import com.ayoprez.castro.model.models.PlayerItem;
 import com.ayoprez.castro.presenter.adapters.players.PlayerAdapterPresenter;
 import com.ayoprez.castro.ui.viewholders.players.PlayersViewHolder;
 

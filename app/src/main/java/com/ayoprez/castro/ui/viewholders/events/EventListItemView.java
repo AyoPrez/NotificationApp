@@ -1,7 +1,6 @@
 package com.ayoprez.castro.ui.viewholders.events;
 
 import com.ayoprez.castro.common.CommonListItemView;
-import com.ayoprez.castro.models.EventItem;
 
 /**
  * Created by ayo on 26.06.16.

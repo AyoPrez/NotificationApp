@@ -1,7 +1,7 @@
 package com.ayoprez.castro.presenter;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.repository.ImagesGalleryRepository;
+import com.ayoprez.castro.model.repository.ImagesGalleryRepository;
 import com.ayoprez.castro.ui.MainView;
 
 import javax.inject.Inject;

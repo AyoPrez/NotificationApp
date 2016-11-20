@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ayoprez.castro.CastroApplication;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.ErrorNotification;
-import com.ayoprez.castro.models.PlayerItem;
+import com.ayoprez.castro.model.models.PlayerItem;
 import com.ayoprez.castro.presenter.players.PlayersPresenter;
 import com.ayoprez.castro.ui.adapters.PlayersListAdapter;
 

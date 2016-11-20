@@ -8,12 +8,12 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.ayoprez.castro.R;
-import com.ayoprez.castro.models.EventItem;
-import com.ayoprez.castro.models.NotificationEvents;
-import com.ayoprez.castro.repository.EventsRepository;
-import com.ayoprez.castro.repository.EventsRepositoryImpl;
-import com.ayoprez.castro.repository.NotificationEventsRepository;
-import com.ayoprez.castro.repository.NotificationEventsRepositoryImpl;
+import com.ayoprez.castro.model.models.EventItem;
+import com.ayoprez.castro.model.models.NotificationEvents;
+import com.ayoprez.castro.model.repository.EventsRepository;
+import com.ayoprez.castro.model.repository.EventsRepositoryImpl;
+import com.ayoprez.castro.model.repository.NotificationEventsRepository;
+import com.ayoprez.castro.model.repository.NotificationEventsRepositoryImpl;
 
 import java.util.ArrayList;
 

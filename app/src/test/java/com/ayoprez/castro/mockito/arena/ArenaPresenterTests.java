@@ -2,20 +2,18 @@ package com.ayoprez.castro.mockito.arena;
 
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.Arena;
-import com.ayoprez.castro.models.ArenaMeta;
-import com.ayoprez.castro.models.ArenaMetaCoordinates;
+import com.ayoprez.castro.model.models.Arena;
+import com.ayoprez.castro.model.models.ArenaMeta;
+import com.ayoprez.castro.model.models.ArenaMetaCoordinates;
 import com.ayoprez.castro.presenter.arena.ArenaPresenter;
 import com.ayoprez.castro.presenter.arena.ArenaPresenterImpl;
-import com.ayoprez.castro.repository.ArenaRepository;
+import com.ayoprez.castro.model.repository.ArenaRepository;
 import com.ayoprez.castro.ui.fragments.arena.ArenaView;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Matchers.anyByte;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;

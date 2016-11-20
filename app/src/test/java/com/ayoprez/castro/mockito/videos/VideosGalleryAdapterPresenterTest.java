@@ -1,12 +1,12 @@
 package com.ayoprez.castro.mockito.videos;
 
 import com.ayoprez.castro.ViewNotFoundException;
-import com.ayoprez.castro.models.VideoItem;
-import com.ayoprez.castro.models.VideoItemMeta;
+import com.ayoprez.castro.model.models.VideoItem;
+import com.ayoprez.castro.model.models.VideoItemMeta;
 import com.ayoprez.castro.presenter.adapters.videos.VideoGalleryAdapterPresenter;
 import com.ayoprez.castro.presenter.videos.VideosGalleryPresenterImpl;
 import com.ayoprez.castro.ui.viewholders.videos.VideoItemView;
-import com.ayoprez.castro.repository.VideosGalleryRepository;
+import com.ayoprez.castro.model.repository.VideosGalleryRepository;
 
 import org.junit.Before;
 import org.junit.Test;
