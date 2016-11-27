@@ -45,7 +45,8 @@ public class VideoRestfulServiceImpl extends ErrorManager implements VideoRestfu
 
                     @Override
                     public void onError(Throwable e) {
-                        showError(view, ERROR_RESTFUL_VIDEOS);
+//                        showError(view, ERROR_RESTFUL_VIDEOS);
+                        view.showErrorMessage(ERROR_RESTFUL_VIDEOS);
                     }
 
                     @Override

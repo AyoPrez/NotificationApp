@@ -1,5 +1,6 @@
 package com.ayoprez.castro.model.repository;
 
+import com.ayoprez.castro.model.models.ImageItem;
 import com.ayoprez.castro.model.models.SponsorItem;
 import com.ayoprez.castro.model.models.SponsorItemMeta;
 
@@ -47,7 +48,7 @@ public class SponsorRepositoryImpl implements SponsorRepository {
         for(SponsorItem sponsor : sponsors) {
             sponsorRealm.beginTransaction();
 
-            sponsor.setId(sponsor.getId() + getLastId());
+            sponsor.setId(getLastId());
 
             SponsorItemMeta itemMeta = sponsorRealm.copyToRealm(sponsor.getMeta());
             SponsorItem itemTable = sponsorRealm.copyToRealm(sponsor);
@@ -73,9 +74,19 @@ public class SponsorRepositoryImpl implements SponsorRepository {
         Realm.getDefaultInstance().close();
     }
 
-    private int getLastId() {
-        return lastId++;
+    private int getLastId(){
+        ArrayList<SponsorItem> list = getAllSponsors();
+
+        if(list.size() != 0){
+            return list.get(list.size() - 1).getId() + 1;
+        }else {
+            return 0;
+        }
     }
+
+//    private int getLastId() {
+//        return lastId++;
+//    }
 
     @Override
     public void closeRealm() {

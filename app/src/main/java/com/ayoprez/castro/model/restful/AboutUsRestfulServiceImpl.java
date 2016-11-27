@@ -43,7 +43,8 @@ public class AboutUsRestfulServiceImpl extends ErrorManager implements AboutUsRe
 
             @Override
             public void onError(Throwable e) {
-                showError(view, ERROR_RESTFUL_ABOUTUS);
+                view.showErrorMessage(ERROR_RESTFUL_ABOUTUS);
+//                showError(view, ERROR_RESTFUL_ABOUTUS);
             }
 
             @Override

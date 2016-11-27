@@ -7,6 +7,8 @@ import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.common.TimeUtils;
 import com.ayoprez.castro.model.restful.RestfulService;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -21,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class LibsModule {
 
+    @Singleton
     @Provides
     public OkHttpClient provideLoggingCapableHttpClient() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -30,6 +33,7 @@ public class LibsModule {
         return new OkHttpClient.Builder().addInterceptor(logging).build();
     }
 
+    @Singleton
     @Provides
     public Retrofit provideRetrofit(String baseURL) {
         return new Retrofit.Builder()
@@ -40,21 +44,25 @@ public class LibsModule {
                 .build();
     }
 
+    @Singleton
     @Provides
     public RestfulService provideRestfulService(){
         return provideRetrofit(Constants.BASE_URL).create(RestfulService.class);
     }
 
+    @Singleton
     @Provides
     public ImageLib providePicassoLibrary(){
         return new ImageLib();
     }
 
+    @Singleton
     @Provides
     public ErrorNotification provideErrorNotification() {
         return new ErrorNotification();
     }
 
+    @Singleton
     @Provides
     public TimeUtils provideTimeUtils(){
         return new TimeUtils();

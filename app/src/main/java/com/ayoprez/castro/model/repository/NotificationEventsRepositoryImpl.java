@@ -78,8 +78,6 @@ public class NotificationEventsRepositoryImpl implements NotificationEventsRepos
         }else {
             return 0;
         }
-
-
     }
 
     @Override

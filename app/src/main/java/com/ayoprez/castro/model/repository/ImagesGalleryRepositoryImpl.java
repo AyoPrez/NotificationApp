@@ -63,7 +63,7 @@ public class ImagesGalleryRepositoryImpl implements ImagesGalleryRepository {
 
         for(ImageItem image : images) {
             imageRealm.beginTransaction();
-            image.setId(image.getId()+getLastId());
+            image.setId(getLastId());
 
             ImageItemMeta itemMeta = imageRealm.copyToRealm(image.getMeta());
             ImageItem itemTable = imageRealm.copyToRealm(image);
@@ -90,8 +90,18 @@ public class ImagesGalleryRepositoryImpl implements ImagesGalleryRepository {
     }
 
     private int getLastId(){
-        return lastId++;
+        ArrayList<ImageItem> list = getAllImages();
+
+        if(list.size() != 0){
+            return list.get(list.size() - 1).getId() + 1;
+        }else {
+            return 0;
+        }
     }
+
+//    private int getLastId(){
+//        return lastId++;
+//    }
 
     @Override
     public void closeRealm() {

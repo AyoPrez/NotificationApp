@@ -45,7 +45,8 @@ public class ImageRestfulServiceImpl extends ErrorManager implements ImageRestfu
 
                     @Override
                     public void onError(Throwable e) {
-                        showError(view, ERROR_RESTFUL_IMAGES);
+                        view.showErrorMessage(ERROR_RESTFUL_IMAGES);
+//                        showError(view, ERROR_RESTFUL_IMAGES);
                     }
 
                     @Override

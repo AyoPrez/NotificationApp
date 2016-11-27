@@ -10,6 +10,7 @@ public interface AboutUsView extends CommonActivityView {
     void displayName(String name);
     void displayDescription(String description);
     void displayImage(String image);
+    void displayNoCallDialog();
 
     void clickShareButton();
     void openShare(String shareText);

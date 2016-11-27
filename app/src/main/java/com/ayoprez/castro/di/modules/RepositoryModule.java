@@ -19,6 +19,8 @@ import com.ayoprez.castro.model.repository.SponsorRepositoryImpl;
 import com.ayoprez.castro.model.repository.VideosGalleryRepository;
 import com.ayoprez.castro.model.repository.VideosGalleryRepositoryImpl;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -28,46 +30,55 @@ import dagger.Provides;
 @Module
 public class RepositoryModule {
 
+    @Singleton
     @Provides
     public EventsRepository provideEventRepository(){
         return new EventsRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public ArenaRepository provideArenaRepository(){
         return new ArenaRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public AboutUsRepository provideAboutUsRepository(){
         return new AboutUsRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public PlayersRepository providePlayersRepository(){
         return new PlayersRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public ImagesGalleryRepository provideImagesGalleryRepository(){
         return new ImagesGalleryRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public SponsorRepository provideSponsorRepository(){
         return new SponsorRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public GamesRepository provideGamesRepository(){
         return new GamesRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public VideosGalleryRepository provideVideosGalleryRepository(){
         return new VideosGalleryRepositoryImpl();
     }
 
+    @Singleton
     @Provides
     public NotificationEventsRepository provideNotificationEvents(){
         return new NotificationEventsRepositoryImpl();

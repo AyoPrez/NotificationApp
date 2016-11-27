@@ -45,7 +45,8 @@ public class ArenaRestfulServiceImpl extends ErrorManager implements ArenaRestfu
 
                     @Override
                     public void onError(Throwable e) {
-                        showError(view, ERROR_RESTFUL_ARENA);
+                        view.showErrorMessage(ERROR_RESTFUL_ARENA);
+//                        showError(view, ERROR_RESTFUL_ARENA);
                     }
 
                     @Override

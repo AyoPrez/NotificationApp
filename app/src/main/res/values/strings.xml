@@ -47,6 +47,7 @@
     <string name="base_error_restful_arena">There was an error obtaining the data of the arena </string>
     <string name="base_error_restful_aboutus">There was an error obtaining the data of the club </string>
     <string name="error">There was an error</string>
+    <string name="error_no_phone_number">There is no phone number. You can\'t call right now</string>
 
     <!-- Players -->
     <string name="senior">Senior</string>

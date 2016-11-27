@@ -47,7 +47,7 @@ public class VideosGalleryRepositoryImpl implements VideosGalleryRepository {
         for(VideoItem video : videos) {
             videoRealm.beginTransaction();
 
-            video.setId(video.getId()+getLastId());
+            video.setId(getLastId());
             video.getMeta().setPreview(video.getMeta().getPreview());
 
             VideoItemMeta itemMeta = videoRealm.copyToRealm(video.getMeta());
@@ -75,8 +75,18 @@ public class VideosGalleryRepositoryImpl implements VideosGalleryRepository {
     }
 
     private int getLastId(){
-        return lastId++;
+        ArrayList<VideoItem> list = getAllVideos();
+
+        if(list.size() != 0){
+            return list.get(list.size() - 1).getId() + 1;
+        }else {
+            return 0;
+        }
     }
+
+//    private int getLastId(){
+//        return lastId++;
+//    }
 
     @Override
     public void closeRealm() {

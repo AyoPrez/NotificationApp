@@ -26,6 +26,8 @@ import com.ayoprez.castro.model.restful.SponsorsRestfulServiceImpl;
 import com.ayoprez.castro.model.restful.VideoRestfulService;
 import com.ayoprez.castro.model.restful.VideoRestfulServiceImpl;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -36,42 +38,49 @@ import dagger.Provides;
 public class RestfulModule {
 
     //    Restful Services
-
+    @Singleton
     @Provides
     public EventsRestfulService provideEventsRestfulService(EventsRepository repository, RestfulService service){
         return new EventsRestfulServiceImpl(repository, service);
     }
 
+    @Singleton
     @Provides
     public PlayerRestfulService providePlayerRestfulService(PlayersRepository repository, RestfulService service){
         return new PlayerRestfulServiceImpl(repository, service);
     }
 
+    @Singleton
     @Provides
     public ArenaRestfulService provideArenaRestfulService(ArenaRepository repository, RestfulService service){
         return new ArenaRestfulServiceImpl(repository, service);
     }
 
+    @Singleton
     @Provides
     public AboutUsRestfulService provideAboutUsRestfulService(AboutUsRepository repository, RestfulService service){
         return new AboutUsRestfulServiceImpl(repository, service);
     }
 
+    @Singleton
     @Provides
     public GamesRestfulService provideGamesRestfulService(GamesRepository repository, RestfulService service){
         return new GamesRestfulServiceImpl(repository, service);
     }
 
+    @Singleton
     @Provides
     public ImageRestfulService provideImageRestfulService(ImagesGalleryRepository repository, RestfulService service){
         return new ImageRestfulServiceImpl(repository, service);
     }
 
+    @Singleton
     @Provides
     public SponsorsRestfulService provideSponsorRestfulService(SponsorRepository repository, RestfulService service){
         return new SponsorsRestfulServiceImpl(repository, service);
     }
 
+    @Singleton
     @Provides
     public VideoRestfulService provideVideoRestfulService(VideosGalleryRepository repository, RestfulService service){
         return new VideoRestfulServiceImpl(repository, service);

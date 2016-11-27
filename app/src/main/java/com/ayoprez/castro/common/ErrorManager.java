@@ -43,6 +43,7 @@ public class ErrorManager {
     public static final byte ERROR_NO_DATA_SPONSOR = 24;
     public static final byte ERROR_NO_DATA_PLAYER = 25;
     public static final byte ERROR = 26;
+    public static final byte ERROR_NO_PHONE_NUMBER = 27;
 
     protected void showError(CommonActivityView commonActivityView, byte message){
         commonActivityView.showErrorMessage(message);

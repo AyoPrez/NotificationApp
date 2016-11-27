@@ -53,7 +53,7 @@ public class EventsRepositoryImpl implements EventsRepository {
 
                 eventRealm.beginTransaction();
 
-                event.setId(event.getId() + getLastId());
+                event.setId(getLastId());
 
                 EventItemMeta itemMeta = eventRealm.copyToRealm(event.getMeta());
                 EventItem itemTable = eventRealm.copyToRealm(event);
@@ -81,8 +81,18 @@ public class EventsRepositoryImpl implements EventsRepository {
     }
 
     private int getLastId(){
-        return lastId++;
+        ArrayList<EventItem> list = getAllEvents();
+
+        if(list.size() != 0){
+            return list.get(list.size() - 1).getId() + 1;
+        }else {
+            return 0;
+        }
     }
+
+//    private int getLastId(){
+//        return lastId++;
+//    }
 
     @Override
     public void closeRealm() {

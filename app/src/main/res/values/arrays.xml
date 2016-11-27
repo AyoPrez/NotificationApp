@@ -31,6 +31,7 @@
         <item>@string/base_error_no_data_sponsors</item>
         <item>@string/base_error_no_data_players</item>
         <item>@string/error</item>
+        <item>@string/error_no_phone_number</item>
 
     </string-array>
 

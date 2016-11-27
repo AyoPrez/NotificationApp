@@ -8,6 +8,7 @@ import com.ayoprez.castro.di.DaggerAppComponent;
 import com.ayoprez.castro.di.modules.AppModule;
 import com.crashlytics.android.Crashlytics;
 import com.karumi.dexter.Dexter;
+import com.squareup.leakcanary.LeakCanary;
 
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
@@ -26,19 +27,21 @@ public class CastroApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Thread threadInitComponents = new Thread() {
-            @Override
-            public void run() {
+        initComponent();
+        initRealm();
+        initFabric();
+        initDexter();
+        initCalligraphy();
+        initLeakCanary();
+    }
 
-                initComponent();
-                initRealm();
-                initFabric();
-                initDexter();
-                initCalligraphy();
-            }
-        };
-
-        threadInitComponents.run();
+    private void initLeakCanary(){
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     private void initCalligraphy(){
@@ -53,7 +56,6 @@ public class CastroApplication extends Application {
     }
 
     private void initRealm(){
-
         Realm.init(this);
 
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()

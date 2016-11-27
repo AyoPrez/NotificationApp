@@ -72,7 +72,8 @@ public class GamesRestfulServiceImpl extends ErrorManager implements GamesRestfu
 
                     @Override
                     public void onError(Throwable e) {
-                        showError(view, ERROR_RESTFUL_GAMES);
+//                        showError(view, ERROR_RESTFUL_GAMES);
+                        view.showErrorMessage(ERROR_RESTFUL_GAMES);
                     }
 
                     @Override

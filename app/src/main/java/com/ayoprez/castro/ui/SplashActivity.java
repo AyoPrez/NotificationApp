@@ -26,13 +26,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by ayo on 20.08.16.
  */
 public class SplashActivity extends AppCompatActivity implements SplashView {
-    private static final String TAG = SplashActivity.class.getSimpleName();
 
     @Inject
     SplashPresenter presenter;
 
-    @Inject
-    ErrorNotification errorNotification;
+//    @Inject
+//    ErrorNotification errorNotification;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,9 +84,9 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Override
     public void showErrorMessage(byte errorMessage) {
-        if(Looper.getMainLooper().getThread() == Thread.currentThread()) {
-            errorNotification.showNotification(this, getResources().getStringArray(R.array.errorsArray)[errorMessage]);
-        }
+//        if(Looper.getMainLooper().getThread() == Thread.currentThread()) {
+//            errorNotification.showNotification(this, getResources().getStringArray(R.array.errorsArray)[errorMessage]);
+//        }
     }
 
     @Override

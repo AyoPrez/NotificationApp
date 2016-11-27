@@ -22,8 +22,7 @@ import javax.inject.Inject;
 public class DeviceBootReceiver extends BroadcastReceiver {
     private static final String LOG_TAG = DeviceBootReceiver.class.getSimpleName();
 
-    @Inject
-    TimeUtils timeUtils;
+    TimeUtils timeUtils = new TimeUtils();
 
     @Override
     public void onReceive(Context context, Intent intent) {

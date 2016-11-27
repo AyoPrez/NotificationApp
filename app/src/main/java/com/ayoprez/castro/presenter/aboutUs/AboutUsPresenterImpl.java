@@ -58,8 +58,8 @@ public class AboutUsPresenterImpl extends ErrorManager implements AboutUsPresent
     @Override
     public void openCall() {
         String number = aboutUs.getMeta().getNumber();
-        if(number == null || number.trim().equals("")){
-            showError(view, ERROR_NO_DATA_ABOUTUS);
+        if(number == null || number.trim().equals("") || number.substring(1, 5).equals("0000")){
+            showError(view, ERROR_NO_PHONE_NUMBER);
         }else{
             view.openPhone(number);
         }

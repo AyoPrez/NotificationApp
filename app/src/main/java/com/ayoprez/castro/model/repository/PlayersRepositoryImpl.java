@@ -1,5 +1,6 @@
 package com.ayoprez.castro.model.repository;
 
+import com.ayoprez.castro.model.models.ImageItem;
 import com.ayoprez.castro.model.models.PlayerItem;
 import com.ayoprez.castro.model.models.PlayerItemMeta;
 
@@ -65,7 +66,7 @@ public class PlayersRepositoryImpl implements PlayersRepository {
         for(PlayerItem player : players) {
             playerRealm.beginTransaction();
 
-            player.setId(player.getId()+getLastId());
+            player.setId(getLastId());
 
             PlayerItemMeta playerItemMeta = playerRealm.copyToRealm(player.getMeta());
             PlayerItem playerItemTable = playerRealm.copyToRealm(player);
@@ -92,8 +93,18 @@ public class PlayersRepositoryImpl implements PlayersRepository {
     }
 
     private int getLastId(){
-        return lastId++;
+        ArrayList<PlayerItem> list = getAllPlayers();
+
+        if(list.size() != 0){
+            return list.get(list.size() - 1).getId() + 1;
+        }else {
+            return 0;
+        }
     }
+
+//    private int getLastId(){
+//        return lastId++;
+//    }
 
     @Override
     public void closeRealm() {

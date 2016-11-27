@@ -1,5 +1,8 @@
 package com.ayoprez.castro.ui.fragments.games;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +17,8 @@ import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.common.ImageLib;
 import com.ayoprez.castro.R;
 import com.ayoprez.castro.presenter.games.GamesCalendarPresenter;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import javax.inject.Inject;
 
@@ -73,7 +78,7 @@ public class GamesCalendarFragment extends Fragment implements GamesCalendarView
 
     @Override
     public void displayCalendar(String url) {
-        imageLib.setImageIntoView(url, iVCalendar);
+        imageLib.setImageIntoViewWithScroll(url, iVCalendar);
         photoZoom = new PhotoViewAttacher(iVCalendar);
     }
 

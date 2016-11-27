@@ -37,6 +37,8 @@ import com.ayoprez.castro.model.repository.PlayersRepository;
 import com.ayoprez.castro.model.repository.SponsorRepository;
 import com.ayoprez.castro.model.repository.VideosGalleryRepository;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -46,81 +48,97 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
+    @Singleton
     @Provides
     public MainPresenter provideMainPresenter(ImagesGalleryRepository imagesGalleryRepository){
         return new MainPresenterImpl(imagesGalleryRepository);
     }
 
+    @Singleton
     @Provides
     public EventPresenter provideEventPresenter(EventsRepository eventsRepository, NotificationEventsRepository notificationEventsRepository){
         return new EventPresenterImpl(eventsRepository, notificationEventsRepository);
     }
 
+    @Singleton
     @Provides
     public ArenaPresenter provideArenaPresenter(ArenaRepository arenaRepository){
         return new ArenaPresenterImpl(arenaRepository);
     }
 
+    @Singleton
     @Provides
     public AboutUsPresenter provideAboutUsPresenter(AboutUsRepository aboutUsRepository){
         return new AboutUsPresenterImpl(aboutUsRepository);
     }
 
+    @Singleton
     @Provides
     public EventAdapterPresenter provideEventAdapterPresenter(EventsRepository eventsRepository, NotificationEventsRepository notificationEventsRepository){
         return new EventPresenterImpl(eventsRepository, notificationEventsRepository);
     }
 
+    @Singleton
     @Provides
     public PlayersPresenter providePlayersPresenter(PlayersRepository repository){
         return new PlayersPresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public PlayerAdapterPresenter providePlayerAdapterPresenter(PlayersRepository repository){
         return new PlayersPresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public GalleryPresenter provideGalleryPresenter(ImagesGalleryRepository repository){
         return new GalleryPresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public GalleryAdapterPresenter provideGalleryAdapterPresenter(ImagesGalleryRepository repository){
         return new GalleryPresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public SponsorsPresenter provideSponsorsPresenter(SponsorRepository repository){
         return new SponsorsPresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public SponsorListAdapterPresenter provideSponsorListAdapterPresenter(SponsorRepository repository){
         return new SponsorsPresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public GamesCalendarPresenter provideGamesCalendarPresenter(GamesRepository repository){
         return new GamesCalendarPresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public GamesTablePresenter provideGamesTablePresenter(GamesRepository repository){
         return new GamesTablePresenterImpl(repository);
     }
 
+    @Singleton
     @Provides
     public VideosGalleryPresenter provideVideosGalleryPresenter(VideosGalleryRepository videosGalleryRepository){
         return new VideosGalleryPresenterImpl(videosGalleryRepository);
     }
 
+    @Singleton
     @Provides
     public VideoGalleryAdapterPresenter provideVideoGalleryAdapterPresenter(VideosGalleryRepository videosGalleryRepository){
         return new VideosGalleryPresenterImpl(videosGalleryRepository);
     }
 
+    @Singleton
     @Provides
     public SplashPresenter provideSplashPresenter() {
         return new SplashPresenterImpl();
