@@ -61,4 +61,7 @@
     <string name="notification_scheduled">I will notify you 4 hours before the event.</string>
     <string name="remind_title">Reminder</string>
 
+    <string name="settings_text">App made fondly by AyoPrez. \n\n
+    For more information, visit the website:</string>
+
 </resources>

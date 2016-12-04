@@ -1,27 +1,20 @@
 package com.ayoprez.castro.ui;
 
-import android.app.DownloadManager;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
+import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,6 +23,7 @@ import com.ayoprez.castro.R;
 import com.ayoprez.castro.common.ErrorManager;
 import com.ayoprez.castro.common.ErrorNotification;
 import com.ayoprez.castro.presenter.MainPresenter;
+import com.ayoprez.castro.ui.fragments.PreferencesFragment;
 import com.ayoprez.castro.ui.fragments.events.EventFragment;
 import com.ayoprez.castro.ui.fragments.players.PlayersBaseFragment;
 import com.ayoprez.castro.ui.fragments.sponsors.SponsorsFragment;
@@ -45,6 +39,9 @@ import com.ayoprez.iggy.library.activities.ImageGalleryActivity;
 import com.ayoprez.iggy.library.adapters.FullScreenImageGalleryAdapter;
 import com.ayoprez.iggy.library.adapters.ImageGalleryAdapter;
 import com.ayoprez.iggy.library.enums.PaletteColorType;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.aboutlibraries.ui.LibsFragment;
+import com.mikepenz.aboutlibraries.ui.LibsSupportFragment;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Callback;
 import java.util.ArrayList;
@@ -158,8 +155,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_sponsors:
                 changeFragment(SponsorsFragment.getInstance());
                 break;
-//            case R.id.nav_settings:
-//                break;
+            case R.id.nav_settings:
+                changeFragment(new LibsBuilder()
+                        .withAboutIconShown(true)
+                        .withAboutAppName(getString(R.string.app_name))
+                        .withAboutDescription(getString(R.string.settings_text) + " " + "<a href=\"http://www.ayoprez.com\">www.ayoprez.com</a>.")
+                        .supportFragment());
+                break;
             default:
                 changeFragment(EventListFragment.getInstance());
         }

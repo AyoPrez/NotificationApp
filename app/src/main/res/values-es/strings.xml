@@ -72,4 +72,8 @@
     <string name="notification_scheduled">Te avisaré cuando falten 4 horas para el evento</string>
     <string name="remind_title">Recordatorio</string>
 
+
+    <string name="settings_text">Aplicación realizada con cariño por AyoPrez. \n\n
+                                Para más información, acuda a la web:</string>
+
 </resources>
