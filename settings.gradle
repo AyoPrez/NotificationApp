@@ -1,1 +1,1 @@
-include ':app', ':iggy'
+include ':app', ':easydownloader', ':iggy'
