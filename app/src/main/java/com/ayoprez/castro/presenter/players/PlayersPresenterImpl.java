@@ -31,11 +31,10 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
             throw new ViewNotFoundException();
         }
 
-        if(playersView == null) {
-            playersView = view;
-        }
+        playersView = view;
     }
 
+    @Override
     public void setCategoryTag(String category) {
         if(category == null || category.equals("")){
             throw new NullPointerException();
@@ -52,7 +51,7 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
             throw new NullPointerException();
         }
 
-        if(repository.getAllPlayers().size() <= 0){
+        if(repository.getAllPlayers().isEmpty()){
             showError(playersView, ERROR_EMPTY_PLAYERS);
         }else {
             switch (categoryTag) {
@@ -67,6 +66,8 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
                 case "Junior":
                     playersView.initRecyclerView(repository.getJuniorPlayers());
                     break;
+                default:
+                    playersView.initRecyclerView(repository.getSeniorPlayers());
             }
         }
     }

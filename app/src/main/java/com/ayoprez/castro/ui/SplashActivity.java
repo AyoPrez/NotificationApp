@@ -53,11 +53,6 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         ((CastroApplication)getApplication()).getComponent().inject(this);
     }
 
-    @Override
-    public void showLoadBar() {
-
-    }
-
     private NetworkInfo getNetworkInfo(){
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

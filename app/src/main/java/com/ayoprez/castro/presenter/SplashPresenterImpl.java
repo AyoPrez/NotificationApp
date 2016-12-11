@@ -55,8 +55,6 @@ public class SplashPresenterImpl implements SplashPresenter {
 
     @Override
     public void getDataFromServer(boolean isConnected, final boolean isWifi) {
-        view.showLoadBar();
-
         if(isConnected) {
             Thread thread1 = new Thread() {
                 @Override

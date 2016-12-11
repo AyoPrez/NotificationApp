@@ -15,7 +15,6 @@ import io.realm.RealmResults;
 public class PlayersRepositoryImpl implements PlayersRepository {
 
     private Realm playerRealm;
-    private int lastId;
 
     public PlayersRepositoryImpl() {
         playerRealm = Realm.getDefaultInstance();
@@ -101,10 +100,6 @@ public class PlayersRepositoryImpl implements PlayersRepository {
             return 0;
         }
     }
-
-//    private int getLastId(){
-//        return lastId++;
-//    }
 
     @Override
     public void closeRealm() {

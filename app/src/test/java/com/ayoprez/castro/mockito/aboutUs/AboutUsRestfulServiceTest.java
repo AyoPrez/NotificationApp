@@ -60,7 +60,7 @@ public class AboutUsRestfulServiceTest {
 
     @Test
     public void shouldLoadAboutUs() throws Exception {
-        when(mockRestfulService.getAboutUsFromServer()).thenReturn(mockCall);
+        when(mockRestfulService.getAboutUsFromServer()).thenReturn(mockCall.toSingle());
 
         TestSubscriber<ArrayList<AboutUs>> testSubscriber = new TestSubscriber<>();
         presenter.getRestfulAboutUs(mockView);
