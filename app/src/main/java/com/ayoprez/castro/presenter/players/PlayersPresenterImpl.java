@@ -83,7 +83,7 @@ public class PlayersPresenterImpl extends ErrorManager implements PlayersPresent
             throw new ViewNotFoundException();
         }
 
-        if(playerItems == null || playerItems.size() == 0){
+        if(playerItems == null || playerItems.isEmpty()){
             showError(itemView, ERROR_EMPTY_PLAYERS, position);
         }else {
             item = playerItems.get(position);

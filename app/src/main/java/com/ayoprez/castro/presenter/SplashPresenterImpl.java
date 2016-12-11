@@ -88,6 +88,9 @@ public class SplashPresenterImpl implements SplashPresenter {
             public void run() {
                 try {
                     sleep(3000);
+                    if(!eventsRestfulService.isComplete()){
+                        sleep(3000);
+                    }
                 } catch (InterruptedException e) {
                     Log.e(TAG, "Error sleeping: ", e);
                 }

@@ -26,6 +26,7 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
     private EventsRepository repository;
     private RestfulService service;
     private Subscription subscription;
+    private boolean completed = false;
 
     public EventsRestfulServiceImpl(EventsRepository repository, RestfulService service){
         this.repository = repository;
@@ -41,6 +42,7 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
                 .subscribe(new Subscriber<ArrayList<EventItem>>() {
                     @Override
                     public void onCompleted() {
+                        completed = true;
                     }
 
                     @Override
@@ -55,7 +57,7 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
 
                     @Override
                     public void onNext(ArrayList<EventItem> events) {
-                        repository.saveEvents(events);
+                        repository.saveEvents(getSortArrayListByDate(events));
                     }
                 });
     }
@@ -65,6 +67,11 @@ public class EventsRestfulServiceImpl extends ErrorManager implements EventsRest
         if(repository.getAllEvents().size() > 0){
             repository.deleteAllEvents();
         }
+    }
+
+    @Override
+    public boolean isComplete() {
+        return completed;
     }
 
     private ArrayList<EventItem> getSortArrayListByDate(ArrayList<EventItem> eventList){
